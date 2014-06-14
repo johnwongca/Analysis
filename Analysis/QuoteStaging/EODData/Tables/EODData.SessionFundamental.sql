@@ -1,0 +1,25 @@
+﻿CREATE TABLE [EODData].[SessionFundamental]
+(
+	[Exchange] [varchar](10) not null,
+	[Symbol] [varchar](32) not null,
+	[Date] [date] NOT NULL,
+	[Name] varchar(128) NULL,
+	[Description] [nvarchar](1000) NULL,
+	[Dividend] [float] NULL,
+	[DividendDate] [datetime] NULL,
+	[DividendYield] [float] NULL,
+	[DSP] [float] NULL,
+	[EBITDA] [float] NULL,
+	[EPS] [float] NULL,
+	[Industry] varchar(1000) NULL,
+	[MarketCap] [bigint] NULL,
+	[NTA] [float] NULL,
+	[PE] [float] NULL,
+	[PEG] [float] NULL,
+	[PtB] [float] NULL,
+	[PtS] [float] NULL,
+	[Sector] varchar(128) NULL,
+	[Shares] [bigint] NULL,
+	[Yield] [float] NULL, 
+    CONSTRAINT [PK_EODData_SessionFundamental] PRIMARY KEY(Exchange, Symbol, Date)
+) 

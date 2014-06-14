@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="5c757e8b-4b3f-42ac-b4d4-2a5943f90fa2" ChangeDateTime="05/12/2014 23:54:21">
+    <Property Name="ElementName" Value="[scheduler].[ServiceApplication].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[scheduler].[ServiceApplication]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ServiceApplicationName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="50cd2627-a674-4496-80ea-c8d7c1f12840" ChangeDateTime="05/12/2014 23:59:15">
+    <Property Name="ElementName" Value="[dbo].[ThreadPool].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ThreadPool]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ServiceApplicationName" />
+  </Operation>
+</Operations>

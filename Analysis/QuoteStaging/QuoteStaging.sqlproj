@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>QuoteStaging</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{f1b20643-b937-46b1-b2ae-5ad5d5df32b5}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>sqlnotes.info</RootNamespace>
+    <AssemblyName>QuoteStaging</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
+    <DefaultFilegroup>QuoteStagingData</DefaultFilegroup>
+    <Recovery>SIMPLE</Recovery>
+    <PageVerify>CHECKSUM</PageVerify>
+    <PermissionSet>UNSAFE</PermissionSet>
+    <AssemblyOwner>dbo</AssemblyOwner>
+    <GenerateSqlClrDdl>True</GenerateSqlClrDdl>
+    <DefaultSchema>clr</DefaultSchema>
+    <DelayedDurability>FORCED</DelayedDurability>
+    <Trustworthy>True</Trustworthy>
+    <IsBrokerPriorityHonored>True</IsBrokerPriorityHonored>
+    <ServiceBrokerOption>EnableBroker</ServiceBrokerOption>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- Default to the v10.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="LoadFromSQL1" />
+    <Folder Include="LoadFromSQL1\Procedures" />
+    <Folder Include="LoadFromSQL1\Triggers" />
+    <Folder Include="LoadFromSQL1\Tables" />
+    <Folder Include="Schemas" />
+    <Folder Include="LoadFromSQL1\Views" />
+    <Folder Include="clr" />
+    <Folder Include="FileGroups" />
+    <Folder Include="clr\Functions" />
+    <Folder Include="clr\CLR" />
+    <Folder Include="ServerObjects" />
+    <Folder Include="EODData" />
+    <Folder Include="EODData\Tables" />
+    <Folder Include="Scripts" />
+    <Folder Include="EODData\Triggers" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Schemas\Staging.sql" />
+    <Build Include="Schemas\clr.sql" />
+    <Build Include="FileGroups\QuoteStagingData.sql" />
+    <Build Include="CLR\Functions\clr.GetLoopbackConnectionString.sql" />
+    <None Include="clr\clrtest.sql" />
+    <Build Include="Schemas\LoadFromSQL1.sql" />
+    <Build Include="LoadFromSQL1\Tables\LoadFromSQL1.Exchange.sql" />
+    <Build Include="LoadFromSQL1\Triggers\LoadFromSQL1.TRI_Exchange.sql" />
+    <Build Include="LoadFromSQL1\Procedures\LoadFromSQL1.LoadQuote.sql" />
+    <Build Include="LoadFromSQL1\Tables\LoadFromSQL1.Symbol.sql" />
+    <Build Include="LoadFromSQL1\Triggers\LoadFromSQL1.TRI_Symbol.sql" />
+    <Build Include="LoadFromSQL1\Tables\LoadFromSQL1.Split.sql" />
+    <Build Include="LoadFromSQL1\Triggers\LoadFromSQL1.TRI_Split.sql" />
+    <Build Include="LoadFromSQL1\Tables\LoadFromSQL1.SymbolChange.sql" />
+    <Build Include="LoadFromSQL1\Triggers\LoadFromSQL1.TRI_SymbolChange.sql" />
+    <Build Include="LoadFromSQL1\Tables\LoadFromSQL1.Quote.sql" />
+    <Build Include="LoadFromSQL1\Triggers\LoadFromSQL1.TRI_Quote.sql" />
+    <Build Include="LoadFromSQL1\Tables\LoadFromSQL1.QuoteMinute.sql" />
+    <Build Include="LoadFromSQL1\Triggers\LoadFromSQL1.TRI_QuoteMinute.sql" />
+    <Build Include="Schemas\EODData.sql" />
+    <Build Include="EODData\Tables\EODData.Setting.sql" />
+    <Build Include="EODData\Tables\EODData.SessionCountry.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_SessionCountry.sql" />
+    <Build Include="EODData\Tables\EODData.SessionExchange.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_SessionExchange.sql" />
+    <Build Include="EODData\Tables\EODData.SessionFundamental.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_SessionFundamental.sql" />
+    <Build Include="EODData\Tables\EODData.SessionQuote.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_SessionQuote.sql" />
+    <Build Include="EODData\Tables\EODData.SessionSplit.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_SessionSplit.sql" />
+    <Build Include="EODData\Tables\EODData.SessionSymbol.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_SessionSymbol.sql" />
+    <Build Include="EODData\Tables\EODData.SessionSymbolChange.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_SessionSymbolChange.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="clr\CLR\ExecuteSQLInternal.cs" />
+    <Compile Include="clr\CLR\SessionStore.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Quote\Quote.sqlproj">
+      <Name>Quote</Name>
+      <Project>{7f473c15-bb1d-405f-8300-8e9e96a4b1ac}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>Quote</DatabaseSqlCmdVariable>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="Quote">
+      <DefaultValue>Quote</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="QuoteStaging.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Scripts\PreDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\PostDeployment.sql" />
+  </ItemGroup>
+</Project>

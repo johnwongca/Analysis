@@ -14,4 +14,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Date" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="bc344f8a-8b23-4003-8553-6cfa7c38f427" ChangeDateTime="06/17/2014 00:18:59">
+    <Property Name="ElementName" Value="[EODData].[Exchange].[Delines]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[EODData].[Exchange]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Declines" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5708d1a5-7b4b-4634-9a61-2b9b1f286213" ChangeDateTime="06/17/2014 00:34:30">
+    <Property Name="ElementName" Value="[EODData].[Fundamental].[DSP]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[EODData].[Fundamental]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DPS" />
+  </Operation>
 </Operations>

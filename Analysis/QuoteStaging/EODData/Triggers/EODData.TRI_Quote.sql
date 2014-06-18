@@ -1,9 +1,9 @@
-﻿create trigger EODData.TRI_SessionQuote on EODData.SessionQuote
+﻿create trigger EODData.TRI_Quote on EODData.vQuote
 instead of insert
 AS 
 BEGIN 
 	set nocount on
-	;merge EODData.SessionQuote t
+	;merge EODData.Quote t
 	using inserted s on t.Symbol = s.Symbol and t.Date = s.Date and t.Exchange = s.Exchange
 	when matched and (
 							t.[Open] <> s.[Open]
@@ -21,5 +21,5 @@ BEGIN
 	when not matched then
 		insert ([Exchange], [Symbol], [Date], [Open], [Close], [High], [Low], [Volume], [Ask], [Bid], [OpenInterest])
 			values(s.Exchange, s.Symbol, s.Date, s.[Open], s.[Close], s.High, s.Low, s.Volume, s.Ask, s.Bid, s.OpenInterest)
-	;
+	option(loop join);
 END

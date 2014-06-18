@@ -84,6 +84,7 @@
     <Folder Include="EODData\Tables" />
     <Folder Include="Scripts" />
     <Folder Include="EODData\Triggers" />
+    <Folder Include="EODData\Views" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\Staging.sql" />
@@ -107,20 +108,27 @@
     <Build Include="LoadFromSQL1\Triggers\LoadFromSQL1.TRI_QuoteMinute.sql" />
     <Build Include="Schemas\EODData.sql" />
     <Build Include="EODData\Tables\EODData.Setting.sql" />
-    <Build Include="EODData\Tables\EODData.SessionCountry.sql" />
-    <Build Include="EODData\Triggers\EODData.TRI_SessionCountry.sql" />
-    <Build Include="EODData\Tables\EODData.SessionExchange.sql" />
-    <Build Include="EODData\Triggers\EODData.TRI_SessionExchange.sql" />
-    <Build Include="EODData\Tables\EODData.SessionFundamental.sql" />
-    <Build Include="EODData\Triggers\EODData.TRI_SessionFundamental.sql" />
-    <Build Include="EODData\Tables\EODData.SessionQuote.sql" />
-    <Build Include="EODData\Triggers\EODData.TRI_SessionQuote.sql" />
-    <Build Include="EODData\Tables\EODData.SessionSplit.sql" />
-    <Build Include="EODData\Triggers\EODData.TRI_SessionSplit.sql" />
-    <Build Include="EODData\Tables\EODData.SessionSymbol.sql" />
-    <Build Include="EODData\Triggers\EODData.TRI_SessionSymbol.sql" />
-    <Build Include="EODData\Tables\EODData.SessionSymbolChange.sql" />
-    <Build Include="EODData\Triggers\EODData.TRI_SessionSymbolChange.sql" />
+    <Build Include="EODData\Tables\EODData.Country.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_Country.sql" />
+    <Build Include="EODData\Tables\EODData.Exchange.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_Exchange.sql" />
+    <Build Include="EODData\Tables\EODData.Fundamental.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_Fundamental.sql" />
+    <Build Include="EODData\Tables\EODData.Quote.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_Quote.sql" />
+    <Build Include="EODData\Tables\EODData.Split.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_Split.sql" />
+    <Build Include="EODData\Tables\EODData.Symbol.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_Symbol.sql" />
+    <Build Include="EODData\Tables\EODData.SymbolChange.sql" />
+    <Build Include="EODData\Triggers\EODData.TRI_SymbolChange.sql" />
+    <Build Include="EODData\Views\EODData.vCountry.sql" />
+    <Build Include="EODData\Views\EODData.vExchange.sql" />
+    <Build Include="EODData\Views\EODData.vFundamental.sql" />
+    <Build Include="EODData\Views\EODData.vQuote.sql" />
+    <Build Include="EODData\Views\EODData.vSplit.sql" />
+    <Build Include="EODData\Views\EODData.vSymbol.sql" />
+    <Build Include="EODData\Views\EODData.vSymbolChange.sql" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clr\CLR\ExecuteSQLInternal.cs" />

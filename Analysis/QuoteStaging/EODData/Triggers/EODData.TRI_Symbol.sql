@@ -1,9 +1,9 @@
-﻿create trigger EODData.TRI_SessionSymbol on EODData.SessionSymbol
+﻿create trigger EODData.TRI_Symbol on EODData.vSymbol
 instead of insert
 AS 
 BEGIN 
 	set nocount on
-	;merge EODData.SessionSymbol t
+	;merge EODData.Symbol t
 	using inserted s on t.Exchange = s.Exchange and t.Symbol = s.Symbol
 	when matched and (
 							isnull(t.Name, '') <> isnull (s.Name, '')
@@ -15,5 +15,6 @@ BEGIN
 			Date = s.Date
 	when not matched then
 		insert (Exchange, Symbol, Name, LongName, Date)
-			values(s.Exchange, s.Symbol, s.Name, s.LongName, s.Date);
+			values(s.Exchange, s.Symbol, s.Name, s.LongName, s.Date)
+	option(loop join);
 END

@@ -1,4 +1,4 @@
-﻿CREATE TABLE [EODData].[SessionFundamental]
+﻿CREATE TABLE [EODData].[Fundamental]
 (
 	[Exchange] [varchar](10) not null,
 	[Symbol] [varchar](32) not null,
@@ -8,7 +8,7 @@
 	[Dividend] [float] NULL,
 	[DividendDate] [datetime] NULL,
 	[DividendYield] [float] NULL,
-	[DSP] [float] NULL,
+	[DPS] [float] NULL,
 	[EBITDA] [float] NULL,
 	[EPS] [float] NULL,
 	[Industry] varchar(1000) NULL,
@@ -21,5 +21,5 @@
 	[Sector] varchar(128) NULL,
 	[Shares] [bigint] NULL,
 	[Yield] [float] NULL, 
-    CONSTRAINT [PK_EODData_SessionFundamental] PRIMARY KEY(Exchange, Symbol, Date)
+    CONSTRAINT [PK_EODData_Fundamental] PRIMARY KEY(Exchange, Symbol, Date)with( STATISTICS_NORECOMPUTE = on)
 ) 

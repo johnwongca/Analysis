@@ -14,15 +14,27 @@ namespace EODDataService
             EODDataConnection connection = new EODDataConnection();
             connection.Token = "016E65GDUEHH";
             var data = connection.GetCountries();
-            Console.WriteLine(data.WriteToServer());
-            Console.WriteLine(data.WriteToServer());
-            Console.WriteLine(data.WriteToServer());
-            Console.WriteLine(data.WriteToServer());
-            Console.WriteLine(data.WriteToServer());
-            /*foreach (var c in connection.GetCountries())
-            {
-                Console.WriteLine("{0}  {1}", c.Code, c.Name);
-            }*/
+            Console.WriteLine("Country: {0}",data.WriteToServer());
+            var exchange = connection.GetExchanges();
+            Console.WriteLine("Exchange: {0}", exchange.WriteToServer());
+            var fundamental = connection.GetFundamentals("NASDAQ");
+            Console.WriteLine("Fundamental:{0}", fundamental.WriteToServer("NASDAQ"));
+            
+            var q = connection.GetQuotes("NASDAQ", new DateTime(2014, 6, 16), EODDataInterval.Day);
+            Console.WriteLine("Quote: {0}", q.WriteToServer("NASDAQ"));
+
+            q = connection.GetQuotes("NASDAQ", new DateTime(2014, 6, 16), EODDataInterval.OneMinute);
+            Console.WriteLine("Quote: {0}", q.WriteToServer("NASDAQ"));
+
+            var split = connection.GetSplits("NASDAQ");
+            Console.WriteLine("Split: {0}", split.WriteToServer("NASDAQ"));
+
+            var symbol = connection.GetSymbols("NASDAQ");
+            Console.WriteLine("Symbol: {0}", symbol.WriteToServer("NASDAQ"));
+
+            var symbolChange = connection.GetSymbolChanges("NASDAQ");
+            Console.WriteLine("symbolChange: {0}", symbolChange.WriteToServer("NASDAQ"));
+            
             Console.WriteLine("Done.");
             Console.ReadKey();
         }

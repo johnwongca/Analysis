@@ -1,16 +1,16 @@
 ﻿
-CREATE TABLE [EODData].[SessionExchange]
+CREATE TABLE [EODData].[Exchange]
 (
 	[Exchange] [varchar](10) not null,
 	[Name] [varchar](128) NOT NULL,
 	[Country] [varchar](5) NULL,
 	[Currency] [varchar](10) NULL,
-	[Delines] [int] NULL,
+	[Declines] [int] NULL,
 	[HasIntradayProduct] [bit] NULL,
-	[IntradayStartDate] [datetime] NULL,
+	[IntradayStartDate] DATE NULL,
 	[IsIntraday] [bit] NULL,
-	[LastTradeDateTime] [datetime] NULL,
+	[LastTradeDateTime] DATE NULL,
 	[Suffix] [varchar](10) NULL,
 	[TimeZone] varchar(50) NULL, 
-    CONSTRAINT [PK_EODData_SessionExchange] PRIMARY KEY(Exchange) 
+    CONSTRAINT [PK_EODData_Exchange] PRIMARY KEY(Exchange) 
 ) 

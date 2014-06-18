@@ -1,4 +1,4 @@
-﻿CREATE TABLE [EODData].[SessionQuote]
+﻿CREATE TABLE [EODData].[Quote]
 (
 	[Exchange] [varchar](10) not null,
 	[Symbol] [varchar](32) not null,
@@ -11,5 +11,5 @@
 	[Ask] [float] NOT NULL,
 	[Bid] [float] NOT NULL,
 	[OpenInterest] [bigint] NOT NULL, 
-    CONSTRAINT [PK_EODData_SessionQuote] PRIMARY KEY (Exchange, Symbol, Date) ,
+    CONSTRAINT [PK_EODData_Quote] PRIMARY KEY (Exchange, Symbol, Date) with( STATISTICS_NORECOMPUTE = on)
 ) 

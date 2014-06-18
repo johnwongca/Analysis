@@ -85,6 +85,7 @@
     <Folder Include="Scripts" />
     <Folder Include="EODData\Triggers" />
     <Folder Include="EODData\Views" />
+    <Folder Include="EODData\Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\Staging.sql" />
@@ -129,6 +130,19 @@
     <Build Include="EODData\Views\EODData.vSplit.sql" />
     <Build Include="EODData\Views\EODData.vSymbol.sql" />
     <Build Include="EODData\Views\EODData.vSymbolChange.sql" />
+    <Build Include="EODData\Tables\EODData.Task.sql" />
+    <Build Include="EODData\Tables\EODData.Interval.sql" />
+    <Build Include="EODData\Tables\EODData.TaskCompleted.sql" />
+    <Build Include="EODData\Procedures\EODData.GetCountry.sql" />
+    <Build Include="EODData\Procedures\EODData.WaitForResult.sql" />
+    <Build Include="EODData\Procedures\EODData.GetExchange.sql" />
+    <Build Include="EODData\Procedures\EODData.GetFundamental.sql" />
+    <Build Include="EODData\Procedures\EODData.GetQuote.sql" />
+    <Build Include="EODData\Procedures\EODData.GetSplit.sql" />
+    <Build Include="EODData\Procedures\EODData.GetSymbol.sql" />
+    <Build Include="EODData\Procedures\EODData.GetSymbolChange.sql" />
+    <Build Include="EODData\Procedures\EODData.GetTask.sql" />
+    <Build Include="EODData\Procedures\EODData.EndTask.sql" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clr\CLR\ExecuteSQLInternal.cs" />
@@ -158,12 +172,19 @@
     </SqlCmdVariable>
   </ItemGroup>
   <ItemGroup>
-    <RefactorLog Include="QuoteStaging.refactorlog" />
-  </ItemGroup>
-  <ItemGroup>
     <PreDeploy Include="Scripts\PreDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="QuoteStaging.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
   </ItemGroup>
 </Project>

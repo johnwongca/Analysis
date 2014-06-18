@@ -21,3 +21,23 @@ using (
 	) as s on t.Name = s.Name
 When not matched then
 	insert(Name, Value) values(s.Name, s.Value);
+
+
+;merge EODData.Interval as t
+using (
+		select * from (values	
+		(0, N'OneMinute', 1),
+		(1, N'FiveMinute', 5),
+		(2, N'TenMinute', 10),
+		(3, N'FifteenMinute', 15),
+		(4, N'ThirtyMinute', 30),
+		(5, N'OneHour', 60),
+		(6, N'Day', NULL),
+		(7, N'Week', NULL),
+		(8, N'Month', NULL),
+		(9, N'Top10Gain', NULL),
+		(10, N'Top10Loss', NULL)
+		) c([IntervalID], [IntervalName], [Minute])
+		) as s on t.IntervalID = s.IntervalID
+when not matched then
+	insert ([IntervalID], [IntervalName], [Minute]) values(s.[IntervalID], s.[IntervalName], s.[Minute]);

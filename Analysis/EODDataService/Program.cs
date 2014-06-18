@@ -21,10 +21,10 @@ namespace EODDataService
             Console.WriteLine("Fundamental:{0}", fundamental.WriteToServer("NASDAQ"));
             
             var q = connection.GetQuotes("NASDAQ", new DateTime(2014, 6, 16), EODDataInterval.Day);
-            Console.WriteLine("Quote: {0}", q.WriteToServer("NASDAQ"));
+            Console.WriteLine("Quote: {0}", q.WriteToServer("NASDAQ", EODDataInterval.Day));
 
             q = connection.GetQuotes("NASDAQ", new DateTime(2014, 6, 16), EODDataInterval.OneMinute);
-            Console.WriteLine("Quote: {0}", q.WriteToServer("NASDAQ"));
+            Console.WriteLine("Quote: {0}", q.WriteToServer("NASDAQ", EODDataInterval.OneMinute));
 
             var split = connection.GetSplits("NASDAQ");
             Console.WriteLine("Split: {0}", split.WriteToServer("NASDAQ"));

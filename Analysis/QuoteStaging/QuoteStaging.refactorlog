@@ -1,31 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
-  <Operation Name="Rename Refactor" Key="e6ec80b1-89e1-4bf9-80ca-d802dbe414e0" ChangeDateTime="06/10/2014 06:06:59">
-    <Property Name="ElementName" Value="[EODData].[Setting].[Id]" />
+  <Operation Name="Rename Refactor" Key="4be8f3db-defc-4cd1-bfbc-c78f20f8a442" ChangeDateTime="06/18/2014 02:53:30">
+    <Property Name="ElementName" Value="[EODData].[Task].[Interval]" />
     <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[EODData].[Setting]" />
+    <Property Name="ParentElementName" Value="[EODData].[Task]" />
     <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="Name" />
+    <Property Name="NewName" Value="IntervalID" />
   </Operation>
-  <Operation Name="Rename Refactor" Key="26d6e6ba-3835-4125-93fc-a726163369bc" ChangeDateTime="06/14/2014 06:45:16">
-    <Property Name="ElementName" Value="[EODData].[SessionSymbol].[DateTime]" />
+  <Operation Name="Rename Refactor" Key="9daa7de6-31a5-4ac4-bc79-c48dfd5d203c" ChangeDateTime="06/18/2014 05:05:07">
+    <Property Name="ElementName" Value="[EODData].[Task].[StartDate]" />
     <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[EODData].[SessionSymbol]" />
+    <Property Name="ParentElementName" Value="[EODData].[Task]" />
     <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="Date" />
-  </Operation>
-  <Operation Name="Rename Refactor" Key="bc344f8a-8b23-4003-8553-6cfa7c38f427" ChangeDateTime="06/17/2014 00:18:59">
-    <Property Name="ElementName" Value="[EODData].[Exchange].[Delines]" />
-    <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[EODData].[Exchange]" />
-    <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="Declines" />
-  </Operation>
-  <Operation Name="Rename Refactor" Key="5708d1a5-7b4b-4634-9a61-2b9b1f286213" ChangeDateTime="06/17/2014 00:34:30">
-    <Property Name="ElementName" Value="[EODData].[Fundamental].[DSP]" />
-    <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[EODData].[Fundamental]" />
-    <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="DPS" />
+    <Property Name="NewName" Value="EnlistDate" />
   </Operation>
 </Operations>

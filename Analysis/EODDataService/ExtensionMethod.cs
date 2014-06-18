@@ -109,12 +109,12 @@ namespace EODDataService
                     }
                 ).ToArray());
         }
-        public static double WriteToServer(this QUOTE[] data, string exchange)
+        public static double WriteToServer(this QUOTE[] data, string exchange, EODDataInterval interval)
         {
             return WriteToServer("EODData.vQuote",
                 data.Select(x => new object[] 
                     { 
-                        exchange, x.Symbol, x.DateTime, 
+                        exchange, x.Symbol, Convert.ToInt16(interval), x.DateTime, 
                         x.Open, x.Close, x.High, 
                         x.Low, x.Volume, x.Ask, 
                         x.Bid, x.OpenInterest

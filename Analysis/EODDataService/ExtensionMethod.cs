@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using EODDataService.EODDataSvc;
 
@@ -11,12 +12,47 @@ namespace EODDataService
 {
     public static partial class G
     {
+        
         static EODDataConnection mEODDataConnection = new EODDataConnection();
         public static string ConnectionString;
-        //public static EODDataConnection EODDataConnection
-        //{
-        //    get { }
-        //}
+        public static int MaxConnection = 0;
+        static DateTime LastSettingsRead = DateTime.MinValue;
+        static void ReadSettings()
+        {
+            lock (mEODDataConnection)
+            {
+                if ((DateTime.Now - LastSettingsRead).TotalMinutes < 1)
+                    return;
+                LastSettingsRead = DateTime.Now;
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                {
+                    connection.Open();
+                    SqlCommand cmd = connection.CreateCommand();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "EODData.ReadSettings";
+                    using (SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        while (reader.Read())
+                        {
+                            if (reader.GetString(0).ToUpper() == "MAXCONCURRENTEXECUTION")
+                                MaxConnection = Convert.ToInt32(reader.GetString(1));
+                            if (reader.GetString(0).ToUpper() == "TOKEN")
+                            {
+                                mEODDataConnection.Token = reader.GetString(1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        public static EODDataConnection EODDataConnection
+        {
+            get 
+            {
+                ReadSettings();
+                return mEODDataConnection;
+            }
+        }
         public static string SetDatabaseConnection(params string[] args)
         {
             SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder();
@@ -150,6 +186,20 @@ namespace EODDataService
                         x.NewExchangeCode, x.NewSymbol
                     }
                 ).ToArray());
+        }
+        //public static void GetAndRunTask()
+        //{
+        //}
+        //public static bool RunTask()
+        //{
+        //    Task task = Task.Factory.StartNew(GetAndRunTask, TaskCreationOptions.LongRunning);
+        //    return true;   
+        //}
+        public static void Run(string[] args)
+        {
+            SetDatabaseConnection(args);
+            ThreadPool.SetMinThreads(50, 50);
+            //using(SqlConnection)
         }
     }
 }

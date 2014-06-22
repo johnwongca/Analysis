@@ -14,4 +14,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="EnlistDate" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="eca23b06-9712-44e4-a4be-937d569f8ce8" ChangeDateTime="06/20/2014 03:13:03">
+    <Property Name="ElementName" Value="[EODData].[TaskCompleted].[StartDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[EODData].[TaskCompleted]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NextStartDate" />
+  </Operation>
 </Operations>

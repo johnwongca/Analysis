@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DownloadTask.cs" />
     <Compile Include="EODDataConnection.cs" />
     <Compile Include="EODDataReader.cs" />
     <Compile Include="ExtensionMethod.cs" />

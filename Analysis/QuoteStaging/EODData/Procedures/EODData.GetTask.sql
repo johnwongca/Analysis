@@ -22,14 +22,14 @@ begin
 	
 		select top 1 @TaskID = TaskID
 		from EODData.Task with(readcommittedlock, readpast, updlock, rowlock)
-		where StartDate <=getdate() and IsRegularPool = 0
-		order by IsRegularPool, StartDate
+		where NextStartDate <=getdate() and IsRegularPool = 0
+		order by IsRegularPool, NextStartDate
 		if @@rowcount > 0
 			goto ___Found___
 		select top 1 @TaskID = TaskID
 		from EODData.Task with(readcommittedlock, readpast, updlock, rowlock)
-		where StartDate <=getdate() and IsRegularPool = 1
-		order by IsRegularPool, StartDate
+		where NextStartDate <=getdate() and IsRegularPool = 1
+		order by IsRegularPool, NextStartDate
 		if @@rowcount > 0
 			goto ___Found___
 		commit

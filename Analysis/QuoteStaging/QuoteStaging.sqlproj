@@ -143,6 +143,10 @@
     <Build Include="EODData\Procedures\EODData.GetSymbolChange.sql" />
     <Build Include="EODData\Procedures\EODData.GetTask.sql" />
     <Build Include="EODData\Procedures\EODData.EndTask.sql" />
+    <Build Include="EODData\Procedures\EODData.ReadSettings.sql" />
+    <Build Include="EODData\Tables\EODData.SessionStatus.sql" />
+    <Build Include="EODData\Procedures\EODData.SetSessionStatus.sql" />
+    <Build Include="EODData\Procedures\EODData.RemoveSessionStatus.sql" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clr\CLR\ExecuteSQLInternal.cs" />

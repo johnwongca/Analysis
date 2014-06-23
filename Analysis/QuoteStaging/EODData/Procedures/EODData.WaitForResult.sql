@@ -10,15 +10,15 @@ begin
 	begin
 		if @TaskID is not null
 			return;
-		while not exists(select * from EODData.Task with(nolock) where PoolID = @PoolID)
+		while exists(select * from EODData.Task with(nolock) where PoolID = @PoolID)
 		begin
 			waitfor delay '00:00:00.100'
 		end
 		return;
 	end
-	while not exists(select * from EODData.Task with(nolock) where PoolID = @PoolID and TaskID = @TaskID)
+	while exists(select * from EODData.Task with(nolock) where PoolID = @PoolID and TaskID = @TaskID)
 	begin
-		waitfor delay '00:00:00.100'
+		waitfor delay '00:00:00.050'
 	end
 	declare @Error varchar(max)
 	select @Error = Error from EODData.TaskCompleted where TaskID = TaskID

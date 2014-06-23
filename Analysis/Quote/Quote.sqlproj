@@ -78,6 +78,7 @@
     <Folder Include="staging\Stored Procedures\" />
     <Folder Include="Assemblies\" />
     <Folder Include="Security\" />
+    <Folder Include="EODData" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="q\Tables\Exchange.sql" />
@@ -92,6 +93,8 @@
     <Build Include="Storage\QuoteMem.sql" />
     <Build Include="Security\q.sql" />
     <Build Include="Security\staging.sql" />
+    <Build Include="Security\EODData.sql" />
+    <Build Include="Storage\QuoteTemp.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assemblies\EODDataWebMethods.dll" />

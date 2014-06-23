@@ -25,41 +25,11 @@ namespace EODDataService
         {
             lock (SyncObject)
             {
-                try
-                {
-                    StatusUpdate(downloadTask, "Done");
-                }
-                finally
-                {
-                    RunningTasks.Remove(downloadTask);
-                }
+
+                RunningTasks.Remove(downloadTask);
             }
         }
-        static void StatusUpdate(DownloadTask downloadTask, string status)
-        {
-            lock (SyncObject)
-            {
-                using (SqlConnection connection = new SqlConnection(G.ConnectionString))
-                {
-                    connection.Open();
-                    SqlCommand cmd= connection.CreateCommand();
-                    cmd.CommandText = "[EODData].[SetSessionStatus]";
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@ManagementThreadID", SqlDbType.Int).Value = Thread.CurrentThread.ManagedThreadId;
-                    cmd.Parameters.Add("@TaskSessionID", SqlDbType.SmallInt).Value = downloadTask.SessionID;
-                    cmd.Parameters.Add("@TaskID", SqlDbType.Int).Value = downloadTask.TaskID;
-                    cmd.Parameters.Add("@PoolID", SqlDbType.SmallInt).Value = downloadTask.PoolID;
-                    cmd.Parameters.Add("@MethodName", SqlDbType.VarChar, 50).Value = downloadTask.MethodName;
-                    cmd.Parameters.Add("@IntervalID", SqlDbType.TinyInt).Value = (byte)downloadTask.IntervalID;
-                    cmd.Parameters.Add("@Exchange", SqlDbType.VarChar, 10).Value = downloadTask.Exchange;
-                    cmd.Parameters.Add("@DateFrom", SqlDbType.Date).Value = downloadTask.DateFrom;
-                    cmd.Parameters.Add("@Status", SqlDbType.VarChar, 50).Value = status;
-                    cmd.Parameters.Add("@Error", SqlDbType.VarChar, -1).Value = downloadTask.ExceptionInSqlFormat;
-                    cmd.ExecuteNonQuery();
-                    connection.Close();
-                }
-            }
-        }
+        
         public static int TaskCount
         {
             get 
@@ -85,20 +55,58 @@ namespace EODDataService
                 return Exceptions.Count == 0? SqlString.Null:new SqlString(string.Join("\n", Exceptions.Select(x => x.Message).ToArray()));
             }
         }
-        public DownloadTaskStatus Status = DownloadTaskStatus.Pending;
 
-        public short SessionID = -1;
-        public short PoolID = -1;
-        public int TaskID = -1;
-        public string MethodName = ""; 
-        public string Exchange = "";
-        public EODDataInterval IntervalID = EODDataInterval.None;
-        public DateTime DateFrom = DateTime.MinValue;
+        void StatusUpdate()
+        {
+            using (SqlConnection connection = new SqlConnection(G.ConnectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = connection.CreateCommand();
+                cmd.CommandText = "[EODData].[SetSessionStatus]";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@ManagementThreadID", SqlDbType.Int).Value = Thread.CurrentThread.ManagedThreadId;
+                cmd.Parameters.Add("@TaskSessionID", SqlDbType.SmallInt).Value = SessionID;
+                cmd.Parameters.Add("@BulkCopySessionID", SqlDbType.SmallInt).Value = BulkCopySessionID;
+                cmd.Parameters.Add("@TaskID", SqlDbType.Int).Value = TaskID;
+                cmd.Parameters.Add("@PoolID", SqlDbType.SmallInt).Value = PoolID;
+                cmd.Parameters.Add("@MethodName", SqlDbType.VarChar, 50).Value = MethodName;
+                cmd.Parameters.Add("@IntervalID", SqlDbType.TinyInt).Value = (byte)Interval;
+                cmd.Parameters.Add("@Exchange", SqlDbType.VarChar, 10).Value = Exchange;
+                cmd.Parameters.Add("@DateFrom", SqlDbType.Date).Value = DateFrom;
+                cmd.Parameters.Add("@Status", SqlDbType.VarChar, 50).Value = Status.ToString();
+                cmd.Parameters.Add("@Error", SqlDbType.VarChar, -1).Value = ExceptionInSqlFormat;
+                cmd.Parameters.Add("@Rows", SqlDbType.Int).Value = Rows;
+                cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        DownloadTaskStatus mStatus = DownloadTaskStatus.Pending;
+        short mBulkCopySessionID = -1;
+        short mSessionID = -1;
+        short mPoolID = -1;
+        int mTaskID = -1;
+        string mMethodName = "";
+        string mExchange = "";
+        int mRows = 0;
+        EODDataInterval mInterval = EODDataInterval.None;
+        DateTime mDateFrom = DateTime.MinValue;
+
+        public DownloadTaskStatus Status { get { return mStatus; } set { mStatus = value; StatusUpdate(); } }
+        public short BulkCopySessionID { get { return mBulkCopySessionID; } set { mBulkCopySessionID = value; StatusUpdate(); } }
+        public short SessionID { get { return mSessionID; } set { mSessionID = value; StatusUpdate(); } }
+        public short PoolID { get { return mPoolID; } set { mPoolID = value; StatusUpdate(); } }
+        public int TaskID { get { return mTaskID; } set { mTaskID = value; StatusUpdate(); } }
+        public int Rows { get { return mRows; } set { mRows = value; StatusUpdate(); } }
+        public string MethodName { get { return mMethodName; } set { mMethodName = value; StatusUpdate(); } }
+        public string Exchange { get { return mExchange; } set { mExchange = value; StatusUpdate(); } }
+        public EODDataInterval Interval { get { return mInterval; } set { mInterval = value; StatusUpdate(); } }
+        public DateTime DateFrom  { get { return mDateFrom; } set { mDateFrom = value; StatusUpdate(); } }
         public DownloadTask()
         {
             AddToList(this);
             task = Task.Factory.StartNew(TaskBody, TaskCreationOptions.LongRunning);
-            StatusUpdate(this, "Object Created");
+            
         }
 
         bool OpenConnection()
@@ -108,7 +116,7 @@ namespace EODDataService
                 connection.Open();
                 SqlCommand cmd = connection.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "@set xact_abort off; begin transaction;select @@spid";
+                cmd.CommandText = "set xact_abort off; begin transaction;select @@spid";
                 SessionID = (short)cmd.ExecuteScalar();
                 return true;
             }
@@ -134,10 +142,23 @@ namespace EODDataService
         }
         void ExecuteTask()
         {
+            DateTime downloadStartDate = DateTime.Now;
             try
             {
                 if (MethodName.ToUpper() == "GetCountries".ToUpper())
-                    G.EODDataConnection.GetCountries().WriteToServer();
+                    G.EODDataConnection.GetCountries().WriteToServer(this);
+                if (MethodName.ToUpper() == "GetExchanges".ToUpper())
+                    G.EODDataConnection.GetExchanges().WriteToServer(this);
+                if (MethodName.ToUpper() == "GetFundamentals".ToUpper())
+                    G.EODDataConnection.GetFundamentals(Exchange).WriteToServer(Exchange, this);
+                if (MethodName.ToUpper() == "GetQuotes".ToUpper())
+                    G.EODDataConnection.GetQuotes(Exchange, DateFrom, Interval).WriteToServer(Exchange, Interval, this);
+                if (MethodName.ToUpper() == "GetSplits".ToUpper())
+                    G.EODDataConnection.GetSplits(Exchange).WriteToServer(Exchange, this);
+                if (MethodName.ToUpper() == "GetSymbols".ToUpper())
+                    G.EODDataConnection.GetSymbols(Exchange).WriteToServer(Exchange, this);
+                if (MethodName.ToUpper() == "GetSymbolChanges".ToUpper())
+                    G.EODDataConnection.GetSymbolChanges(Exchange).WriteToServer(Exchange, this);
             }
             catch(Exception e)
             {
@@ -152,6 +173,8 @@ namespace EODDataService
                 cmd.Parameters.Add("@PoolID", SqlDbType.SmallInt).Value = PoolID;
                 cmd.Parameters.Add("@TaskID", SqlDbType.Int).Value = TaskID;
                 cmd.Parameters.Add("@Error", SqlDbType.VarChar, -1).Value = ExceptionInSqlFormat;
+                cmd.Parameters.Add("@Rows", SqlDbType.Int).Value = Rows;
+                cmd.Parameters.Add("@DownloadStartDate", SqlDbType.DateTime).Value = downloadStartDate;
                 cmd.ExecuteNonQuery();
             }
         }
@@ -169,11 +192,11 @@ namespace EODDataService
                         return false;
                     if(r.Read())
                     {
-                        PoolID = r.IsDBNull(0) ? (short)-1 : r.GetInt16(0);
-                        TaskID = r.IsDBNull(1) ? -1 : r.GetInt32(1);
-                        MethodName = r.IsDBNull(2) ? "" : r.GetString(2);
-                        Exchange = r.IsDBNull(3) ? "" : r.GetString(3);
-                        IntervalID = r.IsDBNull(4) ? EODDataInterval.None : (EODDataInterval)r.GetByte(4);
+                        mPoolID = r.IsDBNull(0) ? (short)-1 : r.GetInt16(0);
+                        mTaskID = r.IsDBNull(1) ? -1 : r.GetInt32(1);
+                        mMethodName = r.IsDBNull(2) ? "" : r.GetString(2);
+                        mExchange = r.IsDBNull(3) ? "" : r.GetString(3);
+                        mInterval = r.IsDBNull(4) ? EODDataInterval.None : (EODDataInterval)r.GetByte(4);
                         DateFrom = r.IsDBNull(5) ? DateTime.MinValue : r.GetDateTime(5);
                         return true;
                     }
@@ -191,15 +214,15 @@ namespace EODDataService
         {
             try
             {
-                StatusUpdate(this, "Opening Connection");
+                StatusUpdate();
                 if (!OpenConnection())
                     return;
-                StatusUpdate(this, "Reading Task");
                 if (!ReadTask())
                     return;
-                StatusUpdate(this, "Executing Task");
                 Status = DownloadTaskStatus.Running;
                 ExecuteTask();
+                lock(SyncObject)
+                    G.LastTaskExecutionTime = DateTime.Now;
             }
             finally
             {

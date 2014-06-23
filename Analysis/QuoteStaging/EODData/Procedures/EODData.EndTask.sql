@@ -1,4 +1,4 @@
-﻿create procedure [EODData].[EndTask](@PoolID smallint, @TaskID int, @Error varchar(max))
+﻿create procedure [EODData].[EndTask](@PoolID smallint, @TaskID int, @Error varchar(max), @Rows int, @DownloadStartDate datetime)
 as
 begin
 	set nocount on
@@ -23,7 +23,7 @@ ___Done___:
 		output deleted.PoolID, deleted.TaskID, deleted.MethodName, 
 				deleted.IntervalID, deleted.Exchange, deleted.Symbol, 
 				deleted.DateFrom, deleted.DateTo, deleted.EnlistDate, 
-				deleted.Retries, @Error
-		into EODData.TaskCompleted(PoolID, TaskID, MethodName, IntervalID, Exchange, Symbol, DateFrom, DateTo, EnlistDate, Retries, Error)
+				deleted.Retries, @Error, @Rows, @DownloadStartDate
+		into EODData.TaskCompleted(PoolID, TaskID, MethodName, IntervalID, Exchange, Symbol, DateFrom, DateTo, EnlistDate, Retries, Error, Rows, DownloadStartDate)
 	where TaskID = @TaskID
 end

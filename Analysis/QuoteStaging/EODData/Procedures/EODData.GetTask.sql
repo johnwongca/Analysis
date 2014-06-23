@@ -16,16 +16,20 @@ begin
 			select @Res = cast(@i as varchar(20))+ '-EODData.GetTask'
 			exec @ret = sp_getapplock @Resource =  @Res, @LockMode =  'Exclusive',  @LockOwner =  'Transaction' ,  @LockTimeout = 0
 			if @ret >=0
+			begin
+				select top 1 @TaskID = TaskID
+				from EODData.Task with(readcommittedlock, readpast, updlock, rowlock)
+				where NextStartDate <=getdate() and IsRegularPool = 0
+				order by IsRegularPool, NextStartDate
+				if @@rowcount > 0
+					goto ___Found___
+				exec sp_releaseapplock @Res, 'Transaction'
 				break;
+			end
 			select @i = @i + 1
 		end
 	
-		select top 1 @TaskID = TaskID
-		from EODData.Task with(readcommittedlock, readpast, updlock, rowlock)
-		where NextStartDate <=getdate() and IsRegularPool = 0
-		order by IsRegularPool, NextStartDate
-		if @@rowcount > 0
-			goto ___Found___
+		
 		select top 1 @TaskID = TaskID
 		from EODData.Task with(readcommittedlock, readpast, updlock, rowlock)
 		where NextStartDate <=getdate() and IsRegularPool = 1
@@ -36,7 +40,7 @@ begin
 		waitfor delay '00:00:00.100'
 		continue
 ___Found___:
-		select PoolID, TaskID, MethodName, Exchange, IntervalID, DateFrom
+		select PoolID, TaskID, MethodName, Exchange, IntervalID, DateFrom, DateTo
 		from EODData.Task with(readcommittedlock, readpast, updlock, rowlock)
 		where @TaskID = TaskID
 		break

@@ -12,7 +12,9 @@
     [DateTo] DATE NULL, 
     [EnlistDate] DATETIME NOT NULL, 
     [Retries] INT not NULL, 
+	DownloadStartDate datetime,
 	CompletedDate datetime not null constraint DF_EDOData_TaskCompleted_CompeteDate default(getdate()),
+	Rows int,
 	Error varchar(max),
     constraint PK_EODData_TaskCompleted PRIMARY KEY(TaskID, TaskCompletionID)
 )

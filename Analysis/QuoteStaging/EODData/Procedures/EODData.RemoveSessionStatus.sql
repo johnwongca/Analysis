@@ -2,5 +2,5 @@
 as
 begin
 	set nocount on 
-	delete EODData.ExecutionStatus;
+	delete EODData.SessionStatus;
 end

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [EODData].[GetQuote](@Exchange varchar(10),@Date date, @PoolID smallint = @@spid)
+﻿CREATE PROCEDURE [EODData].[GetQuote](@Exchange varchar(10), @Interval tinyint, @Date date, @PoolID smallint = @@spid)
 AS
 begin
 	set nocount on
@@ -7,7 +7,7 @@ begin
 								Exchange, Symbol, DateFrom, 
 								DateTo
 							)
-		select	@PoolID PoolID, 'GetQuotes' MethodName, null IntervalID, 
+		select	@PoolID PoolID, 'GetQuotes' MethodName, @Interval IntervalID, 
 				@Exchange Exchange, null Symbol, @Date DateFrom, 
 				null DateTo
 	declare @TaskID int = scope_identity()

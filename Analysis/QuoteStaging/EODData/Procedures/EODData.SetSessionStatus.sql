@@ -2,6 +2,7 @@
 (
 	@ManagementThreadID int,
 	@TaskSessionID smallint,
+	@BulkCopySessionID smallint,
 	@TaskID int,
 	@PoolID smallint,
 	@MethodName varchar(50),
@@ -9,7 +10,8 @@
 	@Exchange varchar(10),
 	@DateFrom date,
 	@Status varchar(50),
-	@Error varchar(max)
+	@Error varchar(max),
+	@Rows int
 )
 AS 
 begin
@@ -18,6 +20,7 @@ begin
 	using (select @ManagementThreadID as ManagementThreadID) s on t.ManagementThreadID = s.ManagementThreadID
 	when matched then
 		update set TaskSessionID = @TaskSessionID,
+					BulkCopySessionID = @BulkCopySessionID,
 					TaskID = @TaskID,
 					PoolID = @PoolID,
 					MethodName = @MethodName,
@@ -26,10 +29,11 @@ begin
 					DateFrom = @DateFrom,
 					Status = @Status,
 					StatusDate = getdate(),
-					Error = @Error
+					Error = @Error,
+					Rows = @Rows
 	when not matched then
-		insert (ManagementThreadID, TaskSessionID, TaskID, PoolID, MethodName, IntervalID, Exchange, DateFrom, Status, StatusDate, Error)
-			values(@ManagementThreadID, @TaskSessionID, @TaskID, @PoolID, @MethodName, @IntervalID, @Exchange, @DateFrom, @Status, getdate(), @Error)
+		insert (ManagementThreadID, BulkCopySessionID, TaskSessionID, TaskID, PoolID, MethodName, IntervalID, Exchange, DateFrom, Status, StatusDate, Error, Rows)
+			values(@ManagementThreadID, @BulkCopySessionID, @TaskSessionID, @TaskID, @PoolID, @MethodName, @IntervalID, @Exchange, @DateFrom, @Status, getdate(), @Error, @Rows)
 	;
 
 end

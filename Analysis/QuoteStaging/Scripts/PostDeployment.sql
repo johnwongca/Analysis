@@ -16,7 +16,8 @@ using (
 		from (
 				values('MaxConcurrentExecution','5'),
 				('Token', '016E65GDUEHH'),
-				('WebService','http://ws.eoddata.com/data.asmx')
+				('WebService','http://ws.eoddata.com/data.asmx'),
+				('MaxIdleTimeInMinute', '30')
 			) c(Name, Value)
 	) as s on t.Name = s.Name
 When not matched then

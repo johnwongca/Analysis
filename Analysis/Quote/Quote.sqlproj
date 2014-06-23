@@ -72,10 +72,7 @@
     <Folder Include="Properties" />
     <Folder Include="q\" />
     <Folder Include="q\Tables\" />
-    <Folder Include="staging\" />
-    <Folder Include="staging\Tables\" />
     <Folder Include="Storage\" />
-    <Folder Include="staging\Stored Procedures\" />
     <Folder Include="Assemblies\" />
     <Folder Include="Security\" />
     <Folder Include="EODData" />
@@ -88,11 +85,9 @@
     <Build Include="q\Tables\QuoteMinute.sql" />
     <Build Include="q\Tables\Fundamental.sql" />
     <Build Include="q\Tables\SymbolChange.sql" />
-    <Build Include="staging\Tables\Settings.sql" />
     <Build Include="Storage\QuoteData.sql" />
     <Build Include="Storage\QuoteMem.sql" />
     <Build Include="Security\q.sql" />
-    <Build Include="Security\staging.sql" />
     <Build Include="Security\EODData.sql" />
     <Build Include="Storage\QuoteTemp.sql" />
   </ItemGroup>

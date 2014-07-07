@@ -21,5 +21,5 @@
 	[Sector] varchar(128) NULL,
 	[Shares] [bigint] NULL,
 	[Yield] [float] NULL, 
-    CONSTRAINT [PK_EODData_Fundamental] PRIMARY KEY(Exchange, Symbol, Date)with( STATISTICS_NORECOMPUTE = on)
+    CONSTRAINT [PK_EODData_Fundamental] PRIMARY KEY(Date, Exchange, Symbol)with( STATISTICS_NORECOMPUTE = on)
 ) 

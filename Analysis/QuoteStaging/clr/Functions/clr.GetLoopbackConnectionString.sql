@@ -2,5 +2,5 @@
 RETURNS varchar(max)
 AS
 BEGIN
-	return 'Server='+@@ServerName+';Database='+db_name()+';trusted_connection=true'
+	return 'Server='+@@ServerName+';Database='+db_name()+';trusted_connection=true;Enlist=false'
 END

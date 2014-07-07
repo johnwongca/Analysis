@@ -14,4 +14,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ServiceApplicationName" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="758dd608-987e-4d2e-ad72-f0e747066136" ChangeDateTime="06/24/2014 06:30:32">
+    <Property Name="ElementName" Value="[q].[Fundamental].[DSP]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[q].[Fundamental]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DPS" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="cd596482-94d2-4e96-89b7-ee8b037b6c43" ChangeDateTime="06/24/2014 06:31:15">
+    <Property Name="ElementName" Value="[q].[Fundamental].[Date]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[q].[Fundamental]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EffectiveDate" />
+  </Operation>
 </Operations>

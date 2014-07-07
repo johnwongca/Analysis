@@ -40,7 +40,7 @@ begin
 		waitfor delay '00:00:00.100'
 		continue
 ___Found___:
-		select PoolID, TaskID, MethodName, Exchange, IntervalID, DateFrom, DateTo
+		select PoolID, TaskID, MethodName, Exchange, IntervalID, DateFrom, DateTo, PostScript
 		from EODData.Task with(readcommittedlock, readpast, updlock, rowlock)
 		where @TaskID = TaskID
 		break

@@ -83,6 +83,7 @@ namespace EODDataService
 
         DownloadTaskStatus mStatus = DownloadTaskStatus.Pending;
         short mBulkCopySessionID = -1;
+        short mPostScriptSessionID = -1;
         short mSessionID = -1;
         short mPoolID = -1;
         int mTaskID = -1;
@@ -91,9 +92,10 @@ namespace EODDataService
         int mRows = 0;
         EODDataInterval mInterval = EODDataInterval.None;
         DateTime mDateFrom = DateTime.MinValue;
-
+        string mPostScript = "";
         public DownloadTaskStatus Status { get { return mStatus; } set { mStatus = value; StatusUpdate(); } }
         public short BulkCopySessionID { get { return mBulkCopySessionID; } set { mBulkCopySessionID = value; StatusUpdate(); } }
+        public short PostScriptSessionID { get { return mPostScriptSessionID; } set { mPostScriptSessionID = value; StatusUpdate(); } }
         public short SessionID { get { return mSessionID; } set { mSessionID = value; StatusUpdate(); } }
         public short PoolID { get { return mPoolID; } set { mPoolID = value; StatusUpdate(); } }
         public int TaskID { get { return mTaskID; } set { mTaskID = value; StatusUpdate(); } }
@@ -138,6 +140,22 @@ namespace EODDataService
             catch(Exception e)
             {
                 Exceptions.Add(e);
+            }
+        }
+        void ExecutePostScript()
+        {
+            if (mPostScript == "")
+                return;
+            using(SqlConnection connection = new SqlConnection(G.ConnectionString))
+            {
+                connection.Open();
+                PostScriptSessionID = connection.GetSessionID();
+                SqlCommand cmd = connection.CreateCommand();
+                cmd.CommandTimeout = 0;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = mPostScript;
+                cmd.Parameters.Add("@TaskID", SqlDbType.Int).Value = TaskID;
+                cmd.ExecuteNonQuery();
             }
         }
         void ExecuteTask()
@@ -198,6 +216,7 @@ namespace EODDataService
                         mExchange = r.IsDBNull(3) ? "" : r.GetString(3);
                         mInterval = r.IsDBNull(4) ? EODDataInterval.None : (EODDataInterval)r.GetByte(4);
                         DateFrom = r.IsDBNull(5) ? DateTime.MinValue : r.GetDateTime(5);
+                        mPostScript = r.IsDBNull(6) ? "" : r.GetString(6);
                         return true;
                     }
                     r.Close();
@@ -221,6 +240,7 @@ namespace EODDataService
                     return;
                 Status = DownloadTaskStatus.Running;
                 ExecuteTask();
+                ExecutePostScript();
                 lock(SyncObject)
                     G.LastTaskExecutionTime = DateTime.Now;
             }

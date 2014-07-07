@@ -3,8 +3,13 @@ instead of insert
 AS 
 BEGIN 
 	set nocount on
-	;merge EODData.Quote t
-	using inserted s on t.Symbol = s.Symbol and t.Date = s.Date and t.Exchange = s.Exchange and t.IntervalID = s.IntervalID
+	; with s0 as
+	(	
+		select Exchange, Symbol, IntervalID, Date, [Open], [Close], High, Low, Volume, Ask, Bid, OpenInterest , row_number() over( partition by Exchange, Symbol, IntervalID, Date order by Exchange, Symbol, IntervalID, Date) RowNumber
+		from inserted
+	)
+	merge EODData.Quote t
+	using (select * from s0 where RowNumber = 1) s on t.Symbol = s.Symbol and t.Date = s.Date and t.Exchange = s.Exchange and t.IntervalID = s.IntervalID
 	when matched and (
 							t.[Open] <> s.[Open]
 						or t.[Close] <> s.[Close]
@@ -20,6 +25,6 @@ BEGIN
 					[Bid] = s.Bid, [OpenInterest] = s.OpenInterest
 	when not matched then
 		insert ([Exchange], [Symbol], IntervalID, [Date], [Open], [Close], [High], [Low], [Volume], [Ask], [Bid], [OpenInterest])
-			values(s.Exchange, s.Symbol, IntervalID, s.Date, s.[Open], s.[Close], s.High, s.Low, s.Volume, s.Ask, s.Bid, s.OpenInterest)
+			values(s.Exchange, s.Symbol, s.IntervalID, s.Date, s.[Open], s.[Close], s.High, s.Low, s.Volume, s.Ask, s.Bid, s.OpenInterest)
 	option(loop join);
 END

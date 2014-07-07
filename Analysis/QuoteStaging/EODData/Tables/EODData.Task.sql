@@ -14,6 +14,7 @@
 	NextStartDate as dateadd(second, power(2, case when Retries < 12 then Retries else 11 end) -1, LastCompletionDate) persisted,
 	IsRegularPool as case when PoolID = 0 then 0 else 1 end persisted, 
 	Status varchar(10) not null constraint DF_EODData_Task_Status default('Pending'),
+	PostScript varchar(max),
 	Error varchar(max),
     constraint PK_EODData_Task PRIMARY KEY(TaskID),
 	constraint FK_EODData_Task_EODData_Interval foreign key (IntervalID) references EODData.Interval(IntervalID),

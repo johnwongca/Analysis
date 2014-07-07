@@ -15,6 +15,7 @@
 	DownloadStartDate datetime,
 	CompletedDate datetime not null constraint DF_EDOData_TaskCompleted_CompeteDate default(getdate()),
 	Rows int,
+	PostScript varchar(max),
 	Error varchar(max),
     constraint PK_EODData_TaskCompleted PRIMARY KEY(TaskID, TaskCompletionID)
 )

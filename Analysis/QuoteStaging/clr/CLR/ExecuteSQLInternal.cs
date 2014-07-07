@@ -175,6 +175,7 @@ namespace sqlnotes.info
             using (SqlConnection targetConnection = new SqlConnection(GetLoopbackConnectionString()))
             {
                 targetConnection.Open();
+
                 SqlCommand targetCommand = targetConnection.CreateCommand();
                 targetCommand.CommandType = System.Data.CommandType.Text;
                 targetCommand.CommandText = "select top 0 * from " + TargetTable.Value;

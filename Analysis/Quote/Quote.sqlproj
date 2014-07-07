@@ -36,6 +36,7 @@
     <PermissionSet>UNSAFE</PermissionSet>
     <DelayedDurability>FORCED</DelayedDurability>
     <AssemblyOwner>dbo</AssemblyOwner>
+    <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -75,33 +76,30 @@
     <Folder Include="Storage\" />
     <Folder Include="Assemblies\" />
     <Folder Include="Security\" />
-    <Folder Include="EODData" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="q\Tables\Exchange.sql" />
-    <Build Include="q\Tables\Symbol.sql" />
-    <Build Include="q\Tables\Split.sql" />
-    <Build Include="q\Tables\Quote.sql" />
-    <Build Include="q\Tables\QuoteMinute.sql" />
-    <Build Include="q\Tables\Fundamental.sql" />
-    <Build Include="q\Tables\SymbolChange.sql" />
+    <Build Include="q\Tables\q.Exchange.sql" />
+    <Build Include="q\Tables\q.Symbol.sql" />
+    <Build Include="q\Tables\q.Split.sql" />
+    <Build Include="q\Tables\q.Quote.sql" />
+    <Build Include="q\Tables\q.QuoteMinute.sql" />
+    <Build Include="q\Tables\q.Fundamental.sql" />
+    <Build Include="q\Tables\q.SymbolChange.sql" />
     <Build Include="Storage\QuoteData.sql" />
     <Build Include="Storage\QuoteMem.sql" />
     <Build Include="Security\q.sql" />
     <Build Include="Security\EODData.sql" />
     <Build Include="Storage\QuoteTemp.sql" />
+    <Build Include="q\Tables\q.Name.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assemblies\EODDataWebMethods.dll" />
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EODDataWebMethods">
-      <HintPath>Assemblies\EODDataWebMethods.dll</HintPath>
-      <SqlAssemblyName>EODDataWebMethods</SqlAssemblyName>
-      <IsModelAware>True</IsModelAware>
-      <GenerateSqlClrDdl>False</GenerateSqlClrDdl>
-      <SqlOwnerName>dbo</SqlOwnerName>
-      <SqlPermissionSet>SAFE</SqlPermissionSet>
-    </Reference>
+    <RefactorLog Include="Quote.refactorlog" />
   </ItemGroup>
 </Project>

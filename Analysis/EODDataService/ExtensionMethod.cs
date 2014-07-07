@@ -97,14 +97,20 @@ namespace EODDataService
             if (period == EODDataInterval.Week) return "w";
             return "m";
         }
+        public static short GetSessionID(this SqlConnection connection)
+        {
+            SqlCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.Text;
+            command.CommandText = "select @@spid";
+            return (short)command.ExecuteScalar();
+        }
         static EODDataReader GetReaderStructure(SqlConnection connection, string tableName, object[][] data = null, DownloadTask dt = null)
         {
             SqlCommand command = connection.CreateCommand();
             command.CommandType = CommandType.Text;
             if (dt != null)
             {
-                command.CommandText = "select @@spid";
-                dt.BulkCopySessionID = (short)command.ExecuteScalar();
+                dt.BulkCopySessionID = dt.BulkCopySessionID = connection.GetSessionID();
                 dt.Rows = data.Length;
             }
             command.CommandText = "select top 0 * from " + tableName;

@@ -69,12 +69,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="LoadFromSQL1" />
-    <Folder Include="LoadFromSQL1\Procedures" />
-    <Folder Include="LoadFromSQL1\Triggers" />
-    <Folder Include="LoadFromSQL1\Tables" />
     <Folder Include="Schemas" />
-    <Folder Include="LoadFromSQL1\Views" />
     <Folder Include="clr" />
     <Folder Include="FileGroups" />
     <Folder Include="clr\Functions" />
@@ -88,25 +83,10 @@
     <Folder Include="EODData\Procedures" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Schemas\Staging.sql" />
     <Build Include="Schemas\clr.sql" />
     <Build Include="FileGroups\QuoteStagingData.sql" />
     <Build Include="CLR\Functions\clr.GetLoopbackConnectionString.sql" />
     <None Include="clr\clrtest.sql" />
-    <Build Include="Schemas\LoadFromSQL1.sql" />
-    <Build Include="LoadFromSQL1\Tables\LoadFromSQL1.Exchange.sql" />
-    <Build Include="LoadFromSQL1\Triggers\LoadFromSQL1.TRI_Exchange.sql" />
-    <Build Include="LoadFromSQL1\Procedures\LoadFromSQL1.LoadQuote.sql" />
-    <Build Include="LoadFromSQL1\Tables\LoadFromSQL1.Symbol.sql" />
-    <Build Include="LoadFromSQL1\Triggers\LoadFromSQL1.TRI_Symbol.sql" />
-    <Build Include="LoadFromSQL1\Tables\LoadFromSQL1.Split.sql" />
-    <Build Include="LoadFromSQL1\Triggers\LoadFromSQL1.TRI_Split.sql" />
-    <Build Include="LoadFromSQL1\Tables\LoadFromSQL1.SymbolChange.sql" />
-    <Build Include="LoadFromSQL1\Triggers\LoadFromSQL1.TRI_SymbolChange.sql" />
-    <Build Include="LoadFromSQL1\Tables\LoadFromSQL1.Quote.sql" />
-    <Build Include="LoadFromSQL1\Triggers\LoadFromSQL1.TRI_Quote.sql" />
-    <Build Include="LoadFromSQL1\Tables\LoadFromSQL1.QuoteMinute.sql" />
-    <Build Include="LoadFromSQL1\Triggers\LoadFromSQL1.TRI_QuoteMinute.sql" />
     <Build Include="Schemas\EODData.sql" />
     <Build Include="EODData\Tables\EODData.Setting.sql" />
     <Build Include="EODData\Tables\EODData.Country.sql" />

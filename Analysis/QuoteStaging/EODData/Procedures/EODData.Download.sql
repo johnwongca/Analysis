@@ -22,7 +22,7 @@ begin
 		if DATENAME(weekday, @DateTo) in ('Saturday', 'Sunday') or @DataReload = 1
 			select @DateFrom = DATEADD(MONTH, -1, @DateTo)
 		else
-			select @DateFrom = DATEADD(DAY, -3, @DateTo)
+			select @DateFrom = DATEADD(DAY, -4, @DateTo)
 	end
 	select @DateTo = isnull(@DateTo, GETDATE())
 	if @DateFrom is null

@@ -176,5 +176,25 @@ begin
 	when matched and (t.[Open]<> s.[Open] or t.High <> s.High or t.Low <> s.Low or t.[Close]<> s.[Close] or t.Volume <> s.Volume) then
 		update set t.[Open]=s.[Open], t.High = s.High , t.Low = s.Low , t.[Close] = s.[Close] , t.Volume = s.Volume
 	;
+	;with s as
+	(
+		select Exchange, Symbol, 
+			MAX(case when IntervalID = 0 then Date end) MinutePriceLastUpdate, 
+			MAX(case when IntervalID = 6 then Date end) DayPriceLastUpdate,
+			MIN(case when IntervalID = 0 then Date end) MinutePriceFirstUpdate, 
+			MIN(case when IntervalID = 6 then Date end) DayPriceFirstUpdate  
+		from [EODData].[Quote] group by Exchange, Symbol, IntervalID
+	)
+	update t
+		set t.DayPriceLastUpdate = case when isnull(t.DayPriceLastUpdate, '1900-01-01')< s.DayPriceLastUpdate then s.DayPriceLastUpdate else t.DayPriceLastUpdate end,
+			t.MinutePriceLastUpdate = case when isnull(t.MinutePriceLastUpdate, '1900-01-01') < s.MinutePriceLastUpdate then s.MinutePriceLastUpdate else t.MinutePriceLastUpdate end,
+			t.DayPriceFirstUpdate = case when t.DayPriceFirstUpdate is null then s.DayPriceFirstUpdate else t.DayPriceFirstUpdate end,
+			t.MinutePriceFirstUpdate = case when t.MinutePriceFirstUpdate is null then s.MinutePriceFirstUpdate else t.MinutePriceFirstUpdate end
+	from [$(Quote)].q.Symbol t
+		inner join s on t.Exchange = s.Exchange and t.Symbol = s.Symbol
+	where isnull(t.DayPriceLastUpdate, '1900-01-01')< s.DayPriceLastUpdate
+		or isnull(t.MinutePriceLastUpdate, '1900-01-01') < s.MinutePriceLastUpdate
+		or t.MinutePriceFirstUpdate is null
+		or t.DayPriceFirstUpdate is null
 end
 go

@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>QuoteOld</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{d8ad780a-a3ad-447c-b510-5a3a134dca85}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>QuoteOld</RootNamespace>
+    <AssemblyName>QuoteOld</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- Default to the v10.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="chart\" />
+    <Folder Include="chart\Tables\" />
+    <Folder Include="q\" />
+    <Folder Include="q\Tables\" />
+    <Folder Include="chart\Views\" />
+    <Folder Include="q\Views\" />
+    <Folder Include="Storage\" />
+    <Folder Include="q\Functions\" />
+    <Folder Include="chart\Functions\" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="q\Stored Procedures\" />
+    <Folder Include="rpt\" />
+    <Folder Include="rpt\Stored Procedures\" />
+    <Folder Include="chart\Stored Procedures\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="Assemblies\" />
+    <Folder Include="Security\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="chart\Tables\Cache.sql" />
+    <Build Include="chart\Tables\Chart.sql" />
+    <Build Include="chart\Tables\ChartUser.sql" />
+    <Build Include="q\Tables\Fundamental.sql" />
+    <Build Include="q\Tables\Split.sql" />
+    <Build Include="q\Tables\SymbolChange.sql" />
+    <Build Include="q\Tables\Quote.sql" />
+    <Build Include="q\Tables\QuoteDetail.sql" />
+    <Build Include="chart\Tables\SourceInterval.sql" />
+    <Build Include="q\Tables\LastLoadedVersion.sql" />
+    <Build Include="q\Tables\Exchange.sql" />
+    <Build Include="q\Tables\Symbol.sql" />
+    <Build Include="chart\Views\ChartList.sql" />
+    <Build Include="q\Views\ExchangeSymbol.sql" />
+    <Build Include="q\Views\SymbolFundamental.sql" />
+    <Build Include="Storage\QuoteData.sql" />
+    <Build Include="q\Functions\Hash.sql" />
+    <Build Include="chart\Functions\GetCursorName.sql" />
+    <Build Include="q\Functions\GetExchange.sql" />
+    <Build Include="q\Functions\GetExchangeID.sql" />
+    <Build Include="q\Functions\GetSymbolID.sql" />
+    <Build Include="q\Functions\GetSymbol.sql" />
+    <Build Include="q\Functions\GetSymbolExchange.sql" />
+    <Build Include="q\Functions\GetSymbolExchangeID.sql" />
+    <Build Include="dbo\Functions\GetChartTableNameByParameter.sql" />
+    <Build Include="dbo\Functions\CLRAlgoritmDescription.sql" />
+    <Build Include="q\Stored Procedures\RetrieveExchange.sql" />
+    <Build Include="q\Stored Procedures\RetrieveExchangeSymbol.sql" />
+    <Build Include="q\Stored Procedures\RetrieveSymbolFundamental.sql" />
+    <Build Include="q\Stored Procedures\RetrieveExchangeFundamental.sql" />
+    <Build Include="q\Stored Procedures\RetrieveSymbol.sql" />
+    <Build Include="q\Stored Procedures\RetrieveSymbolSplit.sql" />
+    <Build Include="q\Stored Procedures\RetrieveQuote.sql" />
+    <Build Include="rpt\Stored Procedures\GetSymbol.sql" />
+    <Build Include="q\Stored Procedures\CompressIndex.sql" />
+    <Build Include="rpt\Stored Procedures\GetExchange.sql" />
+    <Build Include="rpt\Stored Procedures\GetBasicChart.sql" />
+    <Build Include="chart\Stored Procedures\CreateCursor.sql" />
+    <Build Include="chart\Stored Procedures\MonitorEnter.sql" />
+    <Build Include="chart\Stored Procedures\MonitorExit.sql" />
+    <Build Include="chart\Stored Procedures\CursorFetch.sql" />
+    <Build Include="chart\Stored Procedures\BasicChart.sql" />
+    <Build Include="chart\Stored Procedures\GetChartCursor.sql" />
+    <Build Include="chart\Stored Procedures\GetChartList.sql" />
+    <Build Include="chart\Stored Procedures\GetIntervalList.sql" />
+    <Build Include="chart\Stored Procedures\SaveChart.sql" />
+    <Build Include="chart\Stored Procedures\RegisterUser.sql" />
+    <Build Include="chart\Stored Procedures\GetCursorSize.sql" />
+    <Build Include="chart\Stored Procedures\GetSourcedata.sql" />
+    <Build Include="q\Stored Procedures\ImportStaging.sql" />
+    <Build Include="q\Stored Procedures\ImportStaging_Exchange.sql" />
+    <Build Include="q\Stored Procedures\ImportStaging_Symbol.sql" />
+    <Build Include="q\Stored Procedures\ImportStaging_Fundamental.sql" />
+    <Build Include="q\Stored Procedures\ImportStaging_Split.sql" />
+    <Build Include="q\Stored Procedures\ImportStaging_SymbolChange.sql" />
+    <Build Include="q\Stored Procedures\ImportStaging_Quote.sql" />
+    <Build Include="dbo\Stored Procedures\CLRGetBasicChart.sql" />
+    <Build Include="dbo\Stored Procedures\CLRGetBasicChartTableTarget.sql" />
+    <Build Include="Security\calc.sql" />
+    <Build Include="Security\chart.sql" />
+    <Build Include="Security\q.sql" />
+    <Build Include="Security\rpt.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assemblies\QuoteCLR.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="QuoteCLR">
+      <HintPath>Assemblies\QuoteCLR.dll</HintPath>
+      <SqlAssemblyName>QuoteCLR</SqlAssemblyName>
+      <IsModelAware>True</IsModelAware>
+      <GenerateSqlClrDdl>False</GenerateSqlClrDdl>
+      <SqlOwnerName>dbo</SqlOwnerName>
+      <SqlPermissionSet>UNSAFE</SqlPermissionSet>
+    </Reference>
+  </ItemGroup>
+</Project>

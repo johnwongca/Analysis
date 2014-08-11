@@ -72,7 +72,7 @@ begin
 	where Sector is not null
 	
 	
-	declare @t table (SymbolID int, EffectiveDate date)
+	declare @t table (SymbolID int NOT NULL, EffectiveDate date NOT NULL, ExpiryDate date NULL, Sector int NULL, Industry int NULL, Dividend float NULL, DividendDate datetime NULL, DividendYield float NULL, DPS float NULL, EBITDA float NULL, MarketCap bigint NULL, EPS float NULL, PtS float NULL, NTA float NULL, PE float NULL, PEG float NULL, PtB float NULL, Shares bigint NULL, Yield float NULL)
 	declare @Date Date
 	declare cFundamental cursor local static for
 		select distinct Date from EODData.Fundamental order by 1
@@ -81,8 +81,8 @@ begin
 	while @@fetch_status = 0
 	begin
 		delete @t
-		insert into @t
-			select * 
+		insert into @t(SymbolID, EffectiveDate, ExpiryDate, Sector, Industry, Dividend, DividendDate, DividendYield, DPS, EBITDA, MarketCap, EPS, PtS, NTA, PE, PEG, PtB, Shares, Yield)
+			select SymbolID, EffectiveDate, ExpiryDate, Sector, Industry, Dividend, DividendDate, DividendYield, DPS, EBITDA, MarketCap, EPS, PtS, NTA, PE, PEG, PtB, Shares, Yield
 			from (
 				merge [$(Quote)].q.Fundamental as t
 				using (
@@ -99,8 +99,9 @@ begin
 							where i.Date = @Date
 							) as s on t.SymbolID = s.SymbolID and t.ExpiryDate is null
 				when matched and (
-											t.EffectiveDate<> s.Date
-										or isnull(t.Sector, 0) <> isnull(s.Sector, 0)
+											--t.EffectiveDate<> s.Date
+										--or 
+											isnull(t.Sector, 0) <> isnull(s.Sector, 0)
 										or isnull(t.Industry,0) <> isnull(s.Industry, 0)
 										or isnull(t.Dividend, 0) <> isnull(s.Dividend,0) 
 										or isnull(t.DividendDate, '1960-01-01') <> isnull(s.DividendDate, '1960-01-01')
@@ -137,15 +138,20 @@ begin
 				when not matched then
 					insert (SymbolID, EffectiveDate, ExpiryDate, Sector, Industry, Dividend, DividendDate, DividendYield, DPS, EBITDA, MarketCap, EPS, PtS, NTA, PE, PEG, PtB, Shares, Yield)
 						values(s.SymbolID, s.Date, null, s.Sector, s.Industry, s.Dividend, s.DividendDate, s.DividendYield, s.DPS, s.EBITDA, s.MarketCap, s.EPS, s.PtS, s.NTA, s.PE, s.PEG, s.PtB, s.Shares, s.Yield)
-				output deleted.SymbolID, deleted.EffectiveDate
+				output deleted.SymbolID, deleted.EffectiveDate, deleted.ExpiryDate, deleted.Sector, deleted.Industry, deleted.Dividend, deleted.DividendDate, deleted.DividendYield, deleted.DPS, deleted.EBITDA, deleted.MarketCap, deleted.EPS, deleted.PtS, deleted.NTA, deleted.PE, deleted.PEG, deleted.PtB, deleted.Shares, deleted.Yield
 			)ExpiredRecords
-		update t1
-			set t1.ExpiryDate = ExpiryDate.Date
-		from [$(Quote)].q.Fundamental t1
-			inner join @t s1 on s1.SymbolID = t1.SymbolID and s1.EffectiveDate = t1.EffectiveDate
-			cross apply (select MAX(EffectiveDate) Date from [$(Quote)].q.Fundamental where SymbolID = s1.SymbolID group by SymbolID) ExpiryDate
-		where t1.EffectiveDate < ExpiryDate.Date
-			and t1.ExpiryDate is null
+		where SymbolID is not null
+		--update t1
+		--	set t1.ExpiryDate = ExpiryDate.Date
+		--from [$(Quote)].q.Fundamental t1
+		--	inner join @t s1 on s1.SymbolID = t1.SymbolID and s1.EffectiveDate = t1.EffectiveDate
+		--	cross apply (select MAX(EffectiveDate) Date from [$(Quote)].q.Fundamental where SymbolID = s1.SymbolID group by SymbolID) ExpiryDate
+		--where t1.EffectiveDate < ExpiryDate.Date
+		--	and t1.ExpiryDate is null
+		insert into [$(Quote)].q.Fundamental(SymbolID, EffectiveDate, ExpiryDate, Sector, Industry, Dividend, DividendDate, DividendYield, DPS, EBITDA, MarketCap, EPS, PtS, NTA, PE, PEG, PtB, Shares, Yield)
+			select SymbolID, EffectiveDate, @Date, Sector, Industry, Dividend, DividendDate, DividendYield, DPS, EBITDA, MarketCap, EPS, PtS, NTA, PE, PEG, PtB, Shares, Yield
+			from @t t
+			where not exists(select * from [$(Quote)].q.Fundamental t1 where t1.SymbolID = t.SymbolID and t1.EffectiveDate = t.EffectiveDate)
 		fetch next from cFundamental into @Date
 	end
 	close cFundamental

@@ -43,6 +43,11 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test_Indicator.cs" />
+    <Compile Include="Tested\Test_Max.cs" />
+    <Compile Include="Tested\Test_Min.cs" />
+    <Compile Include="Tested\Test_Source.cs" />
+    <Compile Include="Tested\Test_Window.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

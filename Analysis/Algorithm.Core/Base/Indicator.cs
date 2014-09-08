@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Algorithm.Core
 {
-    public class Indicator:IndicatorBase
+    public partial class Indicator: IndicatorBase
     {
         public Indicator(int size = DefaultDataWindowSize)
             : base(size)

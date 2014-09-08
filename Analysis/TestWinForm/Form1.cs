@@ -26,7 +26,7 @@ namespace TestWinForm
         private void button1_Click(object sender, EventArgs e)
         {
             //List<Quote> data = DataAccess.GetData();
-            quoteBindingSource.DataSource = Q;
+            //quoteBindingSource.DataSource = Q;
             chart1.Series.Clear();
             chart1.ChartAreas.Clear();
             ChartArea c1 = chart1.ChartAreas.Add("c1");

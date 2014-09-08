@@ -77,6 +77,7 @@
     <Folder Include="Assemblies\" />
     <Folder Include="Security\" />
     <Folder Include="q\Functions" />
+    <Folder Include="q\Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="q\Tables\q.Exchange.sql" />
@@ -94,6 +95,7 @@
     <Build Include="q\Tables\q.Name.sql" />
     <Build Include="q\Functions\q.DateTimeToFloat.sql" />
     <Build Include="q\Functions\q.FloatToDateTime.sql" />
+    <Build Include="q\Procedures\q.RetrieveQuote.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac">

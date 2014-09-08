@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9CF796CE-64A3-4BE6-993A-08A514F63CE2}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Algorithm.Core</RootNamespace>
     <AssemblyName>Algorithm.Core</AssemblyName>
@@ -29,6 +29,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -39,16 +42,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Indicator.cs" />
-    <Compile Include="IndicatorBase.cs" />
-    <Compile Include="Deprecated\DataBufferMethods.cs" />
-    <Compile Include="DataWindow.cs" />
-    <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="Deprecated\Variable.cs" />
+    <Compile Include="Algorithms\Max.cs" />
+    <Compile Include="Algorithms\Min.cs" />
+    <Compile Include="Base\IComparableEnumerable.cs" />
+    <Compile Include="Base\Indicator.cs" />
+    <Compile Include="Base\IndicatorBase.cs" />
+    <Compile Include="Base\IWindow.cs" />
+    <Compile Include="Base\ISource.cs" />
+    <Compile Include="Base\Methods.cs" />
+    <Compile Include="Base\OutputAttribute.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Deprecated\DataBuffer.cs" />
-    <Compile Include="Source.cs" />
+    <Compile Include="Base\Source.cs" />
+    <Compile Include="Base\Window.cs" />
+    <Compile Include="Test\Test_Indicator.cs" />
+    <Compile Include="Test\Test_Max.cs" />
+    <Compile Include="Test\Test_Min.cs" />
+    <Compile Include="Test\Test_Source.cs" />
+    <Compile Include="Test\Test_Window.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -11,7 +11,7 @@ namespace Algorithm.Core
         Window<double> Close { get; }
         Window<double> Volume { get; }
         Window<int> ItemCount { get; }
-
+        Window<double> TypicalPrice { get; }
         int SymbolID { get; set; }
         IntervalType IntervalType { get; set; }
         int Interval { get; set; }

@@ -19,6 +19,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "QuoteOld", "QuoteOld\QuoteO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.Core", "Algorithm.Core\Algorithm.Core.csproj", "{9CF796CE-64A3-4BE6-993A-08A514F63CE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.Core.UnitTest", "Algorithm.Core.UnitTest\Algorithm.Core.UnitTest.csproj", "{1E7D7EF3-30C1-47FB-A92D-8F8F25CCB795}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{9CF796CE-64A3-4BE6-993A-08A514F63CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CF796CE-64A3-4BE6-993A-08A514F63CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CF796CE-64A3-4BE6-993A-08A514F63CE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E7D7EF3-30C1-47FB-A92D-8F8F25CCB795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E7D7EF3-30C1-47FB-A92D-8F8F25CCB795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E7D7EF3-30C1-47FB-A92D-8F8F25CCB795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E7D7EF3-30C1-47FB-A92D-8F8F25CCB795}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

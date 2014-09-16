@@ -10,10 +10,10 @@ namespace Algorithm.Core
     public class Window<T>: IWindow<T> where T : IComparable<T>, IEquatable<T>, IConvertible
     {
         public const int DefaultDataWindowSize = 1000;
-        protected long mCurrentOrdinal = -1;
+        protected long mCurrentLocation = -1;
 
         T[] mBuffer = null;
-        int lastLocation = -1;
+        int position = -1;
         public int Size
         {
             get { return mBuffer.Length; }
@@ -22,7 +22,7 @@ namespace Algorithm.Core
                 mBuffer = new T[value];
             }
         }
-        public long CurrentOrdinal { get { return mCurrentOrdinal; } }
+        public long CurrentLocation { get { return mCurrentLocation; } }
         protected virtual void Initialization(params Window<T>[] values)
         {
         }
@@ -34,26 +34,28 @@ namespace Algorithm.Core
         }
         public virtual Window<T> Push(params Window<T>[] values)
         {
-            mCurrentOrdinal++;
-            if (mCurrentOrdinal == 0)
-                Initialization(values);
-            lastLocation = (int)(mCurrentOrdinal % Size);
-            mBuffer[lastLocation] = default(T);
             BeforeSetValue(values);
+            mCurrentLocation++;
+            if (mCurrentLocation == 0)
+                Initialization(values);
+            
+            position = (int)(mCurrentLocation % Size);
+            mBuffer[position] = default(T);
+            
             if (values.Length > 0)
-                mBuffer[lastLocation] = values[0].Value;
+                mBuffer[position] = values[0].Value;
             AfterSetValue(values);
             return this;
         }
         
         public virtual Window<T> Set(T value)
         {
-            mBuffer[lastLocation] = value;
+            mBuffer[position] = value;
             return this;
         }
         public virtual Window<T> Set(int index, T value)
         {
-            mBuffer[(mCurrentOrdinal - index) % Size] = value;
+            mBuffer[(mCurrentLocation - index) % Size] = value;
             return this;
         }
         public Window(int size = DefaultDataWindowSize)
@@ -69,14 +71,14 @@ namespace Algorithm.Core
         {
             get
             {
-                if (mCurrentOrdinal < Size)
+                if (mCurrentLocation < Size)
                     return mBuffer[0];
-                return mBuffer[(mCurrentOrdinal - Size + 1) % Size];
+                return mBuffer[(mCurrentLocation - Size + 1) % Size];
             }
         }
         public bool HasValue(int index)
         {
-            return !((mCurrentOrdinal < index) || (index >= Size));
+            return !((mCurrentLocation < index) || (index >= Size));
         }
         public T this[int index]
         {
@@ -84,7 +86,7 @@ namespace Algorithm.Core
             {
                 if (!HasValue(index))
                     return default(T);
-                return mBuffer[(mCurrentOrdinal - index) % Size];
+                return mBuffer[(mCurrentLocation - index) % Size];
             }
         }
         public T Value
@@ -99,12 +101,12 @@ namespace Algorithm.Core
         {
             get
             {
-                return (int)Math.Min(mCurrentOrdinal + 1, Size);
+                return (int)Math.Min(mCurrentLocation + 1, Size);
             }
         }
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < Math.Min(mCurrentOrdinal+1, Size); i++)
+            for (int i = 0; i < Math.Min(mCurrentLocation+1, Size); i++)
             {
                 yield return this[i];
             }
@@ -124,6 +126,8 @@ namespace Algorithm.Core
         {
             return GetEnumerator();
         }
+
+        
 
         #region overloaded Operators
         public static implicit operator T[](Window<T> buffer)
@@ -152,6 +156,7 @@ namespace Algorithm.Core
         {
             return new Window<T>(1).Push().Set(value);
         }
+        
     }
     
 }

@@ -12,13 +12,14 @@ namespace Algorithm.Core
     public abstract partial class IndicatorBase : Window<double>, ISource 
     {
         ISource mSource;
+
         public ISource Source
         {
             get { return mSource; }
             set { mSource = value; }
         }
         #region Implement ISource
-        [Output(Name="___DateFrom___")]
+        [Output]
         public Window<DateTime> DateFrom { get { return mSource.DateFrom; } }
         [Output]
         public Window<DateTime> DateTo { get { return mSource.DateTo; } }
@@ -32,9 +33,12 @@ namespace Algorithm.Core
         public Window<double> Close { get { return mSource.Close; } }
         [Output]
         public Window<double> Volume { get { return mSource.Volume; } }
+        
         [Output]
         public Window<int> ItemCount { get { return mSource.ItemCount; } }
 
+        [Output]
+        public Window<double> TypicalPrice { get { return mSource.TypicalPrice; } }
         public int SymbolID { get { return mSource.SymbolID; } set { mSource.SymbolID = value; } }
         public IntervalType IntervalType { get { return mSource.IntervalType; } set { mSource.IntervalType = value; } }
         public int Interval { get { return mSource.Interval; } set { mSource.Interval = value; } }

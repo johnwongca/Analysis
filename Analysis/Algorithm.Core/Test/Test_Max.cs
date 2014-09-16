@@ -12,6 +12,7 @@ namespace Algorithm.Core.Test
         private static void Test_Max()
         {
             Window<double> w1 = new Window<double>(5);
+            
             var Max = Indicator.Create_Max(3, 3);
             Random r = new Random();
             for (int i = 0; i < 10; i++)

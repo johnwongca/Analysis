@@ -36,7 +36,7 @@ namespace Algorithm.Core
         DateTime mStartDate=DateTime.MinValue, mEndDate = DateTime.MaxValue;
         int mSize, mInterval, mSymbolID;
         Window<DateTime> mDateFrom, mDateTo;
-        Window<double> mOpen, mClose, mHigh, mLow;
+        Window<double> mOpen, mClose, mHigh, mLow, mTypicalPrice;
         Window<double> mVolume;
         Window<int> mItemCount;
 
@@ -66,6 +66,7 @@ namespace Algorithm.Core
         public Window<double> Close { get { return mClose; } }
         public Window<double> High { get { return mHigh; } }
         public Window<double> Low { get { return mLow; } }
+        public Window<double> TypicalPrice { get { return mTypicalPrice; } }
         public Window<double> Volume { get { return mVolume; } }
         public Window<int> ItemCount { get { return mItemCount; } }
         public IntervalType IntervalType
@@ -151,6 +152,7 @@ namespace Algorithm.Core
                 mLow = new Window<double>(mSize);
                 mVolume = new Window<double>(mSize);
                 mItemCount = new Window<int>(mSize);
+                mTypicalPrice = new Window<double>(mSize);
                 reader = Methods.RetrieveQuote(mSymbolID, mIntervalType != IntervalType.Minutes, mStartDate, mEndDate);
             }
         }
@@ -243,6 +245,7 @@ namespace Algorithm.Core
             mClose.Push(staging2.Close);
             mVolume.Push(staging2.Volume);
             mItemCount.Push(staging2.RowNumber);
+            mTypicalPrice.Push((staging2.High + staging2.Low + staging2.Close) / 2);
         }
         void SetValuesInPartition()
         {

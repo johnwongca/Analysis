@@ -3,35 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Forms;
+using Algorithm.Core.Forms;
+using Fasterflect;
 namespace Algorithm.Core
 {
     
-    
     public partial class Program
     {
-        static void test1(Type t)
+        static bool IsWindowsStarted = false;
+        static void StartWindows()
         {
-            OutputAttribute output = null;
-            foreach(var p in t.GetProperties())
-            {
-                if(p.PropertyType.IsWindow())
-                {
-                    //p.CustomAttributes.FirstOrDefault(x => x. is OutputAttribute);
-                }
-            }
+            IsWindowsStarted = true;
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
         }
-        [Output(Name = "MainMethod")]
         static void Main(string[] args)
         {
-            //Test.Test.Test_Indicator();
-            test1(typeof(Indicator));
+            //StartWindows();
+            Test.Test.Test_Indicator_WeightedMovingAverage();
+            
 
             #region Paulse and quit
-            Console.WriteLine("Done");
-            Console.ReadKey();
+            if (!IsWindowsStarted)
+            {
+                Console.WriteLine("Done");
+                Console.ReadKey();
+            }
             #endregion
         }
+
+        
     }
 
    

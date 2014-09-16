@@ -33,8 +33,14 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fasterflect">
+      <HintPath>..\packages\fasterflect.2.1.3\lib\net40\Fasterflect.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGet.Core, Version=1.6.30117.9648, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,26 +48,67 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\WeightedMovingAverage.cs" />
     <Compile Include="Algorithms\Max.cs" />
     <Compile Include="Algorithms\Min.cs" />
+    <Compile Include="Algorithms\MeanDeviation.cs" />
+    <Compile Include="Algorithms\ExponentialMovingAverage.cs" />
+    <Compile Include="Algorithms\StandardDeviation.cs" />
+    <Compile Include="Algorithms\SimpleMovingAverage.cs" />
+    <Compile Include="Algorithms\Sum.cs" />
+    <Compile Include="Base\DataSetDefinition.cs" />
     <Compile Include="Base\IComparableEnumerable.cs" />
     <Compile Include="Base\Indicator.cs" />
     <Compile Include="Base\IndicatorBase.cs" />
+    <Compile Include="Base\IndicatorReader.cs" />
+    <Compile Include="Base\IndicatorWriter.cs" />
+    <Compile Include="Base\InputAttribute.cs" />
     <Compile Include="Base\IWindow.cs" />
     <Compile Include="Base\ISource.cs" />
     <Compile Include="Base\Methods.cs" />
     <Compile Include="Base\OutputAttribute.cs" />
+    <Compile Include="Forms\ChartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ChartForm.Designer.cs">
+      <DependentUpon>ChartForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base\Source.cs" />
     <Compile Include="Base\Window.cs" />
-    <Compile Include="Test\Test_Indicator.cs" />
+    <Compile Include="Test\Test_Indicator_WeightedMovingAverage.cs" />
+    <Compile Include="Test\Test_Indicator_MeanDeviation.cs" />
+    <Compile Include="Test\Test_Indicator_ExponentialMovingAverage.cs" />
+    <Compile Include="Test\Test_Indicator_StandardDeviation.cs" />
+    <Compile Include="Test\Test_Indicator_SimpleMovingAverage.cs" />
+    <Compile Include="Test\Test_Indicator_Sum.cs" />
+    <Compile Include="Test\Test_Indicator01.cs" />
+    <Compile Include="Test\Test_IndicatorWriter.cs" />
+    <Compile Include="Test\Test_IndicatorReader.cs" />
     <Compile Include="Test\Test_Max.cs" />
     <Compile Include="Test\Test_Min.cs" />
     <Compile Include="Test\Test_Source.cs" />
     <Compile Include="Test\Test_Window.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\ChartForm.resx">
+      <DependentUpon>ChartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

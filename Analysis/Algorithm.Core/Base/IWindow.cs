@@ -1,10 +1,14 @@
 ﻿using System;
 namespace Algorithm.Core
 {
+    public interface IWindowBase
+    {
+        object Value { get; set; }
+    }
     public interface IWindow<T> : IComparableEnumerable<T> where T : IComparable<T>, IEquatable<T>, IConvertible
     {
         T[] Buffer { get; }
-        long CurrentOrdinal { get; }
+        long CurrentLocation { get; }
         T First { get; }
         bool HasValue(int index);
         Window<T> Push(params Window<T>[] values);

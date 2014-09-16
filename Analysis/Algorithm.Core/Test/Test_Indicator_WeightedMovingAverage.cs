@@ -7,31 +7,31 @@ using Algorithm.Core;
 
 namespace Algorithm.Core.Test
 {
-    public class TestIndicator01 : IndicatorBase
+    public class TestIndicator_WeightedMovingAverage : Indicator
     {
-        Min min;
-        //Max<int> max;
-        public TestIndicator01(int size = DefaultDataWindowSize)
+        WeightedMovingAverage average;
+
+        public TestIndicator_WeightedMovingAverage(int size = DefaultDataWindowSize)
             : base(size)
         {
             SymbolID = 170976;
             IntervalType = IntervalType.Days;
             Interval = 3;
             StartDate = new DateTime(2010, 7, 16);
-            EndDate = new DateTime(2015, 8, 16);
-            min = Min(3, 1);
+            EndDate = new DateTime(2010, 8, 16);
+            average = WeightedMovingAverage(3);
         }
 
         protected override void AfterSetValue(params Window<double>[] values)
         {
-            Value = min.Push(Open, High, Low, Close);
+            Value = average.Push(Close);
         }
     }
     public partial class Test
     {
-        public static void Test_Indicator()
+        public static void Test_Indicator_WeightedMovingAverage()
         {
-            TestIndicator01 indicator = new TestIndicator01(5);
+            TestIndicator_WeightedMovingAverage indicator = new TestIndicator_WeightedMovingAverage(5);
 
             indicator.OpenData();
             for (int i = 0; i < 2000; i++)

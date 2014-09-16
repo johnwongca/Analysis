@@ -8,11 +8,11 @@ namespace Algorithm.Core
 {
     public class Max : Indicator
     {
-        int mPeriod;
+        public int Period { get; set; }
         public Max(int period, int size = Window<double>.DefaultDataWindowSize)
             : base(size)
         {
-            mPeriod = period;
+            Period = period;
         }
 
         protected override void AfterSetValue(params Window<double>[] values)
@@ -20,7 +20,7 @@ namespace Algorithm.Core
             double maxValue = double.NaN;
             foreach (Window<double> w in values)
             {
-                for (int i = 0; i < mPeriod; i++)
+                for (int i = 0; i < Period; i++)
                 {
                     if (!w.HasValue(i))
                         break;

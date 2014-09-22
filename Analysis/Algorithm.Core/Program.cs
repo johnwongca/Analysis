@@ -22,7 +22,7 @@ namespace Algorithm.Core
         static void Main(string[] args)
         {
             //StartWindows();
-            Test.Test.Test_Indicator_WeightedMovingAverage();
+            Test.Test.Test_Indicator_VolumeWeightedMovingAverage();
             
 
             #region Paulse and quit

@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithms\WeightedMovingAverage.cs" />
+    <Compile Include="Algorithms\VolumeWeightedMovingAverage.cs" />
     <Compile Include="Algorithms\Max.cs" />
     <Compile Include="Algorithms\Min.cs" />
     <Compile Include="Algorithms\MeanDeviation.cs" />
@@ -56,6 +56,7 @@
     <Compile Include="Algorithms\StandardDeviation.cs" />
     <Compile Include="Algorithms\SimpleMovingAverage.cs" />
     <Compile Include="Algorithms\Sum.cs" />
+    <Compile Include="Algorithms\WeightedMovingAverage.cs" />
     <Compile Include="Base\DataSetDefinition.cs" />
     <Compile Include="Base\IComparableEnumerable.cs" />
     <Compile Include="Base\Indicator.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base\Source.cs" />
     <Compile Include="Base\Window.cs" />
+    <Compile Include="Test\Test_Indicator_VolumeWeightedMovingAverage.cs" />
     <Compile Include="Test\Test_Indicator_WeightedMovingAverage.cs" />
     <Compile Include="Test\Test_Indicator_MeanDeviation.cs" />
     <Compile Include="Test\Test_Indicator_ExponentialMovingAverage.cs" />

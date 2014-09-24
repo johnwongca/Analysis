@@ -43,7 +43,7 @@ namespace Algorithm.Core
             mCurrentLocation++;
             if ((mInputCacheSize > 0) && (cache == null))
                 cache = new Window<T>[values.Length];
-            if (mInputCacheSize > 0)
+            if (cache != null)
             {
                 for (int i = 0; i < values.Length; i++)
                 {

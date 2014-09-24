@@ -9,6 +9,11 @@ namespace Algorithm.Core
 {
     public class Window<T>: IWindow<T> where T : IComparable<T>, IEquatable<T>, IConvertible
     {
+        protected int mInputCacheSize = 0;
+        protected Window<T>[] cache = null;
+        public int InputCacheSize { get { return mInputCacheSize; } set { mInputCacheSize = value; } }
+
+
         public const int DefaultDataWindowSize = 1000;
         protected long mCurrentLocation = -1;
 
@@ -34,17 +39,29 @@ namespace Algorithm.Core
         }
         public virtual Window<T> Push(params Window<T>[] values)
         {
-            BeforeSetValue(values);
-            mCurrentLocation++;
-            if (mCurrentLocation == 0)
-                Initialization(values);
             
+            mCurrentLocation++;
+            if ((mInputCacheSize > 0) && (cache == null))
+                cache = new Window<T>[values.Length];
+            if (mInputCacheSize > 0)
+            {
+                for (int i = 0; i < values.Length; i++)
+                {
+                    if (cache[i] == null)
+                        cache[i] = new Window<T>(mInputCacheSize);
+                    cache[i].Push(values[i].Value);
+                }
+            }
+            Window<T>[] p = mInputCacheSize > 0 ? cache : values;
+            if (mCurrentLocation == 0)
+                Initialization(p);
+            BeforeSetValue(p);
             position = (int)(mCurrentLocation % Size);
             mBuffer[position] = default(T);
             
-            if (values.Length > 0)
-                mBuffer[position] = values[0].Value;
-            AfterSetValue(values);
+            if (p.Length > 0)
+                mBuffer[position] = p[0].Value;
+            AfterSetValue(p);
             return this;
         }
         

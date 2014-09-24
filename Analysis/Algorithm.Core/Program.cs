@@ -22,9 +22,9 @@ namespace Algorithm.Core
         static void Main(string[] args)
         {
             //StartWindows();
-            Test.Test.Test_Indicator_BollingerBands();
+            //Test.Test.Test_Indicator_BollingerBands();
             //Test.Test.Test_Indicator_SimpleMovingAverage();
-
+            Test.Test.Test_Indicator_Sum();
             #region Paulse and quit
             if (!IsWindowsStarted)
             {

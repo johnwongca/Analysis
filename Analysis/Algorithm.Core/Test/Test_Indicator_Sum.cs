@@ -20,6 +20,7 @@ namespace Algorithm.Core.Test
             StartDate = new DateTime(2010, 7, 16);
             EndDate = new DateTime(2010, 8, 16);
             sum = Sum(3);
+            sum.InputCacheSize = 5;
         }
 
         protected override void AfterSetValue(params Window<double>[] values)

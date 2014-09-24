@@ -16,7 +16,7 @@ namespace Algorithm.Core.Test
         {
             SymbolID = 170976;
             IntervalType = IntervalType.Days;
-            Interval = 3;
+            Interval = 1;
             StartDate = new DateTime(2010, 7, 16);
             EndDate = new DateTime(2010, 8, 16);
             average = SimpleMovingAverage(3);

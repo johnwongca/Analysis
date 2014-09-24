@@ -14,7 +14,7 @@ namespace Algorithm.Core
         protected override void AfterSetValue(params Window<double>[] values)
         {
             base.AfterSetValue(values);
-            Value = Value / mPeriod.ToDouble();
+            Value = Value / Convert.ToDouble(Math.Min(mPeriod, CurrentLocation + 1));
         }
     }
     public partial class IndicatorBase

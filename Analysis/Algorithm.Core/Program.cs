@@ -22,8 +22,8 @@ namespace Algorithm.Core
         static void Main(string[] args)
         {
             //StartWindows();
-            Test.Test.Test_Indicator_VolumeWeightedMovingAverage();
-            
+            Test.Test.Test_Indicator_BollingerBands();
+            //Test.Test.Test_Indicator_SimpleMovingAverage();
 
             #region Paulse and quit
             if (!IsWindowsStarted)

@@ -55,7 +55,7 @@ namespace Algorithm.Core
         }
         public StandardDeviation StandardDeviation(int period, Window<double> average ,int size = Window<double>.DefaultDataWindowSize)
         {
-            return new StandardDeviation(period, size) { Source = this.Source };
+            return new StandardDeviation(period, average, size) { Source = this.Source };
         }
         public static StandardDeviation Create_StandardDeviation(int period, int size = Window<double>.DefaultDataWindowSize, ISource source = null)
         {

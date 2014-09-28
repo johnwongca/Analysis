@@ -245,7 +245,7 @@ namespace Algorithm.Core
             mClose.Push(staging2.Close);
             mVolume.Push(staging2.Volume);
             mItemCount.Push(staging2.RowNumber);
-            mTypicalPrice.Push((staging2.High + staging2.Low + staging2.Close) / 2);
+            mTypicalPrice.Push((staging2.High + staging2.Low + staging2.Close) / 3);
         }
         void SetValuesInPartition()
         {

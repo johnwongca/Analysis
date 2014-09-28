@@ -49,6 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\Aroon.cs" />
+    <Compile Include="Algorithms\UltimateOscillator.cs" />
+    <Compile Include="Algorithms\StochasticOscillator.cs" />
+    <Compile Include="Algorithms\RelativeStrengthIndex.cs" />
+    <Compile Include="Algorithms\RateOfChange.cs" />
+    <Compile Include="Algorithms\CommodityChannelIndex.cs" />
+    <Compile Include="Algorithms\ChandeMomentumOscillator.cs" />
     <Compile Include="Algorithms\BollingerBands.cs" />
     <Compile Include="Algorithms\VolumeWeightedMovingAverage.cs" />
     <Compile Include="Algorithms\Max.cs" />
@@ -86,6 +92,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base\Source.cs" />
     <Compile Include="Base\Window.cs" />
+    <Compile Include="Test\TestIndicator_UltimateOscillator.cs" />
+    <Compile Include="Test\Test_Indicator_StochasticOscillator.cs" />
+    <Compile Include="Test\Test_Indicator_RelativeStrengthIndex.cs" />
+    <Compile Include="Test\Test_Indicator_RateOfChange.cs" />
+    <Compile Include="Test\Test_Indicator_CommodityChannelIndex.cs" />
+    <Compile Include="Test\Test_Indicator_ChandeMomentumOscillator.cs" />
     <Compile Include="Test\Test_Indicator_BollingerBands.cs" />
     <Compile Include="Test\Test_Indicator_Aroon.cs" />
     <Compile Include="Test\Test_Indicator_VolumeWeightedMovingAverage.cs" />

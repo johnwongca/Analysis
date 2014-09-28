@@ -103,5 +103,17 @@ namespace Algorithm.Core
                 return false;
             return (current[period] >= compareTo[period]) && (current[0] < compareTo[0]);
         }
+        public static double RelativeStrength(this double input1, double input2)
+        {
+            return input2 == 0 ? 100d : (100d / (1d + (input1 / input2)));
+        }
+        public static double RelativeStrength(this Window<double> input1, double input2)
+        {
+            return input1.Value.RelativeStrength(input2);
+        }
+        public static double RelativeStrength(this Window<double> input1, Window<double> input2)
+        {
+            return input1.Value.RelativeStrength(input2.Value);
+        }
     }
 }

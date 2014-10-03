@@ -96,6 +96,9 @@
     <Build Include="q\Functions\q.DateTimeToFloat.sql" />
     <Build Include="q\Functions\q.FloatToDateTime.sql" />
     <Build Include="q\Procedures\q.RetrieveQuote.sql" />
+    <Build Include="q\Procedures\q.ClearOldData.sql" />
+    <Build Include="q\Procedures\q.GetSymbol.sql" />
+    <Build Include="q\Procedures\q.GetExchange.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac">

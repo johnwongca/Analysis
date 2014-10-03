@@ -1,6 +1,6 @@
 ﻿namespace Algorithm.Core.Forms
 {
-    partial class ChartForm
+    partial class FormBase
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // ChartForm
+            // FormBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 321);
-            this.Name = "ChartForm";
-            this.Text = "ChartForm";
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "FormBase";
+            this.Text = "FormBase";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormBase_FormClosed);
+            this.Load += new System.EventHandler(this.FormBase_Load);
             this.ResumeLayout(false);
 
         }

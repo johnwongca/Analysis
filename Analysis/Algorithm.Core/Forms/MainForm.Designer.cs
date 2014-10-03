@@ -29,44 +29,78 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miSymbols = new System.Windows.Forms.ToolStripMenuItem();
+            this.miWindows = new System.Windows.Forms.ToolStripMenuItem();
+            this.miCloseAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.miSymbols,
+            this.miWindows,
+            this.testToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(475, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(291, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // fileToolStripMenuItem
+            // miSymbols
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newChartToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.miSymbols.Name = "miSymbols";
+            this.miSymbols.Size = new System.Drawing.Size(64, 20);
+            this.miSymbols.Text = "Symbols";
+            this.miSymbols.Click += new System.EventHandler(this.miSymbols_Click);
             // 
-            // newChartToolStripMenuItem
+            // miWindows
             // 
-            this.newChartToolStripMenuItem.Name = "newChartToolStripMenuItem";
-            this.newChartToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.newChartToolStripMenuItem.Text = "New Chart";
+            this.miWindows.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miCloseAll,
+            this.toolStripMenuItem1});
+            this.miWindows.Name = "miWindows";
+            this.miWindows.Size = new System.Drawing.Size(68, 20);
+            this.miWindows.Text = "Windows";
+            this.miWindows.DropDownOpening += new System.EventHandler(this.miWindows_DropDownOpening);
+            // 
+            // miCloseAll
+            // 
+            this.miCloseAll.Name = "miCloseAll";
+            this.miCloseAll.Size = new System.Drawing.Size(120, 22);
+            this.miCloseAll.Text = "Close All";
+            this.miCloseAll.Click += new System.EventHandler(this.miCloseAll_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(117, 6);
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.testToolStripMenuItem.Text = "Test";
+            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(475, 74);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(291, 26);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Text = "A!";
+            this.TopMost = true;
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -77,7 +111,10 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newChartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miSymbols;
+        private System.Windows.Forms.ToolStripMenuItem miWindows;
+        private System.Windows.Forms.ToolStripMenuItem miCloseAll;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
     }
 }

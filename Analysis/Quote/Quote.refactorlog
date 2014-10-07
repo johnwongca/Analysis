@@ -28,4 +28,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="EffectiveDate" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="6cf39ec7-1f2f-4462-b1d9-3f5a7c0ad9e1" ChangeDateTime="10/06/2014 21:36:41">
+    <Property Name="ElementName" Value="[q].[Algorithm].[FullName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[q].[Algorithm]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClassName" />
+  </Operation>
 </Operations>

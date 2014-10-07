@@ -99,6 +99,9 @@
     <Build Include="q\Procedures\q.ClearOldData.sql" />
     <Build Include="q\Procedures\q.GetSymbol.sql" />
     <Build Include="q\Procedures\q.GetExchange.sql" />
+    <Build Include="q\Tables\q.Chart.sql" />
+    <Build Include="q\Procedures\q.UpdateChart.sql" />
+    <Build Include="q\Procedures\q.GetChart.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac">

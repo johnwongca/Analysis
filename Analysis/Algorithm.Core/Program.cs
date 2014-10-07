@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Algorithm.Core.Forms;
+using Algorithm.Core;
+using System.Reflection;
 using Fasterflect;
 namespace Algorithm.Core
 {
@@ -24,8 +26,11 @@ namespace Algorithm.Core
         [STAThread]
         static void Main(string[] args)
         {
+            IndicatorClass.LoadIndicatorClasses();
+
             //Test.Test.Test_Indicator_UltimateOscillator();
             StartWindows();
+            
             
             #region Paulse and quit
             if (!IsWindowsStarted)

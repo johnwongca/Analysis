@@ -30,10 +30,10 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.miSymbols = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnChart = new System.Windows.Forms.ToolStripMenuItem();
             this.miWindows = new System.Windows.Forms.ToolStripMenuItem();
             this.miCloseAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,8 +41,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miSymbols,
-            this.miWindows,
-            this.testToolStripMenuItem});
+            this.btnChart,
+            this.miWindows});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(291, 24);
@@ -55,6 +55,13 @@
             this.miSymbols.Size = new System.Drawing.Size(64, 20);
             this.miSymbols.Text = "Symbols";
             this.miSymbols.Click += new System.EventHandler(this.miSymbols_Click);
+            // 
+            // btnChart
+            // 
+            this.btnChart.Name = "btnChart";
+            this.btnChart.Size = new System.Drawing.Size(48, 20);
+            this.btnChart.Text = "Chart";
+            this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
             // 
             // miWindows
             // 
@@ -78,13 +85,6 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(117, 6);
             // 
-            // testToolStripMenuItem
-            // 
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
-            this.testToolStripMenuItem.Text = "Test";
-            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -95,12 +95,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "A!";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -115,6 +113,6 @@
         private System.Windows.Forms.ToolStripMenuItem miWindows;
         private System.Windows.Forms.ToolStripMenuItem miCloseAll;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btnChart;
     }
 }

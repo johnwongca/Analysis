@@ -92,16 +92,10 @@ namespace Algorithm.Core.Forms
             }
         }
 
-        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        
+        private void btnChart_Click(object sender, EventArgs e)
         {
-            if (SymbolForm.Visible)
-                SymbolForm.Close();
-            SymbolForm.ShowDialog();
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            
+            (new ChartForm()).Show();
         }
 
         

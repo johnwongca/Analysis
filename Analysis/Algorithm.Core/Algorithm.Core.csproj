@@ -41,6 +41,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,6 +67,7 @@
     <Compile Include="Algorithms\Sum.cs" />
     <Compile Include="Algorithms\WeightedMovingAverage.cs" />
     <Compile Include="Base\DataSetDefinition.cs" />
+    <Compile Include="Base\IndicatorClass.cs" />
     <Compile Include="Base\IComparableEnumerable.cs" />
     <Compile Include="Base\Indicator.cs" />
     <Compile Include="Base\IndicatorBase.cs" />
@@ -75,7 +77,14 @@
     <Compile Include="Base\IWindow.cs" />
     <Compile Include="Base\ISource.cs" />
     <Compile Include="Base\Methods.cs" />
+    <Compile Include="Base\IndicatorAttribute.cs" />
     <Compile Include="Base\OutputAttribute.cs" />
+    <Compile Include="Forms\ChartDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ChartDetailForm.Designer.cs">
+      <DependentUpon>ChartDetailForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ChartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +109,14 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ToolStripNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\ToolStripDateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Indicators\DefaultIndicator - Copy.cs" />
+    <Compile Include="Indicators\DefaultIndicator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base\Source.cs" />
@@ -132,6 +149,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="Forms\ChartDetailForm.resx">
+      <DependentUpon>ChartDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChartForm.resx">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </EmbeddedResource>

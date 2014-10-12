@@ -12,13 +12,15 @@ namespace Algorithm.Core.Forms
 {
     public partial class ChartForm : FormBase
     {
+        public long Token;
         IntervalType IntervalType = IntervalType.Minutes;
         int Interval = 1, SymbolID = -1;
-
+        IndicatorClass IndicatorClass = null;
         ChartDetailForm details = null;
         bool isUserSearchText = true;
         public ChartForm()
         {
+            Token = Methods.GetToken();
             InitializeComponent();
             AlgorithmMenu.DropDownItems.Clear();
             for (int i = 0; i < IndicatorClass.IndicatorClasses.Count; i++)
@@ -30,6 +32,7 @@ namespace Algorithm.Core.Forms
                     item.Checked = true;
                     AlgorithmMenu.Tag = item.Tag;
                     AlgorithmMenu.Text = item.Text;
+                    IndicatorClass = IndicatorClass.IndicatorClasses[i];
                 }
                 AlgorithmMenu.DropDownItems.Add(item);
             }
@@ -39,11 +42,11 @@ namespace Algorithm.Core.Forms
             details.OnSearchConfirm += new EventHandler(OnSearchConfirm);
             nInterval.NumericUpDownControl.Minimum = 1;
             nInterval.NumericUpDownControl.Maximum = 99999999;
-            
+            ReloadData();
         }
         void ReloadData()
         {
-            Console.WriteLine("Reloaddata");
+            Console.WriteLine("Reloaddata {0}", IndicatorClass.IndicatorName);
         }
         void OnSearchConfirm(object sender, EventArgs e)
         {
@@ -85,6 +88,7 @@ namespace Algorithm.Core.Forms
             {
                 AlgorithmMenu.Text = item.Text;
                 AlgorithmMenu.Tag = item.Tag;
+                IndicatorClass = IndicatorClass.IndicatorClasses[Convert.ToInt32(item.Tag)];
                 ReloadData();
             }
         }

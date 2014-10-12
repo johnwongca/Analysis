@@ -13,7 +13,6 @@ namespace Algorithm.Core
         public static List<IndicatorClass> IndicatorClasses = new List<IndicatorClass>();
         public static void LoadIndicatorClasses()
         {
-            Console.WriteLine("Start");
             IndicatorClasses.Clear();
             IndicatorClasses.AddRange(
                     Assembly.GetExecutingAssembly().GetTypes().Where(

@@ -11,6 +11,7 @@ namespace Algorithm.Core
 {
     public static partial class Methods
     {
+        private static DateTime MinDateTime = new DateTime(1900, 1, 1);
         private static Regex InvalidParameterCharacters = new Regex(@"[^A-Z0-9_\s]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static SqlConnection GetConnection()
         {
@@ -33,7 +34,7 @@ namespace Algorithm.Core
             command.CommandTimeout = 0;
             command.Parameters.Add("@SymbolID", SqlDbType.Int).Value = symbolId;
             command.Parameters.Add("@IsEOD", SqlDbType.Bit).Value = isEndOfDate;
-            command.Parameters.Add("@DateFrom", SqlDbType.DateTime).Value = dateFrom;
+            command.Parameters.Add("@DateFrom", SqlDbType.DateTime).Value = dateFrom<MinDateTime ? MinDateTime: dateFrom;
             command.Parameters.Add("@DateTo", SqlDbType.DateTime).Value = dateTo == default(DateTime)? DateTime.MaxValue: dateTo;
             return command.ExecuteReader(CommandBehavior.CloseConnection);
         }
@@ -60,7 +61,8 @@ namespace Algorithm.Core
         }
         public static bool IsWindow(this Type t)
         {
-            return t == typeof(Window<double>) || t == typeof(Window<DateTime>) || t == typeof(Window<int>);
+            return t.IsSubclassOf(typeof(Window<double>)) || t.IsSubclassOf(typeof(Window<DateTime>)) || t.IsSubclassOf(typeof(Window<int>))
+                || t == typeof(Window<double>) || t == typeof(Window<DateTime>) || t == typeof(Window<int>);
         }
         public static string GetSQLName(this string str)
         {
@@ -114,6 +116,57 @@ namespace Algorithm.Core
         public static double RelativeStrength(this Window<double> input1, Window<double> input2)
         {
             return input1.Value.RelativeStrength(input2.Value);
+        }
+        public static long GetToken()
+        {
+            using(SqlConnection connection = GetConnection())
+            {
+                using(SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "q.GetToken";
+                    command.CommandType = CommandType.StoredProcedure;
+                    return Convert.ToInt64(command.ExecuteScalar());
+                }
+            }
+        }
+        public static Dictionary<string, InputAttribute> GetInputAttributes(this Type t)
+        {
+            Dictionary<string, InputAttribute>  ret = new Dictionary<string, InputAttribute>();
+            InputAttribute i;
+            foreach (var p in t.GetProperties())
+            {
+                i = (InputAttribute)(p.GetCustomAttributes(true).FirstOrDefault(x => x is InputAttribute));
+                if (i != null)
+                {
+                    ret.Add(p.Name, i);
+                }
+            }
+            return ret;
+        }
+        public static string GetCursorName(int symbolID, IntervalType intervalType, int interval, DateTime startDate)
+        {
+            return string.Format("C_{0}_{1}_{2}_{3}{4:00}{5:00}", symbolID, intervalType, interval, startDate.Year, startDate.Month, startDate.Day);
+        }
+        public static DataTable CursorFetch(this string CursorName, int startLocation = 0, int rows = 50)
+        {
+            using(SqlConnection connection = GetConnection())
+            {
+                using(SqlCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "q.CursorFetch";
+                    cmd.Parameters.Add("@CursorName", SqlDbType.VarChar, 128).Value = CursorName;
+                    cmd.Parameters.Add("@StartLocation", SqlDbType.Int).Value = startLocation;
+                    cmd.Parameters.Add("@NumberOfRows", SqlDbType.Int).Value = rows;
+                    using(SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    {
+                        if (reader == null)
+                            return null;
+                        DataTable ret = new DataTable();
+                        ret.Load(reader);
+                        return ret;
+                    }
+                }
+            }
         }
     }
 }

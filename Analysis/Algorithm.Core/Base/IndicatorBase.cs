@@ -39,10 +39,14 @@ namespace Algorithm.Core
 
         [Output]
         public Window<double> TypicalPrice { get { return mSource.TypicalPrice; } }
+        [InputInt(DefaultValue = 170976)]
         public int SymbolID { get { return mSource.SymbolID; } set { mSource.SymbolID = value; } }
+        [InputIntervalType(DefaultValue = IntervalType.Minutes)]
         public IntervalType IntervalType { get { return mSource.IntervalType; } set { mSource.IntervalType = value; } }
+        [InputInt(DefaultValue = 1)]
         public int Interval { get { return mSource.Interval; } set { mSource.Interval = value; } }
         public int SourceWindowSize { get { return mSource.SourceWindowSize; } set { mSource.SourceWindowSize = value; } }
+
         public DateTime StartDate { get { return mSource.StartDate; } set { mSource.StartDate = value; } }
         public DateTime EndDate { get { return mSource.EndDate; } set { mSource.EndDate = value; } }
         public bool IsClosed { get { return mSource.IsClosed; } }

@@ -102,6 +102,9 @@
     <Build Include="q\Tables\q.Chart.sql" />
     <Build Include="q\Procedures\q.UpdateChart.sql" />
     <Build Include="q\Procedures\q.GetChart.sql" />
+    <Build Include="q\q.TokenSequence.sql" />
+    <Build Include="q\Procedures\q.GetToken.sql" />
+    <Build Include="q\Procedures\q.CursorFetch.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac">

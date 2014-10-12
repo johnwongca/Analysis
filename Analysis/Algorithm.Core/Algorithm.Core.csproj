@@ -115,7 +115,7 @@
     <Compile Include="Forms\ToolStripDateTimePicker.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Indicators\DefaultIndicator - Copy.cs" />
+    <Compile Include="Indicators\TestIndicator.cs" />
     <Compile Include="Indicators\DefaultIndicator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -9,8 +9,9 @@ namespace Algorithm.Core
     public class DefaultIndicator : Indicator
     {
         public DefaultIndicator()
-            : base(1)
+            : base(1000)
         {
+            
         }
     }
     public partial class IndicatorBase

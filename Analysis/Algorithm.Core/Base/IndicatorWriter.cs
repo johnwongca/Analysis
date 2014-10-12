@@ -16,17 +16,14 @@ namespace Algorithm.Core
         string TableDefinition()
         {
             string ret;
-            ret = string.Format(@"if object_id('{0}') is not null
-    drop table {0}
-create table {0}(", TableName);
+            ret = string.Format(@"if object_id('[{0}]') is not null
+    drop table [{0}]
+create table [{0}](", TableName);
             for (int i = 0; i < Reader.DataSetDefinition.ColumnCount; i++)
             {
-                if (i == 0)
-                    ret = ret + Reader.DataSetDefinition.Columns[i].SQLDefinition;
-                else
-                    ret = ret + "," + Reader.DataSetDefinition.Columns[i].SQLDefinition;
+               ret = ret  + Reader.DataSetDefinition.Columns[i].SQLDefinition +",";
             }
-            ret = ret + ")";
+            ret = ret + " primary key (___RowNumber___))";
             return ret;
         }
         public void WriteToServer()
@@ -40,7 +37,7 @@ create table {0}(", TableName);
                 command.ExecuteNonQuery();
                 using (SqlBulkCopy bulkcopy = new SqlBulkCopy(connection))
                 {
-                    bulkcopy.DestinationTableName = TableName;
+                    bulkcopy.DestinationTableName = "["+TableName+"]";
                     bulkcopy.WriteToServer(Reader);
                 }
             }

@@ -16,6 +16,7 @@ namespace Algorithm.Core
         string mDataTypeName;
         int mSize;
         public string Name;
+        public string PropertyName;
         public int Ordinal;
         public int Size
         {

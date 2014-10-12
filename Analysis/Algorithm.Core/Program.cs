@@ -29,9 +29,13 @@ namespace Algorithm.Core
             IndicatorClass.LoadIndicatorClasses();
 
             //Test.Test.Test_Indicator_UltimateOscillator();
-            StartWindows();
+            //StartWindows();
+            Test1Indicator i = new Test1Indicator() { };
+            i.SetDefaultValues();
+            i.WriteToServer();
+
             
-            
+
             #region Paulse and quit
             if (!IsWindowsStarted)
             {

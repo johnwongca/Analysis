@@ -54,16 +54,39 @@ namespace Algorithm.Core
                         c = new DataColumnDefinition()
                                     {
                                         Name = string.IsNullOrEmpty(output.Name)? p.Name : output.Name,
-                                        DataTypeName = p.PropertyType == typeof(Window<double>) ? "real" : (p.PropertyType == typeof(Window<DateTime>) ? "DateTime" : "Int"),
+                                        PropertyName = p.Name,
+                                        DataTypeName = (p.PropertyType == typeof(Window<double>)) || (p.PropertyType.IsSubclassOf(typeof(Window<double>))) ? "real" : ((p.PropertyType == typeof(Window<DateTime>))|| (p.PropertyType.IsSubclassOf(typeof(Window<DateTime>))) ? "DateTime" : "Int"),
                                         Table = mDatasetDefinition
                                     };
                         c.GetterObject = mIndicator.GetPropertyValue(p.Name);
-                        c.ValueGetter = c.GetterObject.GetType().DelegateForGetPropertyValue("Value");
+                        if (c.GetterObject != null)
+                            c.ValueGetter = c.GetterObject.GetType().DelegateForGetPropertyValue("Value");
                         mDatasetDefinition.Columns.Add(c);
                     }
                 }
             }
         }
+        public bool Read()
+        {
+            bool ret = mIndicator.Read();
+            if (rowNumber == 0)
+            {
+                foreach(var c in mDatasetDefinition.Columns)
+                {
+                    if (c.PropertyName == "")
+                        continue;
+                    if (c.PropertyName == null)
+                        continue;
+                    if (c.GetterObject != null)
+                        continue;
+                    c.GetterObject = mIndicator.TryGetPropertyValue(c.PropertyName);
+                    c.ValueGetter = c.GetterObject.GetType().DelegateForGetPropertyValue("Value");
+                }
+            }
+            rowNumber++;
+            return ret;
+        }
+
         public void Close()
         {
             mIsClosed = true;
@@ -87,12 +110,6 @@ namespace Algorithm.Core
         public bool NextResult()
         {
             return false;
-        }
-
-        public bool Read()
-        {
-            rowNumber++;
-            return mIndicator.Read();
         }
 
         public int RecordsAffected

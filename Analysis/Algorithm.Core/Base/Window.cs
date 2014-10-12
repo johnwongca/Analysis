@@ -28,6 +28,10 @@ namespace Algorithm.Core
             }
         }
         public long CurrentLocation { get { return mCurrentLocation; } }
+        public virtual void Start(params Window<T>[] values)
+        {
+
+        }
         protected virtual void Initialization(params Window<T>[] values)
         {
         }
@@ -39,7 +43,8 @@ namespace Algorithm.Core
         }
         public virtual Window<T> Push(params Window<T>[] values)
         {
-            
+            if (mCurrentLocation < 0)
+                Start(values);
             mCurrentLocation++;
             if ((mInputCacheSize > 0) && (cache == null))
                 cache = new Window<T>[values.Length];

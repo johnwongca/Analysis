@@ -28,15 +28,12 @@ namespace Algorithm.Core
         {
             IndicatorClass.LoadIndicatorClasses();
 
-            //Test.Test.Test_Indicator_UltimateOscillator();
-            //StartWindows();
-            Test1Indicator i = new Test1Indicator() { };
-            i.SetDefaultValues();
-            i.WriteToServer();
-
+            StartWindows();
             
+            //Test.Test.Test_IndicatorWriter();
 
             #region Paulse and quit
+
             if (!IsWindowsStarted)
             {
                 Console.WriteLine("Done");

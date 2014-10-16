@@ -11,7 +11,8 @@ namespace Algorithm.Core
 {
     public static partial class Methods
     {
-        private static DateTime MinDateTime = new DateTime(1900, 1, 1);
+        public static List<string> Cursors = new List<string>();
+        private static DateTime MinDateTime = new DateTime(2010, 1, 1);
         private static Regex InvalidParameterCharacters = new Regex(@"[^A-Z0-9_\s]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         public static SqlConnection GetConnection()
         {
@@ -147,25 +148,68 @@ namespace Algorithm.Core
         {
             return string.Format("C_{0}_{1}_{2}_{3}{4:00}{5:00}", symbolID, intervalType, interval, startDate.Year, startDate.Month, startDate.Day);
         }
-        public static DataTable CursorFetch(this string CursorName, int startLocation = 0, int rows = 50)
+        public static int CursorFetch(this string CursorName, DataTable table, int startLocation = 0, int rows = 50)
         {
             using(SqlConnection connection = GetConnection())
             {
                 using(SqlCommand cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = "q.CursorFetch";
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@CursorName", SqlDbType.VarChar, 128).Value = CursorName;
                     cmd.Parameters.Add("@StartLocation", SqlDbType.Int).Value = startLocation;
                     cmd.Parameters.Add("@NumberOfRows", SqlDbType.Int).Value = rows;
+                    var p = cmd.Parameters.Add("@ReturnValue", SqlDbType.Int);
+                    p.Direction = ParameterDirection.ReturnValue;
                     using(SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                     {
                         if (reader == null)
-                            return null;
-                        DataTable ret = new DataTable();
-                        ret.Load(reader);
-                        return ret;
+                            return -1;
+                        table.Load(reader);
+                        return Convert.ToInt32(p.Value);
                     }
                 }
+            }
+        }
+        public static int CursorSize(this string CursorName)
+        {
+            using (SqlConnection connection = GetConnection())
+            {
+                using (SqlCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "q.CursorSize";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@CursorName", SqlDbType.VarChar, 128).Value = CursorName;
+                    var p = cmd.Parameters.Add("@ReturnValue", SqlDbType.Int);
+                    p.Direction = ParameterDirection.ReturnValue;
+                    cmd.ExecuteNonQuery();
+                    return Convert.ToInt32(p.Value);
+
+                }
+            }
+        }
+        public static void CursorRemove(this string CursorName)
+        {
+            using (SqlConnection connection = GetConnection())
+            {
+                using (SqlCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "q.CursorRemove";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@CursorName", SqlDbType.VarChar, 128).Value = CursorName;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public static void CursorRemoveAll()
+        {
+            foreach(string s in Cursors)
+            {
+                try
+                {
+                    CursorRemove(s);
+                }
+                catch { }
             }
         }
     }

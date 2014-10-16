@@ -105,6 +105,8 @@
     <Build Include="q\q.TokenSequence.sql" />
     <Build Include="q\Procedures\q.GetToken.sql" />
     <Build Include="q\Procedures\q.CursorFetch.sql" />
+    <Build Include="q\Procedures\q.CursorSize.sql" />
+    <Build Include="q\Procedures\q.CursorRemove.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac">

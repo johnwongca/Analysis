@@ -75,6 +75,20 @@ namespace Algorithm.Core
                     asyncDone(null);
             })).Start();
         }
-        
+        public DataTable WriteToDataTable(DataTable table = null)
+        {
+            if (table == null)
+                table = new DataTable();
+            else
+                table.Rows.Clear();
+            this.OpenData();
+            using (IDataReader r = new IndicatorReader() { Indicator = this })
+            {
+                table.Load(r);
+                table.PrimaryKey = new DataColumn[]{table.Columns[0]}; 
+            }
+            this.CloseData();
+            return table;
+        }
     }
 }

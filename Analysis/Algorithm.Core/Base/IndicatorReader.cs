@@ -25,6 +25,7 @@ namespace Algorithm.Core
                 {
                     mIndicator = value;
                     GetDataSetDefinition();
+                    mIsClosed = false;
                 }
             }
         }
@@ -32,7 +33,7 @@ namespace Algorithm.Core
         void GetDataSetDefinition()
         {
             mDatasetDefinition = new DataSetDefinition();
-            mDatasetDefinition.Columns.Add(new DataColumnDefinition() { Name = "___RowNumber___", DataTypeName = "bigint", Table = mDatasetDefinition });
+            mDatasetDefinition.Columns.Add(new DataColumnDefinition() { Name = "___RowNumber___", DataTypeName = "bigint", Table = mDatasetDefinition, IsPrimaryKey = true });
             DataColumnDefinition c = new DataColumnDefinition()
             {
                 Name = "___Return___",
@@ -234,7 +235,16 @@ namespace Algorithm.Core
 
         public int GetValues(object[] values)
         {
-            throw new NotImplementedException();
+            int ret = 0;
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (i < FieldCount)
+                {
+                    values[i] = this[i];
+                    ret++;
+                }
+            }
+            return ret;
         }
 
         public bool IsDBNull(int i)

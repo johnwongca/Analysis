@@ -2,7 +2,7 @@
 as
 begin
 	set nocount on
-	select ChartName, AlgorithmName, SymbolID, IntervalType, Interval, ChartDefinition 
+	select ChartName, ChartDefinition 
 	from q.Chart 
 	order by ChartName
 end

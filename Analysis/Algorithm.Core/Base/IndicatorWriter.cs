@@ -23,7 +23,7 @@ create table [{0}](", TableName);
             {
                ret = ret  + Reader.DataSetDefinition.Columns[i].SQLDefinition +",";
             }
-            ret = ret + " primary key (___RowNumber___))";
+            ret = ret + " primary key (___RowNumber___)) with (data_compression = page)";
             return ret;
         }
         public void WriteToServer()
@@ -33,6 +33,7 @@ create table [{0}](", TableName);
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = "use " + DatabaseName;
                 command.ExecuteNonQuery();
+                Methods.Cursors.Add(TableName);
                 command.CommandText = TableDefinition();
                 command.ExecuteNonQuery();
                 using (SqlBulkCopy bulkcopy = new SqlBulkCopy(connection))

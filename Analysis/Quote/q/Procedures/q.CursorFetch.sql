@@ -10,8 +10,9 @@ begin
 
 	select @SQL = 'select @CursorSize = max(___RowNumber___) from tempdb.dbo.'+quotename(@CursorName)
 	exec sp_executesql @SQL, N'@CursorSize int output', @CursorSize output
+	select @CursorSize = isnull(@CursorSize, 0);
 	if @StartLocation <=0
-		select @StartLocation = 2147483647
+		select @StartLocation = 200000000
 	if @CursorSize < @StartLocation + @NumberOfRows - 1
 		select @StartLocation = @CursorSize  - @NumberOfRows + 1
 	if(@StartLocation < 1)

@@ -343,8 +343,8 @@ namespace Algorithm.Core
                 r[SchemaTableColumn.AllowDBNull] = c.Nullable;
                 r[SchemaTableOptionalColumn.IsReadOnly] = true;
                 r[SchemaTableOptionalColumn.IsRowVersion] = false;
-                r[SchemaTableColumn.IsUnique] = false;
-                r[SchemaTableColumn.IsKey] = false;
+                r[SchemaTableColumn.IsUnique] = c.IsPrimaryKey;
+                r[SchemaTableColumn.IsKey] = c.IsPrimaryKey;
                 r[SchemaTableOptionalColumn.IsAutoIncrement] = false;
                 r[SchemaTableOptionalColumn.IsHidden] = false;
                 r[SchemaTableOptionalColumn.BaseCatalogName] = DBNull.Value;

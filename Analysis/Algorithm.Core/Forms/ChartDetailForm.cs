@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Algorithm.Core.Forms
 {
@@ -16,6 +17,8 @@ namespace Algorithm.Core.Forms
         public string Exchange, Symbol, SymbolName;
         public int SymbolID;
         public EventHandler OnSearchConfirm;
+        public Chart chart;
+        public ChartForm ChartForm;
         public bool SearchFound()
         {
             if (dvSymbol.Count == 1)
@@ -82,7 +85,6 @@ namespace Algorithm.Core.Forms
                 dvSymbol.RowFilter = "Symbol like '%" + textSearch.Text.Replace("'", "''") + "%'";
             else if (ddExchange.Text != "All")
                 dvSymbol.RowFilter = "Symbol like '%" + textSearch.Text.Replace("'", "''") + "%' and Exchange = '" + ddExchange.Text + "'";
-
         }
 
         
@@ -118,6 +120,12 @@ namespace Algorithm.Core.Forms
             {
                 btnOk_Click(null, null);
             }
+        }
+
+        private void btnSetSplitter_Click(object sender, EventArgs e)
+        {
+            ChartForm.SetSplitter();
+            ChartForm.RearrangeSplitters();
         }
     }
 }

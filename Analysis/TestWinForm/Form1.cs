@@ -95,7 +95,7 @@ namespace TestWinForm
             DateTime now = DateTime.Now;
             if ((now - lastEvent).TotalMilliseconds < 100)
             {
-                return;
+                //return;
             }
             lastEvent = now;
             

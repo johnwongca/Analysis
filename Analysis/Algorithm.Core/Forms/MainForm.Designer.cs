@@ -29,32 +29,25 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.miSymbols = new System.Windows.Forms.ToolStripMenuItem();
             this.btnChart = new System.Windows.Forms.ToolStripMenuItem();
             this.miWindows = new System.Windows.Forms.ToolStripMenuItem();
             this.miCloseAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.miSymbols = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miSymbols,
             this.btnChart,
-            this.miWindows});
+            this.miWindows,
+            this.miSymbols});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(291, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // miSymbols
-            // 
-            this.miSymbols.Name = "miSymbols";
-            this.miSymbols.Size = new System.Drawing.Size(64, 20);
-            this.miSymbols.Text = "Symbols";
-            this.miSymbols.Click += new System.EventHandler(this.miSymbols_Click);
             // 
             // btnChart
             // 
@@ -84,6 +77,14 @@
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(117, 6);
+            // 
+            // miSymbols
+            // 
+            this.miSymbols.Name = "miSymbols";
+            this.miSymbols.Size = new System.Drawing.Size(64, 20);
+            this.miSymbols.Text = "Symbols";
+            this.miSymbols.Visible = false;
+            this.miSymbols.Click += new System.EventHandler(this.miSymbols_Click);
             // 
             // MainForm
             // 

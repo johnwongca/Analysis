@@ -27,10 +27,11 @@ namespace Algorithm.Core
         static void Main(string[] args)
         {
             IndicatorClass.LoadIndicatorClasses();
+            ChartList.LoadCharts();
 
             StartWindows();
-            
-            //Test.Test.Test_IndicatorWriter();
+
+            //Test.Test.Test_Source();
 
             #region Paulse and quit
 

@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.ComponentModel;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Algorithm.Core
 {
+    //public
     public class IndicatorClass
     {
         public static List<IndicatorClass> IndicatorClasses = new List<IndicatorClass>();

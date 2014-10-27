@@ -9,13 +9,13 @@ namespace Algorithm.Core.Test
 {
     public partial class Test
     {
-        private static void Test_Source()
+        public static void Test_Source()
         {
-            Source source = new Source(170976, IntervalType.Days, 3);
+            Source source = new Source(170976, IntervalType.Minutes, 60);
             source.StartDate = new DateTime(2014, 7, 17);
-            source.EndDate = new DateTime(2014, 9, 16);
+            source.EndDate = new DateTime(2014, 12, 16);
             source.OpenData();
-            for (int i = 0; i < 2000; i++)
+            for (int i = 0; i < 12000; i++)
             {
                 if (source.Read())
                 {

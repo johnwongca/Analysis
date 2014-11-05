@@ -46,5 +46,6 @@ namespace Algorithm.Core
         public string IndicatorName;
         public Type Class;
         public string Description;
+        
     }
 }

@@ -18,10 +18,11 @@ namespace Algorithm.Core.Forms
         public const string SplitterName = "Splitter";
         bool instanceStart = true;
         public long Token;
-        IntervalType IntervalType = IntervalType.Minutes;
+        IntervalType IntervalType = IntervalType.Days;
         int Interval = 1, SymbolID = -1, startLocation = -1, numberOfRows = 100;
         int CursorSize { get { return data.Rows.Count; } }
         IndicatorClass IndicatorClass = null;
+        FlowLayoutPanel currentPanel = null;
         ChartDetailForm details = null;
         bool isUserSearchText = true, stopLoading = true;
         DataTable data = new DataTable() { TableName = "base"};
@@ -52,7 +53,16 @@ namespace Algorithm.Core.Forms
         }
         void ValidateChart()
         {
+            foreach (ToolStripMenuItem item in miCharts.DropDownItems)
+            {
+                if(item.Checked)
+                {
+                    chartDefinition = ((ChartList)(((ToolStripMenuItem)item).Tag)).Definition;
+                    break;
+                }
+            }
             bool changed = false;
+            List<XElement> removeList = new List<XElement>();
             foreach (var x1 in chartDefinition.Elements("Series"))
             {
                 foreach (var x2 in x1.Elements("Series"))
@@ -62,17 +72,25 @@ namespace Algorithm.Core.Forms
                     if (data.Columns.IndexOf(x2.Attribute("XValueMember").Value) < 0)
                     {
                         x2.Attribute("XValueMember").Value = "";
+                        if (removeList.IndexOf(x2) < 0)
+                            removeList.Add(x2);
                         changed = true;
                     }
                     if (data.Columns.IndexOf(x2.Attribute("YValueMembers").Value) < 0)
                     {
                         x2.Attribute("YValueMembers").Value = "";
+                        if (removeList.IndexOf(x2) < 0)
+                            removeList.Add(x2);
                         changed = true;
                     }
                 }
             }
             if (changed)
+            {
+                foreach (var a in removeList)
+                    a.Remove();
                 chart1.SetDefinition(chartDefinition);
+            }
         }
         private void ChartChange(object sender, EventArgs e)
         {
@@ -91,18 +109,38 @@ namespace Algorithm.Core.Forms
                 {
                     chartName = c.Name;
                     x = c.Definition;
-                    
-                    break;
                 }
             }
             chartDefinition = new XElement(x);
+            ValidateChart();
             chart1.SetDefinition(chartDefinition);
+            chart1.DataBind();
         }
-        public ChartForm()
+        private void AlgorithmChange(object sender, EventArgs e)
         {
-            Token = Methods.GetToken();
-            InitializeComponent();
-            labelIsLoading.Visible = false;
+            foreach (ToolStripMenuItem i in AlgorithmMenu.DropDownItems)
+            {
+                i.Checked = false;
+                ((FlowLayoutPanel)i.Tag).Visible = false;
+            }
+            var item = (ToolStripMenuItem)sender;
+            item.Checked = true;
+            ((FlowLayoutPanel)item.Tag).Visible = true;
+            if (AlgorithmMenu.Text != item.Text)
+            {
+                AlgorithmMenu.Text = item.Text;
+                IndicatorClass = (IndicatorClass)((FlowLayoutPanel)item.Tag).Tag;
+                currentPanel = (FlowLayoutPanel)item.Tag;
+                ReloadData();
+            }
+        }
+        private void Parameter_ValueChanged(object sender, EventArgs e)
+        {
+            ReloadData();
+        }
+        void LoadAlgoritms()
+        {
+            TabPage containter = details.ParameterContainer;
             AlgorithmMenu.DropDownItems.Clear();
             for (int i = 0; i < IndicatorClass.IndicatorClasses.Count; i++)
             {
@@ -111,12 +149,55 @@ namespace Algorithm.Core.Forms
                 if (IndicatorClass.IndicatorClasses[i].IndicatorName == "Default")
                 {
                     item.Checked = true;
-                    AlgorithmMenu.Tag = item.Tag;
                     AlgorithmMenu.Text = item.Text;
                     IndicatorClass = IndicatorClass.IndicatorClasses[i];
                 }
                 AlgorithmMenu.DropDownItems.Add(item);
+                FlowLayoutPanel panel = new FlowLayoutPanel() { Visible = item.Checked};
+                panel.Tag = IndicatorClass.IndicatorClasses[i];
+                containter.Controls.Add(panel);
+                panel.Dock = DockStyle.Fill;
+                item.Tag = panel;
+                ParameterControl pc;
+                foreach(var p in IndicatorClass.IndicatorClasses[i].Class.GetProperties().OrderBy(x=>x.Name))
+                {
+                    foreach(var attr in p.GetCustomAttributes(true))
+                    {
+                        if(attr is InputIntAttribute)
+                        {
+                            pc = new ParameterControl();
+                            panel.Controls.Add(pc);
+                            pc.label.Text = p.Name;
+                            pc.Value.Minimum = (decimal)((InputIntAttribute)attr).FromValue;
+                            pc.Value.Maximum = (decimal)((InputIntAttribute)attr).ToValue;
+                            pc.Value.Value = (decimal)((InputIntAttribute)attr).DefaultValue;
+                            pc.PropertyName = p.Name;
+                            pc.IndicatorClass = IndicatorClass.IndicatorClasses[i];
+                            pc.Value.ValueChanged += new EventHandler(Parameter_ValueChanged);
+                        }
+                        if (attr is InputDoubleAttribute)
+                        {
+                            pc = new ParameterControl();
+                            panel.Controls.Add(pc);
+                            pc.label.Text = p.Name;
+                            pc.Value.Minimum = (decimal)((InputDoubleAttribute)attr).FromValue;
+                            pc.Value.Maximum = (decimal)((InputDoubleAttribute)attr).ToValue;
+                            pc.Value.Value = (decimal)((InputDoubleAttribute)attr).DefaultValue;
+                            pc.PropertyName = p.Name;
+                            pc.IndicatorClass = IndicatorClass.IndicatorClasses[i];
+                            pc.Value.ValueChanged += new EventHandler(Parameter_ValueChanged);
+                        }
+                    }
+                }
+                
             }
+        }
+        public ChartForm()
+        {
+            Token = Methods.GetToken();
+            InitializeComponent();
+            labelIsLoading.Visible = false;
+            
             hScrollBar.Minimum = 1;
             details = new ChartDetailForm();
             details.Owner = this;
@@ -126,6 +207,8 @@ namespace Algorithm.Core.Forms
             chartPropertySelected = details.chartPropertySelected;
             chartPropertyAll = details.chartPropertyAll;
             chartPropertyAll.SelectedObject = chart1;
+
+            LoadAlgoritms();
 
             nInterval.NumericUpDownControl.Minimum = 1;
             nInterval.NumericUpDownControl.Maximum = 99999999;
@@ -159,7 +242,7 @@ namespace Algorithm.Core.Forms
         }
         void PopulateDataview()
         {
-            Console.WriteLine("Start scrolling {0}", startLocation);
+            //Console.WriteLine("Start scrolling {0}", startLocation);
             chartData.Rows.Clear();
             for (int i = startLocation; (i < startLocation + numberOfRows) && (i < data.Rows.Count); i++)
             {
@@ -183,11 +266,7 @@ namespace Algorithm.Core.Forms
                     return;
                 if (SymbolID < 0)
                     return;
-                //string cursorName = Methods.GetCursorName(SymbolID, IntervalType, Interval, StartDate);
-                //if (forceReloading)
-                //    cursorName.CursorRemove();
-                //CursorSize = cursorName.CursorSize();
-
+                
 
                 using (Indicator indicator = (Indicator)Activator.CreateInstance(IndicatorClass.Class))
                 {
@@ -196,10 +275,21 @@ namespace Algorithm.Core.Forms
                     indicator.SymbolID = SymbolID;
                     indicator.Interval = Interval;
                     indicator.IntervalType = IntervalType;
+                    if(currentPanel!=null)
+                    {
+                        foreach(ParameterControl pc in currentPanel.Controls)
+                        {
+                            if (IndicatorClass.Class.GetProperty(pc.PropertyName).PropertyType == typeof(int))
+                                indicator.SetPropertyValue(pc.PropertyName, pc.IntValue);
+                            if (IndicatorClass.Class.GetProperty(pc.PropertyName).PropertyType == typeof(double))
+                                indicator.SetPropertyValue(pc.PropertyName, pc.DoubleValue);
+                        }
+                    }
                     //indicator.WriteToServer();
-                    Console.WriteLine("Start fetching {0}", SymbolID);
+                    //Console.WriteLine("Start fetching {0}", SymbolID);
+                    DateTime ddd = DateTime.Now;
                     data = indicator.WriteToDataTable(data);
-                    Console.WriteLine("Fetching {0} done. Size = {1}", SymbolID, data.Rows.Count);
+                    Console.WriteLine("Fetching {0} done. Size = {1}. Duration = {2:0.000} ms", SymbolID, data.Rows.Count, (DateTime.Now - ddd).TotalMilliseconds);
                     if(chartData.Columns.Count + 1 != data.Columns.Count )
                     {
                         chartData = data.Clone();
@@ -252,21 +342,7 @@ namespace Algorithm.Core.Forms
             details.SearchText = QuoteSearch.Text;
             details.SearchFound();
         }
-        private void AlgorithmChange(object sender, EventArgs e)
-        {
-            foreach (ToolStripMenuItem i in AlgorithmMenu.DropDownItems)
-                i.Checked = false;
-            var item = (ToolStripMenuItem)sender;
-            item.Checked = true;
-            if (AlgorithmMenu.Text != item.Text)
-            {
-                AlgorithmMenu.Text = item.Text;
-                AlgorithmMenu.Tag = item.Tag;
-                IndicatorClass = IndicatorClass.IndicatorClasses[Convert.ToInt32(item.Tag)];
-                ReloadData();
-            }
-        }
-
+        
         private void IntervalChange(object sender, EventArgs e)
         {
             foreach (ToolStripMenuItem i in IntervalTypeMenu.DropDownItems)
@@ -308,6 +384,7 @@ namespace Algorithm.Core.Forms
         {
             if (IsLoadingData)
                 return;
+            //Console.WriteLine("{0}/{1}", hScrollBar.Value, hScrollBar.Maximum);
             startLocation = hScrollBar.Value;
             //ReloadData();
             
@@ -426,6 +503,74 @@ namespace Algorithm.Core.Forms
         DateTime lastMouseMove = DateTime.Now;
         bool mouseDown = false;
         ChartArea splitterChartArea = null;
+        private void ShowValues(HitTestResult hitTest, MouseEventArgs e)
+        {
+            if (hitTest == null)
+                return;
+            string DateTimeFormat = "{0:yyyy-MM-dd hh:mm}";
+            string NumberFormat1 = "{0:0,0.00}";
+            string NumberFormat2 = "{0:0,0}";
+            string NumberFormat3 = "{0:0,0.0000}";
+            if (hitTest.PointIndex >= 0)
+            {
+                if (chartData.Rows.Count > hitTest.PointIndex)
+                {
+                    var row = chartData.Rows[hitTest.PointIndex];
+                    details.tDateFrom.Text = string.Format(DateTimeFormat, row["DateFrom"]);
+                    details.tDateTo.Text = string.Format(DateTimeFormat, row["DateTo"]);
+                    details.tHigh.Text = string.Format(NumberFormat1, row["High"]);
+                    details.tLow.Text = string.Format(NumberFormat1, row["Low"]);
+                    details.tOpen.Text = string.Format(NumberFormat1, row["Open"]);
+                    details.tClose.Text = string.Format(NumberFormat1, row["Close"]);
+                    details.tVolume.Text = string.Format(NumberFormat2, row["Volume"]);
+                    details.tTypical.Text = string.Format(NumberFormat1, row["TypicalPrice"]);
+                    //populate list views
+                    var list = details.lvData;
+                    list.Groups.Clear();
+                    list.Items.Clear();
+                    ListViewGroup group= null;
+                    string fieldName;
+                    foreach(ChartArea ca in chart1.ChartAreas)
+                    {
+                        foreach (var ii in chart1.Series.Where(x => x.ChartArea == ca.Name).Select(x => new {x, x.YValueMembers}).Where(x => x.YValueMembers != "").OrderBy(x => x.YValueMembers))
+                        {
+                            fieldName = ii.YValueMembers;
+                            if ((fieldName != "DateFrom") && (fieldName != "DateTo") && (fieldName != "High") && (fieldName != "Low") && (fieldName != "Open")
+                                && (fieldName != "Close") && (fieldName != "Volume") && (fieldName != "TypicalPrice") && (fieldName != "High,Low,Open,Close"))
+                            {
+
+                                group = null;
+                                foreach(ListViewGroup g in list.Groups)
+                                {
+                                    if(g.Header == ca.Name)
+                                    {
+                                        group = g;
+                                        break;
+                                    }
+                                }
+                                if(group==null)
+                                    group = list.Groups.Add(ca.Name, ca.Name);
+                                var item = new ListViewItem();
+                                if (ii.x.Color != Color.White)
+                                    item.ForeColor = ii.x.Color;
+                                else
+                                    item.ForeColor = Color.Black;
+                                item.Text = fieldName;
+                                item.SubItems.Add(string.Format(NumberFormat3, row[fieldName]));
+                                item.Group = group;
+                                group.Items.Add(item);
+                                list.Items.Add(item);
+                            }
+                        }
+                    }
+                }
+            }
+            if (hitTest.ChartArea != null)
+            {
+                details.tY1.Text = string.Format(NumberFormat1, hitTest.ChartArea.AxisY.PixelPositionToValue(e.Y));
+                details.tY2.Text = string.Format(NumberFormat1, hitTest.ChartArea.AxisY2.PixelPositionToValue(e.Y));
+            }
+        }
         private void chart1_MouseMove(object sender, MouseEventArgs e)
         {
             DateTime now = DateTime.Now;
@@ -436,11 +581,7 @@ namespace Algorithm.Core.Forms
             lastMouseMove = now;
             #region move splitter
             var hitTest = chart1.HitTest(e.X, e.Y);
-            infoLabel.Visible = hitTest.PointIndex >= 0;
-            if(infoLabel.Visible)
-            {
-                infoLabel.Text = string.Format("{0:yyyy-MM-dd hh:mm}--{1:yyyy-MM-dd hh:mm}", chartData.Rows[hitTest.PointIndex]["DateFrom"], chartData.Rows[hitTest.PointIndex]["DateTo"]);
-            }
+            ShowValues(hitTest, e);
             if(hitTest!=null)
             {
                 if (

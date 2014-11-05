@@ -127,5 +127,7 @@ namespace Algorithm.Core.Forms
             ChartForm.SetSplitter();
             ChartForm.RearrangeSplitters();
         }
+
+        
     }
 }

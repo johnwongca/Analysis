@@ -12,7 +12,7 @@ when MA(Loss) is 0, output is 100
     public class RelativeStrengthIndex:Indicator
     {
         Window<double> mAverageGain = null, mAverageLoss = null;
-        bool useInternalAverage = false;
+        public bool UseInternalAverage = false;
         int mPeriod;
         public int Period { get { return mPeriod; } }
         public RelativeStrengthIndex(int period, int size = Window<double>.DefaultDataWindowSize)
@@ -25,13 +25,13 @@ when MA(Loss) is 0, output is 100
         {
             if(mAverageGain==null)
             {
-                useInternalAverage = true;
+                UseInternalAverage = true;
                 mAverageGain = SimpleMovingAverage(Period, 1);
                 mAverageGain.InputCacheSize = Period + 1;
                 mAverageLoss = SimpleMovingAverage(Period, 1);
                 mAverageLoss.InputCacheSize = Period + 1;
             }
-            if (useInternalAverage)
+            if (UseInternalAverage)
             {
                 mAverageGain.Push(values[0].Gain());
                 mAverageLoss.Push(values[0].Loss());

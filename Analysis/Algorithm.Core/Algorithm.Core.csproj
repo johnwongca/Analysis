@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\Aroon.cs" />
+    <Compile Include="Algorithms\MACD.cs" />
     <Compile Include="Algorithms\UltimateOscillator.cs" />
     <Compile Include="Algorithms\StochasticOscillator.cs" />
     <Compile Include="Algorithms\RelativeStrengthIndex.cs" />
@@ -80,6 +81,12 @@
     <Compile Include="Base\Methods.cs" />
     <Compile Include="Base\IndicatorAttribute.cs" />
     <Compile Include="Base\OutputAttribute.cs" />
+    <Compile Include="Forms\ParameterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ParameterControl.Designer.cs">
+      <DependentUpon>ParameterControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ChartDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +135,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Test\TestIndicator_UltimateOscillator.cs" />
+    <Compile Include="Test\Test_Indicator_Test1Indicator.cs" />
     <Compile Include="Test\Test_Indicator_StochasticOscillator.cs" />
     <Compile Include="Test\Test_Indicator_RelativeStrengthIndex.cs" />
     <Compile Include="Test\Test_Indicator_RateOfChange.cs" />
@@ -155,6 +163,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="Forms\ParameterControl.resx">
+      <DependentUpon>ParameterControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChartDetailForm.resx">
       <DependentUpon>ChartDetailForm.cs</DependentUpon>
     </EmbeddedResource>

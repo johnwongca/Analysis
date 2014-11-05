@@ -39,11 +39,11 @@ namespace Algorithm.Core
 
         [Output]
         public Window<double> TypicalPrice { get { return mSource.TypicalPrice; } }
-        [InputInt(DefaultValue = 170976)]
+        //[InputInt(DefaultValue = 170976)]
         public int SymbolID { get { return mSource.SymbolID; } set { mSource.SymbolID = value; } }
         [InputIntervalType(DefaultValue = IntervalType.Minutes)]
         public IntervalType IntervalType { get { return mSource.IntervalType; } set { mSource.IntervalType = value; } }
-        [InputInt(DefaultValue = 1)]
+        //[InputInt(DefaultValue = 1, FromValue=1, ToValue=9999)]
         public int Interval { get { return mSource.Interval; } set { mSource.Interval = value; } }
         public int SourceWindowSize { get { return mSource.SourceWindowSize; } set { mSource.SourceWindowSize = value; } }
 

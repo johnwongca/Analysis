@@ -11,7 +11,7 @@ namespace Algorithm.Core
     {
         long rowNumber = 0;
         DataSetDefinition mDatasetDefinition = null;
-        bool mIsClosed = true;
+        bool mIsClosed = true, schemaRead = false, recordReturnedBySchema = false, rowReadFirst = false;
         public Indicator mIndicator;
         public Indicator Indicator
         {
@@ -32,8 +32,16 @@ namespace Algorithm.Core
         public DataSetDefinition DataSetDefinition { get { return mDatasetDefinition; } }
         void GetDataSetDefinition()
         {
+            if (schemaRead)
+                return;
+            if (!rowReadFirst)
+                recordReturnedBySchema = Indicator.Read();
+            schemaRead = true;
             mDatasetDefinition = new DataSetDefinition();
             mDatasetDefinition.Columns.Add(new DataColumnDefinition() { Name = "___RowNumber___", DataTypeName = "bigint", Table = mDatasetDefinition, IsPrimaryKey = true });
+            if (!recordReturnedBySchema)
+                return;
+            rowReadFirst = true;
             DataColumnDefinition c = new DataColumnDefinition()
             {
                 Name = "___Return___",
@@ -67,23 +75,37 @@ namespace Algorithm.Core
                 }
             }
         }
+        void setGetter()
+        {
+            foreach (var c in mDatasetDefinition.Columns)
+            {
+                if (c.PropertyName == "")
+                    continue;
+                if (c.PropertyName == null)
+                    continue;
+                if (c.GetterObject != null)
+                    continue;
+                c.GetterObject = mIndicator.TryGetPropertyValue(c.PropertyName);
+                c.ValueGetter = c.GetterObject.GetType().DelegateForGetPropertyValue("Value");
+            }
+        }
         public bool Read()
         {
-            bool ret = mIndicator.Read();
+            
             if (rowNumber == 0)
             {
-                foreach(var c in mDatasetDefinition.Columns)
+                if (!schemaRead)
                 {
-                    if (c.PropertyName == "")
-                        continue;
-                    if (c.PropertyName == null)
-                        continue;
-                    if (c.GetterObject != null)
-                        continue;
-                    c.GetterObject = mIndicator.TryGetPropertyValue(c.PropertyName);
-                    c.ValueGetter = c.GetterObject.GetType().DelegateForGetPropertyValue("Value");
+                    GetDataSetDefinition();
                 }
+                if (rowReadFirst)
+                    setGetter();
+                else
+                    return false;
+                rowNumber++;
+                return true;
             }
+            bool ret = Indicator.Read();
             rowNumber++;
             return ret;
         }

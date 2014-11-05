@@ -31,7 +31,7 @@ namespace Algorithm.Core
 
             StartWindows();
 
-            //Test.Test.Test_Source();
+            //Test.Test.Test_Indicator_Test1Indicator();
 
             #region Paulse and quit
 

@@ -20,7 +20,7 @@ Lower band: Standard deviation in the window * -Delta
 
         public Indicator Average { get; set; }
         public Indicator AverageForStandardDeviation { get; set; }
-        public Window<double> Upper { get { return this.Value; } }
+        public Window<double> Upper { get { return this; } }
         public Window<double> Lower { get { return mLower; } }
         public BollingerBands(int period, int size = Window<double>.DefaultDataWindowSize)
             : base(size)

@@ -19,7 +19,8 @@ namespace Algorithm.Core.Forms
         bool instanceStart = true;
         public long Token;
         IntervalType IntervalType = IntervalType.Days;
-        int Interval = 1, SymbolID = -1, startLocation = -1, numberOfRows = 100;
+        int Interval = 1, startLocation = -1, numberOfRows = 100;
+        public int SymbolID = -1;
         int CursorSize { get { return data.Rows.Count; } }
         IndicatorClass IndicatorClass = null;
         FlowLayoutPanel currentPanel = null;
@@ -140,7 +141,7 @@ namespace Algorithm.Core.Forms
         }
         void LoadAlgoritms()
         {
-            TabPage containter = details.ParameterContainer;
+            TabPage containter = details.tabParameterContainer;
             AlgorithmMenu.DropDownItems.Clear();
             for (int i = 0; i < IndicatorClass.IndicatorClasses.Count; i++)
             {
@@ -255,6 +256,31 @@ namespace Algorithm.Core.Forms
             //dataView.RowFilter = "___RowNumber___>=" + startLocation.ToString() + " and ___RowNumber___<" + (startLocation + numberOfRows).ToString();
             //Console.WriteLine("Scrolling {0} done.{1}--{2}", startLocation, dataView.ToTable().Rows[0]["___RowNumber___"], dataView.ToTable().Rows[dataView.ToTable().Rows.Count - 1]["___RowNumber___"]);
         }
+        public void LoadData(DataTable target)
+        {
+            DateTime ddd = DateTime.Now;
+            using (Indicator indicator = (Indicator)Activator.CreateInstance(IndicatorClass.Class))
+            {
+                indicator.SetDefaultValues();
+                indicator.StartDate = StartDate;
+                indicator.SymbolID = SymbolID;
+                indicator.Interval = Interval;
+                indicator.IntervalType = IntervalType;
+                if(currentPanel!=null)
+                {
+                    foreach(ParameterControl pc in currentPanel.Controls)
+                    {
+                        if (IndicatorClass.Class.GetProperty(pc.PropertyName).PropertyType == typeof(int))
+                            indicator.SetPropertyValue(pc.PropertyName, pc.IntValue);
+                        if (IndicatorClass.Class.GetProperty(pc.PropertyName).PropertyType == typeof(double))
+                            indicator.SetPropertyValue(pc.PropertyName, pc.DoubleValue);
+                    }
+                }
+                
+                data = indicator.WriteToDataTable(target);
+                Console.WriteLine("Retrieve Symbol {0} done. Size = {1}. Duration = {2:0.000} ms", SymbolID, data.Rows.Count, (DateTime.Now - ddd).TotalMilliseconds);
+            }
+        }
         void ReloadData(bool forceReloading = false)
         {
             try
@@ -266,38 +292,13 @@ namespace Algorithm.Core.Forms
                     return;
                 if (SymbolID < 0)
                     return;
-                
 
-                using (Indicator indicator = (Indicator)Activator.CreateInstance(IndicatorClass.Class))
+                LoadData(data);
+                if(chartData.Columns.Count + 1 != data.Columns.Count )
                 {
-                    indicator.SetDefaultValues();
-                    indicator.StartDate = StartDate;
-                    indicator.SymbolID = SymbolID;
-                    indicator.Interval = Interval;
-                    indicator.IntervalType = IntervalType;
-                    if(currentPanel!=null)
-                    {
-                        foreach(ParameterControl pc in currentPanel.Controls)
-                        {
-                            if (IndicatorClass.Class.GetProperty(pc.PropertyName).PropertyType == typeof(int))
-                                indicator.SetPropertyValue(pc.PropertyName, pc.IntValue);
-                            if (IndicatorClass.Class.GetProperty(pc.PropertyName).PropertyType == typeof(double))
-                                indicator.SetPropertyValue(pc.PropertyName, pc.DoubleValue);
-                        }
-                    }
-                    //indicator.WriteToServer();
-                    //Console.WriteLine("Start fetching {0}", SymbolID);
-                    DateTime ddd = DateTime.Now;
-                    data = indicator.WriteToDataTable(data);
-                    Console.WriteLine("Fetching {0} done. Size = {1}. Duration = {2:0.000} ms", SymbolID, data.Rows.Count, (DateTime.Now - ddd).TotalMilliseconds);
-                    if(chartData.Columns.Count + 1 != data.Columns.Count )
-                    {
-                        chartData = data.Clone();
-                        chartData.Columns.Add("___XDisplay___", typeof(string));
-                    }
-                    //dataView.Table = data;
-                    
-                }
+                    chartData = data.Clone();
+                    chartData.Columns.Add("___XDisplay___", typeof(string));
+                }   
                 SetCursorLocation();
                 hScrollBar.Minimum = 0;
                 hScrollBar.Maximum = Math.Max(1, CursorSize - numberOfRows);
@@ -316,10 +317,16 @@ namespace Algorithm.Core.Forms
         {
             isUserSearchText = false;
             QuoteSearch.Text = details.Symbol;
+            if(QuoteSearch.Text.Length >0)
+            {
+                QuoteSearch.SelectionStart = QuoteSearch.Text.Length;
+                QuoteSearch.SelectionLength = 0;
+            }
             isUserSearchText = true;
             if (SymbolID != details.SymbolID)
             {
                 SymbolID = details.SymbolID;
+                this.Text = details.Exchange + "::" + details.Symbol + "::" + details.SymbolName;
                 ReloadData();
             }
             
@@ -430,6 +437,16 @@ namespace Algorithm.Core.Forms
                 return;
             if(id == 0)
             {
+                //adjust chart areas' height
+                var list = chart1.ChartAreas.Where(x => !IsSplitter(x.Name)).ToList();
+                float height = (100f - (list.Count - 1) * 0.1f) / list.Count;
+                float position = 0;
+                foreach(var c in list)
+                {
+                    c.Position.Y = position;
+                    c.Position.Height = height;
+                    position = position + height + 0.1f;
+                }
                 if(IsSplitter(chart1.ChartAreas[id].Name))
                 {
                     chart1.ChartAreas.RemoveAt(id);
@@ -503,6 +520,8 @@ namespace Algorithm.Core.Forms
         DateTime lastMouseMove = DateTime.Now;
         bool mouseDown = false;
         ChartArea splitterChartArea = null;
+        System.Drawing.Font selectedFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, /*System.Drawing.FontStyle.Italic |*/ System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        System.Drawing.Font regularFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         private void ShowValues(HitTestResult hitTest, MouseEventArgs e)
         {
             if (hitTest == null)
@@ -518,6 +537,7 @@ namespace Algorithm.Core.Forms
                     var row = chartData.Rows[hitTest.PointIndex];
                     details.tDateFrom.Text = string.Format(DateTimeFormat, row["DateFrom"]);
                     details.tDateTo.Text = string.Format(DateTimeFormat, row["DateTo"]);
+                    details.tDay.Text = ((DateTime)row["DateTo"]).ToString("dddd");
                     details.tHigh.Text = string.Format(NumberFormat1, row["High"]);
                     details.tLow.Text = string.Format(NumberFormat1, row["Low"]);
                     details.tOpen.Text = string.Format(NumberFormat1, row["Open"]);
@@ -539,22 +559,31 @@ namespace Algorithm.Core.Forms
                                 && (fieldName != "Close") && (fieldName != "Volume") && (fieldName != "TypicalPrice") && (fieldName != "High,Low,Open,Close"))
                             {
 
-                                group = null;
-                                foreach(ListViewGroup g in list.Groups)
+                                if ((group == null) || (group.Header != ca.Name))
                                 {
-                                    if(g.Header == ca.Name)
+                                    group = null;
+                                    foreach (ListViewGroup g in list.Groups)
                                     {
-                                        group = g;
-                                        break;
+                                        if (g.Header == ca.Name)
+                                        {
+                                            group = g;
+                                            break;
+                                        }
                                     }
+                                    if (group == null)
+                                        group = list.Groups.Add(ca.Name, ca.Name);
+
+                                    
                                 }
-                                if(group==null)
-                                    group = list.Groups.Add(ca.Name, ca.Name);
+                                
+
                                 var item = new ListViewItem();
+                                item.Font = ca == hitTest.ChartArea ? selectedFont : regularFont;
                                 if (ii.x.Color != Color.White)
                                     item.ForeColor = ii.x.Color;
                                 else
                                     item.ForeColor = Color.Black;
+                                
                                 item.Text = fieldName;
                                 item.SubItems.Add(string.Format(NumberFormat3, row[fieldName]));
                                 item.Group = group;

@@ -118,4 +118,7 @@
   <ItemGroup>
     <RefactorLog Include="Quote.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SqlSchemaCompare1.scmp" />
+  </ItemGroup>
 </Project>

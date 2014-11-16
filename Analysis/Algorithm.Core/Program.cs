@@ -30,6 +30,7 @@ namespace Algorithm.Core
             ChartList.LoadCharts();
 
             StartWindows();
+            //Test.Test.Test_Indicator_UltimateOscillator();
 
             //Test.Test.Test_Indicator_Test1Indicator();
 

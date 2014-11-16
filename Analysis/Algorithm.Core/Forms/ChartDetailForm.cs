@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -26,6 +27,22 @@ namespace Algorithm.Core.Forms
                 btnOk_Click(null, null);
                 return true;
             }
+            else if (dvSymbol.Count >= 1)
+            {
+                if (SearchText.Length >= 1)
+                {
+                    for (int i = 0; i < dvSymbol.Count; i++)
+                    {
+                        var r = dvSymbol[i];
+                        if(r.Row["Symbol"].ToString().ToUpper() == SearchText.ToUpper())
+                        {
+                            bsSymbol.Position = i;
+                            btnOk_Click(null, null);
+                            return true;
+                        }
+                    }
+                }
+            }
             return false;
         }
         public string SearchText
@@ -45,13 +62,16 @@ namespace Algorithm.Core.Forms
         }
         public void SetExchangeList()
         {
+            lExchange.Items.Clear();
             ddExchange.DropDownItems.Clear();
             ddExchange.DropDownItems.Add("All").Click += miExchange_Click;
             ddExchange.DropDownItems.Add("-");
             for (int i = 0; i < MainForm.Exchange.Rows.Count; i++)
             {
                 ddExchange.DropDownItems.Add(MainForm.Exchange.Rows[i]["Exchange"].ToString()).Click += miExchange_Click;
+                lExchange.Items.Add(MainForm.Exchange.Rows[i]["Exchange"].ToString());
             }
+            lExchange.Text = "NASDAQ";
             ddExchange.Text = "All";
         }
         public ChartDetailForm()
@@ -85,6 +105,18 @@ namespace Algorithm.Core.Forms
                 dvSymbol.RowFilter = "Symbol like '%" + textSearch.Text.Replace("'", "''") + "%'";
             else if (ddExchange.Text != "All")
                 dvSymbol.RowFilter = "Symbol like '%" + textSearch.Text.Replace("'", "''") + "%' and Exchange = '" + ddExchange.Text + "'";
+            if (textSearch.Text.Length >= 1)
+            {
+                for (int i = 0; i < dvSymbol.Count; i++)
+                {
+                    var r = dvSymbol[i];
+                    if (r.Row["Symbol"].ToString().ToUpper() == textSearch.Text.ToUpper())
+                    {
+                        bsSymbol.Position = i;
+                        break;
+                    }
+                }
+            }
         }
 
         
@@ -127,7 +159,133 @@ namespace Algorithm.Core.Forms
             ChartForm.SetSplitter();
             ChartForm.RearrangeSplitters();
         }
+        private void btnScan_Click(object sender, EventArgs e)
+        {
+            Scan();
+        }
 
-        
+        private void btnScanStop_Click(object sender, EventArgs e)
+        {
+            scanStopped = true;
+        }
+
+        #region Scan
+        DataTable sourceForScan = new DataTable("ScanSource");
+        DataTable scanResult = new DataTable("ScanResult");
+        bool scanStopped = false;
+        void LoadData()
+        {
+            ChartForm.LoadData(sourceForScan);
+        }
+        void Scan()
+        {
+            scanResultGrid.AutoGenerateColumns = true;
+            scanResult.Rows.Clear();
+            if(scanResult.Columns.Count == 0)
+            {
+                DataColumn c;
+                c = scanResult.Columns.Add("Symbol", typeof(string));
+                c = scanResult.Columns.Add("TypicalPrice", typeof(double));
+                c = scanResult.Columns.Add("Bollinger", typeof(int));
+                c = scanResult.Columns.Add("RSI", typeof(int));
+                c = scanResult.Columns.Add("MACD", typeof(int));
+                c = scanResult.Columns.Add("UltimateOscillator", typeof(int));
+                c = scanResult.Columns.Add("Exchange", typeof(string));
+                c = scanResult.Columns.Add("SymbolID", typeof(int));
+                
+            }
+            
+            try
+            {
+                btnScan.Enabled = false;
+                btnScanStop.Enabled = true;
+                progressBar1.Visible = true;
+                bsScanResult.DataSource = scanResult;
+                Application.DoEvents();
+                using (DataView dv = new DataView(MainForm.Symbol))
+                {
+                    dv.RowFilter = "Exchange='"+lExchange.Text+"'";
+                    progressBar1.Maximum = dv.Count;
+                    progressBar1.Minimum = 0;
+                    progressBar1.Value = 0;
+                    for(int i=0; i<dv.Count; i++)
+                    {
+                        if (scanStopped)
+                            return;
+                        SymbolID = (int)(dv[i]["SymbolID"]);
+                        Symbol = (string)(dv[i]["Symbol"]);
+                        Exchange = (string)(dv[i]["Exchange"]);
+                        ChartForm.SymbolID = SymbolID;
+                        LoadData();
+                        ScanCheck();
+                        progressBar1.Value = i;
+                        Application.DoEvents();
+                    }
+                }
+            }
+            finally
+            {
+                progressBar1.Visible = false;
+                btnScan.Enabled = true;
+                btnScanStop.Enabled = false;
+                scanStopped = false;
+                
+            }
+            
+        }
+        void ScanCheck()
+        {
+            if (sourceForScan.Rows.Count == 0)
+                return;
+            double a, b, c, high, low, typicalPrice;
+
+            DataRow s = sourceForScan.Rows[sourceForScan.Rows.Count - 1];
+            high = Convert.ToDouble(s["High"]);
+            low = Convert.ToDouble(s["Low"]);
+            typicalPrice = Convert.ToDouble(s["TypicalPrice"]);
+            
+            DataRow t = scanResult.NewRow();
+            t.BeginEdit();
+            t["TypicalPrice"] = typicalPrice;
+            t["Exchange"] = Exchange;
+            t["Symbol"] = Symbol;
+            t["SymbolID"] = SymbolID;
+            t["MACD"] = Convert.ToInt32 (Convert.ToDouble(s["MACDDivergence"]) * 100);
+            a = Convert.ToDouble(s["BollingerBandsUpper"]);
+            b = Convert.ToDouble(s["BollingerBandsAverage"]);
+            c = Convert.ToDouble(s["BollingerBandsLower"]);
+            a = a - c;
+            b = b - c;
+            c = typicalPrice - c;
+            t["Bollinger"] = a <=double.Epsilon? 0: (int)(c * 100/a);
+            a = Convert.ToDouble(s["RSI"]);
+            t["RSI"] = Convert.ToInt32(a);
+            t["UltimateOscillator"] = Convert.ToInt32((Convert.ToDouble(s["UltimateOscillator"])) * 100);
+            t.EndEdit();
+            if((a>=69)||(a<=31))
+            {
+                scanResult.Rows.Add(t);
+            }
+            else
+            {
+                t.Delete();
+            }
+            
+        }
+        #endregion
+
+        private void scanResultGrid_DoubleClick(object sender, EventArgs e)
+        {
+            if (bsScanResult.Current == null)
+                return;
+            Exchange = ((DataRowView)bsScanResult.Current)["Exchange"].ToString();
+            Symbol = ((DataRowView)bsScanResult.Current)["Symbol"].ToString();
+            SymbolID = (int)((DataRowView)bsScanResult.Current)["SymbolID"];
+            if (OnSearchConfirm != null)
+                OnSearchConfirm(this, EventArgs.Empty);
+        }
+
+      
+
     }
 }

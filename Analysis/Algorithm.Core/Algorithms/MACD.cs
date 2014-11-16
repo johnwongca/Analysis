@@ -10,9 +10,9 @@ namespace Algorithm.Core
         public int PeriodShort { get; set; }
         public int PeriodLong { get; set; }
         public int SignalPeriod { get; set; }
-        public Window<double> Divergence { get { return this; } }
+        public Window<double> Divergence = new Window<double>(1);
         public Window<double> MACDSignal = null;
-        SimpleMovingAverage SMAShort, SMALong;
+        public Window<double> SMAShort, SMALong;
         public MACD(int size = Window<double>.DefaultDataWindowSize)
             : base(size)
         {
@@ -22,9 +22,9 @@ namespace Algorithm.Core
         }
         public override void Start(params Window<double>[] values)
         {
-            MACDSignal = SimpleMovingAverage(SignalPeriod, SignalPeriod + 2);
-            SMAShort = SimpleMovingAverage(PeriodShort, 2);
-            SMALong = SimpleMovingAverage(PeriodLong, 2);
+            MACDSignal = ExponentialMovingAverage(SignalPeriod, SignalPeriod + 2);
+            SMAShort = ExponentialMovingAverage(PeriodShort, 2);
+            SMALong = ExponentialMovingAverage(PeriodLong, 2);
         }
         protected override void AfterSetValue(params Window<double>[] values)
         {
@@ -32,6 +32,7 @@ namespace Algorithm.Core
             SMALong.Push(values);
             Value = SMAShort - SMALong;
             MACDSignal.Push(this);
+            Divergence.Push(Value - MACDSignal.Value);
         }
     }
     public partial class IndicatorBase

@@ -36,7 +36,8 @@ when MA(Loss) is 0, output is 100
                 mAverageGain.Push(values[0].Gain());
                 mAverageLoss.Push(values[0].Loss());
             }
-            Value = mAverageGain.RelativeStrength(mAverageLoss);
+            //Value = mAverageGain.RelativeStrength(mAverageLoss);
+            Value = 100 - (mAverageLoss == 0 ? 100d : (100d / (1d + (mAverageGain / mAverageLoss))));
         }
     }
     public partial class IndicatorBase

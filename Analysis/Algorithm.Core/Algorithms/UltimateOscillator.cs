@@ -23,10 +23,10 @@ http://ta.mql4.com/indicators/oscillators/ultimate")]
     {
         int mPeriod1 = 7, mPeriod2 = 14, mPeriod3 = 28;
         Window<double> bp1, bp2, bp3, tr1, tr2, tr3;
-        
-        public int Period1 { get { return mPeriod1; } }
-        public int Period2 { get { return mPeriod2; } }
-        public int Period3 { get { return mPeriod3; } }
+
+        public int Period1 { get { return mPeriod1; } set { mPeriod1 = value; } }
+        public int Period2 { get { return mPeriod2; } set { mPeriod2 = value; } }
+        public int Period3 { get { return mPeriod3; } set { mPeriod3 = value; } }
         public UltimateOscillator(int size = Window<double>.DefaultDataWindowSize)
             : base(size)
         {
@@ -35,9 +35,13 @@ http://ta.mql4.com/indicators/oscillators/ultimate")]
         protected override void Initialization(params Window<double>[] values)
         {
             base.Initialization(values);
-            bp1 = Sum(Period1,1); bp1.InputCacheSize = Period1+1;
-            bp2 = Sum(Period2,1); bp2.InputCacheSize = Period2+1;
-            bp3 = Sum(Period3,1); bp3.InputCacheSize = Period3+1;
+            
+        }
+        public override void Start(params Window<double>[] values)
+        {
+            bp1 = Sum(Period1, 1); bp1.InputCacheSize = Period1 + 1;
+            bp2 = Sum(Period2, 1); bp2.InputCacheSize = Period2 + 1;
+            bp3 = Sum(Period3, 1); bp3.InputCacheSize = Period3 + 1;
             tr1 = Sum(Period1, 1); tr1.InputCacheSize = Period1 + 1;
             tr2 = Sum(Period2, 1); tr2.InputCacheSize = Period2 + 1;
             tr3 = Sum(Period3, 1); tr3.InputCacheSize = Period3 + 1;
@@ -54,7 +58,7 @@ http://ta.mql4.com/indicators/oscillators/ultimate")]
             a2 = tr2 == 0 ? 0 : bp2 / tr2;
             a3 = tr3 == 0 ? 0 : bp3 / tr3;
             Value = 100d * ((4d * a1) + (2d * a2) + a3) / 7d;
-            Value = bp1.Value;
+            //Value = bp1.Value;
         }
     }
     public partial class IndicatorBase

@@ -35,9 +35,9 @@
             System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "ssss",
-            "sss1"}, -1);
+            "sss1"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0))));
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabSearch = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.gSymbol = new System.Windows.Forms.DataGridView();
@@ -54,19 +54,13 @@
             this.textSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnOk = new System.Windows.Forms.ToolStripButton();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabControl3 = new System.Windows.Forms.TabControl();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.chartPropertyAll = new System.Windows.Forms.PropertyGrid();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.btnSetSplitter = new System.Windows.Forms.ToolStripButton();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.chartPropertySelected = new System.Windows.Forms.PropertyGrid();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.tabData = new System.Windows.Forms.TabPage();
             this.lvData = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tDay = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.tTypical = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tY2 = new System.Windows.Forms.TextBox();
@@ -87,11 +81,27 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tDateFrom = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.ParameterContainer = new System.Windows.Forms.TabPage();
+            this.tabParameterContainer = new System.Windows.Forms.TabPage();
+            this.tabChart = new System.Windows.Forms.TabPage();
+            this.tabControl3 = new System.Windows.Forms.TabControl();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.chartPropertyAll = new System.Windows.Forms.PropertyGrid();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.btnSetSplitter = new System.Windows.Forms.ToolStripButton();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.chartPropertySelected = new System.Windows.Forms.PropertyGrid();
+            this.tabScan = new System.Windows.Forms.TabPage();
+            this.scanResultGrid = new System.Windows.Forms.DataGridView();
+            this.bsScanResult = new System.Windows.Forms.BindingSource(this.components);
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnScanStop = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btnScan = new System.Windows.Forms.Button();
+            this.lExchange = new System.Windows.Forms.ComboBox();
             this.bsExchange = new System.Windows.Forms.BindingSource(this.components);
             this.bsSymbol = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabSearch.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gSymbol)).BeginInit();
@@ -99,23 +109,28 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gExchange)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabData.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.tabChart.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.tabPage6.SuspendLayout();
-            this.tabPage7.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.tabScan.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scanResultGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsScanResult)).BeginInit();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsExchange)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSymbol)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage7);
-            this.tabControl1.Controls.Add(this.ParameterContainer);
+            this.tabControl1.Controls.Add(this.tabSearch);
+            this.tabControl1.Controls.Add(this.tabData);
+            this.tabControl1.Controls.Add(this.tabParameterContainer);
+            this.tabControl1.Controls.Add(this.tabChart);
+            this.tabControl1.Controls.Add(this.tabScan);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -123,17 +138,17 @@
             this.tabControl1.Size = new System.Drawing.Size(552, 648);
             this.tabControl1.TabIndex = 0;
             // 
-            // tabPage1
+            // tabSearch
             // 
-            this.tabPage1.Controls.Add(this.tabControl2);
-            this.tabPage1.Controls.Add(this.toolStrip1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(544, 622);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Search";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabSearch.Controls.Add(this.tabControl2);
+            this.tabSearch.Controls.Add(this.toolStrip1);
+            this.tabSearch.Location = new System.Drawing.Point(4, 22);
+            this.tabSearch.Name = "tabSearch";
+            this.tabSearch.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSearch.Size = new System.Drawing.Size(544, 622);
+            this.tabSearch.TabIndex = 0;
+            this.tabSearch.Text = "Search";
+            this.tabSearch.UseVisualStyleBackColor = true;
             // 
             // tabControl2
             // 
@@ -286,98 +301,17 @@
             this.btnOk.Text = "OK";
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // tabPage2
+            // tabData
             // 
-            this.tabPage2.Controls.Add(this.tabControl3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(544, 622);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Chart";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabControl3
-            // 
-            this.tabControl3.Controls.Add(this.tabPage5);
-            this.tabControl3.Controls.Add(this.tabPage6);
-            this.tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl3.Location = new System.Drawing.Point(3, 3);
-            this.tabControl3.Name = "tabControl3";
-            this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(538, 616);
-            this.tabControl3.TabIndex = 0;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Controls.Add(this.chartPropertyAll);
-            this.tabPage5.Controls.Add(this.toolStrip2);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(530, 590);
-            this.tabPage5.TabIndex = 0;
-            this.tabPage5.Text = "All";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // chartPropertyAll
-            // 
-            this.chartPropertyAll.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartPropertyAll.Location = new System.Drawing.Point(3, 28);
-            this.chartPropertyAll.Name = "chartPropertyAll";
-            this.chartPropertyAll.Size = new System.Drawing.Size(524, 559);
-            this.chartPropertyAll.TabIndex = 2;
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSetSplitter});
-            this.toolStrip2.Location = new System.Drawing.Point(3, 3);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(524, 25);
-            this.toolStrip2.TabIndex = 1;
-            this.toolStrip2.Text = "btnSetSplitter";
-            // 
-            // btnSetSplitter
-            // 
-            this.btnSetSplitter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSetSplitter.Image = ((System.Drawing.Image)(resources.GetObject("btnSetSplitter.Image")));
-            this.btnSetSplitter.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSetSplitter.Name = "btnSetSplitter";
-            this.btnSetSplitter.Size = new System.Drawing.Size(48, 22);
-            this.btnSetSplitter.Text = "Splitter";
-            this.btnSetSplitter.Click += new System.EventHandler(this.btnSetSplitter_Click);
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.Controls.Add(this.chartPropertySelected);
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(530, 590);
-            this.tabPage6.TabIndex = 1;
-            this.tabPage6.Text = "Selected";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // chartPropertySelected
-            // 
-            this.chartPropertySelected.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartPropertySelected.Location = new System.Drawing.Point(3, 3);
-            this.chartPropertySelected.Name = "chartPropertySelected";
-            this.chartPropertySelected.Size = new System.Drawing.Size(524, 584);
-            this.chartPropertySelected.TabIndex = 1;
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.lvData);
-            this.tabPage7.Controls.Add(this.panel1);
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(544, 622);
-            this.tabPage7.TabIndex = 2;
-            this.tabPage7.Text = "Data";
-            this.tabPage7.UseVisualStyleBackColor = true;
+            this.tabData.Controls.Add(this.lvData);
+            this.tabData.Controls.Add(this.panel1);
+            this.tabData.Location = new System.Drawing.Point(4, 22);
+            this.tabData.Name = "tabData";
+            this.tabData.Padding = new System.Windows.Forms.Padding(3);
+            this.tabData.Size = new System.Drawing.Size(544, 622);
+            this.tabData.TabIndex = 2;
+            this.tabData.Text = "Data";
+            this.tabData.UseVisualStyleBackColor = true;
             // 
             // lvData
             // 
@@ -410,15 +344,18 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 103;
+            this.columnHeader1.Width = 181;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Value";
-            this.columnHeader2.Width = 103;
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader2.Width = 169;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.tDay);
+            this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.tTypical);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.tY2);
@@ -445,6 +382,24 @@
             this.panel1.Size = new System.Drawing.Size(538, 116);
             this.panel1.TabIndex = 0;
             // 
+            // tDay
+            // 
+            this.tDay.Location = new System.Drawing.Point(387, 3);
+            this.tDay.Name = "tDay";
+            this.tDay.ReadOnly = true;
+            this.tDay.Size = new System.Drawing.Size(116, 20);
+            this.tDay.TabIndex = 21;
+            this.tDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(361, 6);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(26, 13);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "Day";
+            // 
             // tTypical
             // 
             this.tTypical.Location = new System.Drawing.Point(238, 81);
@@ -465,7 +420,7 @@
             // 
             // tY2
             // 
-            this.tY2.Location = new System.Drawing.Point(386, 29);
+            this.tY2.Location = new System.Drawing.Point(387, 55);
             this.tY2.Name = "tY2";
             this.tY2.ReadOnly = true;
             this.tY2.Size = new System.Drawing.Size(116, 20);
@@ -475,7 +430,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(360, 32);
+            this.label9.Location = new System.Drawing.Point(361, 58);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(20, 13);
             this.label9.TabIndex = 16;
@@ -483,7 +438,7 @@
             // 
             // tY1
             // 
-            this.tY1.Location = new System.Drawing.Point(386, 3);
+            this.tY1.Location = new System.Drawing.Point(387, 29);
             this.tY1.Name = "tY1";
             this.tY1.ReadOnly = true;
             this.tY1.Size = new System.Drawing.Size(116, 20);
@@ -493,7 +448,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(360, 6);
+            this.label8.Location = new System.Drawing.Point(361, 32);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(20, 13);
             this.label8.TabIndex = 14;
@@ -623,14 +578,174 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Date From";
             // 
-            // ParameterContainer
+            // tabParameterContainer
             // 
-            this.ParameterContainer.Location = new System.Drawing.Point(4, 22);
-            this.ParameterContainer.Name = "ParameterContainer";
-            this.ParameterContainer.Size = new System.Drawing.Size(544, 622);
-            this.ParameterContainer.TabIndex = 3;
-            this.ParameterContainer.Text = "Parameters";
-            this.ParameterContainer.UseVisualStyleBackColor = true;
+            this.tabParameterContainer.Location = new System.Drawing.Point(4, 22);
+            this.tabParameterContainer.Name = "tabParameterContainer";
+            this.tabParameterContainer.Size = new System.Drawing.Size(544, 622);
+            this.tabParameterContainer.TabIndex = 3;
+            this.tabParameterContainer.Text = "Parameters";
+            this.tabParameterContainer.UseVisualStyleBackColor = true;
+            // 
+            // tabChart
+            // 
+            this.tabChart.Controls.Add(this.tabControl3);
+            this.tabChart.Location = new System.Drawing.Point(4, 22);
+            this.tabChart.Name = "tabChart";
+            this.tabChart.Padding = new System.Windows.Forms.Padding(3);
+            this.tabChart.Size = new System.Drawing.Size(544, 622);
+            this.tabChart.TabIndex = 1;
+            this.tabChart.Text = "Chart";
+            this.tabChart.UseVisualStyleBackColor = true;
+            // 
+            // tabControl3
+            // 
+            this.tabControl3.Controls.Add(this.tabPage5);
+            this.tabControl3.Controls.Add(this.tabPage6);
+            this.tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl3.Location = new System.Drawing.Point(3, 3);
+            this.tabControl3.Name = "tabControl3";
+            this.tabControl3.SelectedIndex = 0;
+            this.tabControl3.Size = new System.Drawing.Size(538, 616);
+            this.tabControl3.TabIndex = 0;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.chartPropertyAll);
+            this.tabPage5.Controls.Add(this.toolStrip2);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(530, 590);
+            this.tabPage5.TabIndex = 0;
+            this.tabPage5.Text = "All";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // chartPropertyAll
+            // 
+            this.chartPropertyAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartPropertyAll.Location = new System.Drawing.Point(3, 28);
+            this.chartPropertyAll.Name = "chartPropertyAll";
+            this.chartPropertyAll.Size = new System.Drawing.Size(524, 559);
+            this.chartPropertyAll.TabIndex = 2;
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSetSplitter});
+            this.toolStrip2.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(524, 25);
+            this.toolStrip2.TabIndex = 1;
+            this.toolStrip2.Text = "btnSetSplitter";
+            // 
+            // btnSetSplitter
+            // 
+            this.btnSetSplitter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSetSplitter.Image = ((System.Drawing.Image)(resources.GetObject("btnSetSplitter.Image")));
+            this.btnSetSplitter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSetSplitter.Name = "btnSetSplitter";
+            this.btnSetSplitter.Size = new System.Drawing.Size(48, 22);
+            this.btnSetSplitter.Text = "Splitter";
+            this.btnSetSplitter.Click += new System.EventHandler(this.btnSetSplitter_Click);
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.chartPropertySelected);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(530, 590);
+            this.tabPage6.TabIndex = 1;
+            this.tabPage6.Text = "Selected";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // chartPropertySelected
+            // 
+            this.chartPropertySelected.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartPropertySelected.Location = new System.Drawing.Point(3, 3);
+            this.chartPropertySelected.Name = "chartPropertySelected";
+            this.chartPropertySelected.Size = new System.Drawing.Size(524, 584);
+            this.chartPropertySelected.TabIndex = 1;
+            // 
+            // tabScan
+            // 
+            this.tabScan.Controls.Add(this.scanResultGrid);
+            this.tabScan.Controls.Add(this.panel2);
+            this.tabScan.Location = new System.Drawing.Point(4, 22);
+            this.tabScan.Name = "tabScan";
+            this.tabScan.Size = new System.Drawing.Size(544, 622);
+            this.tabScan.TabIndex = 4;
+            this.tabScan.Text = "Scan";
+            this.tabScan.UseVisualStyleBackColor = true;
+            // 
+            // scanResultGrid
+            // 
+            this.scanResultGrid.AllowUserToAddRows = false;
+            this.scanResultGrid.AllowUserToDeleteRows = false;
+            this.scanResultGrid.AutoGenerateColumns = false;
+            this.scanResultGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.scanResultGrid.DataSource = this.bsScanResult;
+            this.scanResultGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scanResultGrid.Location = new System.Drawing.Point(0, 29);
+            this.scanResultGrid.Name = "scanResultGrid";
+            this.scanResultGrid.ReadOnly = true;
+            this.scanResultGrid.Size = new System.Drawing.Size(544, 593);
+            this.scanResultGrid.TabIndex = 1;
+            this.scanResultGrid.DoubleClick += new System.EventHandler(this.scanResultGrid_DoubleClick);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btnScanStop);
+            this.panel2.Controls.Add(this.progressBar1);
+            this.panel2.Controls.Add(this.btnScan);
+            this.panel2.Controls.Add(this.lExchange);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(544, 29);
+            this.panel2.TabIndex = 0;
+            // 
+            // btnScanStop
+            // 
+            this.btnScanStop.Enabled = false;
+            this.btnScanStop.Location = new System.Drawing.Point(216, 3);
+            this.btnScanStop.Name = "btnScanStop";
+            this.btnScanStop.Size = new System.Drawing.Size(75, 23);
+            this.btnScanStop.TabIndex = 3;
+            this.btnScanStop.Text = "Stop";
+            this.btnScanStop.UseVisualStyleBackColor = true;
+            this.btnScanStop.Click += new System.EventHandler(this.btnScanStop_Click);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar1.Location = new System.Drawing.Point(297, 3);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(239, 23);
+            this.progressBar1.Step = 1;
+            this.progressBar1.TabIndex = 2;
+            this.progressBar1.Visible = false;
+            // 
+            // btnScan
+            // 
+            this.btnScan.Location = new System.Drawing.Point(135, 3);
+            this.btnScan.Name = "btnScan";
+            this.btnScan.Size = new System.Drawing.Size(75, 23);
+            this.btnScan.TabIndex = 1;
+            this.btnScan.Text = "Scan";
+            this.btnScan.UseVisualStyleBackColor = true;
+            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
+            // 
+            // lExchange
+            // 
+            this.lExchange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lExchange.FormattingEnabled = true;
+            this.lExchange.Location = new System.Drawing.Point(8, 3);
+            this.lExchange.Name = "lExchange";
+            this.lExchange.Size = new System.Drawing.Size(121, 21);
+            this.lExchange.TabIndex = 0;
             // 
             // ChartDetailForm
             // 
@@ -643,8 +758,8 @@
             this.Text = "Details";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChartDetailForm_FormClosing);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tabSearch.ResumeLayout(false);
+            this.tabSearch.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gSymbol)).EndInit();
@@ -653,16 +768,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.gExchange)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
+            this.tabData.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.tabChart.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.tabPage6.ResumeLayout(false);
-            this.tabPage7.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.tabScan.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scanResultGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsScanResult)).EndInit();
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsExchange)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSymbol)).EndInit();
             this.ResumeLayout(false);
@@ -672,8 +791,8 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabSearch;
+        private System.Windows.Forms.TabPage tabChart;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripDropDownButton ddExchange;
@@ -699,7 +818,7 @@
         public System.Windows.Forms.PropertyGrid chartPropertyAll;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton btnSetSplitter;
-        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TabPage tabData;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Panel panel1;
@@ -724,6 +843,16 @@
         public System.Windows.Forms.TextBox tTypical;
         private System.Windows.Forms.Label label10;
         public System.Windows.Forms.ListView lvData;
-        public System.Windows.Forms.TabPage ParameterContainer;
+        public System.Windows.Forms.TabPage tabParameterContainer;
+        public System.Windows.Forms.TextBox tDay;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TabPage tabScan;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button btnScan;
+        private System.Windows.Forms.ComboBox lExchange;
+        private System.Windows.Forms.Button btnScanStop;
+        private System.Windows.Forms.DataGridView scanResultGrid;
+        private System.Windows.Forms.BindingSource bsScanResult;
     }
 }

@@ -186,12 +186,15 @@ namespace Algorithm.Core.Forms
                 DataColumn c;
                 c = scanResult.Columns.Add("Symbol", typeof(string));
                 c = scanResult.Columns.Add("TypicalPrice", typeof(double));
-                c = scanResult.Columns.Add("Bollinger", typeof(int));
+                c = scanResult.Columns.Add("Jump", typeof(int));
+                c = scanResult.Columns.Add("Over5", typeof(int));
                 c = scanResult.Columns.Add("RSI", typeof(int));
+                c = scanResult.Columns.Add("Bollinger", typeof(int));
                 c = scanResult.Columns.Add("MACD", typeof(int));
                 c = scanResult.Columns.Add("UltimateOscillator", typeof(int));
                 c = scanResult.Columns.Add("Exchange", typeof(string));
                 c = scanResult.Columns.Add("SymbolID", typeof(int));
+                c = scanResult.Columns.Add("SymbolName", typeof(string));
                 
             }
             
@@ -215,6 +218,7 @@ namespace Algorithm.Core.Forms
                         SymbolID = (int)(dv[i]["SymbolID"]);
                         Symbol = (string)(dv[i]["Symbol"]);
                         Exchange = (string)(dv[i]["Exchange"]);
+                        SymbolName = (string)(dv[i]["SymbolName"]);
                         ChartForm.SymbolID = SymbolID;
                         LoadData();
                         ScanCheck();
@@ -240,6 +244,9 @@ namespace Algorithm.Core.Forms
             double a, b, c, high, low, typicalPrice;
 
             DataRow s = sourceForScan.Rows[sourceForScan.Rows.Count - 1];
+            DataRow s_1 = null;
+            if (sourceForScan.Rows.Count > 1)
+                s_1 = sourceForScan.Rows[sourceForScan.Rows.Count - 2];
             high = Convert.ToDouble(s["High"]);
             low = Convert.ToDouble(s["Low"]);
             typicalPrice = Convert.ToDouble(s["TypicalPrice"]);
@@ -250,6 +257,7 @@ namespace Algorithm.Core.Forms
             t["Exchange"] = Exchange;
             t["Symbol"] = Symbol;
             t["SymbolID"] = SymbolID;
+            t["SymbolName"] = SymbolName;
             t["MACD"] = Convert.ToInt32 (Convert.ToDouble(s["MACDDivergence"]) * 100);
             a = Convert.ToDouble(s["BollingerBandsUpper"]);
             b = Convert.ToDouble(s["BollingerBandsAverage"]);
@@ -261,16 +269,47 @@ namespace Algorithm.Core.Forms
             a = Convert.ToDouble(s["RSI"]);
             t["RSI"] = Convert.ToInt32(a);
             t["UltimateOscillator"] = Convert.ToInt32((Convert.ToDouble(s["UltimateOscillator"])) * 100);
+            t["Jump"] = 0;
+            t["Over5"] = 0;
+            if (s_1!=null)
+            {
+                if(Convert.ToDouble(s_1["High"])< Convert.ToDouble(s["Low"]))
+                {
+                    t["Jump"] = 1;
+                }
+                if (Convert.ToDouble(s_1["Low"]) > Convert.ToDouble(s["High"]))
+                {
+                    t["Jump"] = -1;
+                }
+                if (
+                        (Convert.ToDouble(s_1["TypicalPrice"]) < Convert.ToDouble(s_1["MAShort"]))
+                    &&
+                        (Convert.ToDouble(s["TypicalPrice"]) > Convert.ToDouble(s["MAShort"]))
+                    )
+                {
+                    t["Over5"] = 1;
+                }
+                
+            }
             t.EndEdit();
-            if((a>=69)||(a<=31))
+            bool rowAdded = false;
+            if(!rowAdded&&((a>=69)||(a<=31)))
             {
                 scanResult.Rows.Add(t);
+                rowAdded = true;
             }
-            else
+            if (!rowAdded && ((int)t["Jump"]!=0))
             {
-                t.Delete();
+                scanResult.Rows.Add(t);
+                rowAdded = true;
             }
-            
+            if (!rowAdded && ((int)t["Over5"] != 0))
+            {
+                scanResult.Rows.Add(t);
+                rowAdded = true;
+            }
+            if(!rowAdded)
+                t.Delete();
         }
         #endregion
 
@@ -281,6 +320,7 @@ namespace Algorithm.Core.Forms
             Exchange = ((DataRowView)bsScanResult.Current)["Exchange"].ToString();
             Symbol = ((DataRowView)bsScanResult.Current)["Symbol"].ToString();
             SymbolID = (int)((DataRowView)bsScanResult.Current)["SymbolID"];
+            SymbolName = ((DataRowView)bsScanResult.Current)["SymbolName"].ToString();
             if (OnSearchConfirm != null)
                 OnSearchConfirm(this, EventArgs.Empty);
         }

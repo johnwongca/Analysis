@@ -9,19 +9,19 @@ namespace Algorithm.Core
     public sealed class Test1Indicator : Indicator
     {
         #region MAs
-        bool MAUseSMA = false;
-        [InputInt(DefaultValue=200, FromValue=1, ToValue = 9000, Interval = 1)]
+        bool MAUseSMA = true;
+        [InputInt(DefaultValue=30, FromValue=1, ToValue = 9000, Interval = 1)]
         
         public int MALongPeriod { get; set; }
         [Output]
         public Indicator MALong { get; set; }
         
-        [InputInt(DefaultValue = 100, FromValue = 1, ToValue = 9000, Interval = 1)]
+        [InputInt(DefaultValue = 10, FromValue = 1, ToValue = 9000, Interval = 1)]
         public int MAMedianPeriod { get; set; }
         [Output]
         public Indicator MAMedian { get; set; }
 
-        [InputInt(DefaultValue = 20, FromValue = 1, ToValue = 9000, Interval = 1)]
+        [InputInt(DefaultValue = 5, FromValue = 1, ToValue = 9000, Interval = 1)]
         public int MAShortPeriod { get; set; }
         [Output]
         public Indicator MAShort { get; set; }

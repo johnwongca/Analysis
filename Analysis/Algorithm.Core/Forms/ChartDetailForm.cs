@@ -172,6 +172,8 @@ namespace Algorithm.Core.Forms
         #region Scan
         DataTable sourceForScan = new DataTable("ScanSource");
         DataTable scanResult = new DataTable("ScanResult");
+        double Shares;
+        long MarketCap;
         bool scanStopped = false;
         void LoadData()
         {
@@ -186,12 +188,15 @@ namespace Algorithm.Core.Forms
                 DataColumn c;
                 c = scanResult.Columns.Add("Symbol", typeof(string));
                 c = scanResult.Columns.Add("TypicalPrice", typeof(double));
-                c = scanResult.Columns.Add("Jump", typeof(int));
+                c = scanResult.Columns.Add("TurnOver", typeof(double));
+                
                 c = scanResult.Columns.Add("Over5", typeof(int));
                 c = scanResult.Columns.Add("RSI", typeof(int));
                 c = scanResult.Columns.Add("Bollinger", typeof(int));
                 c = scanResult.Columns.Add("MACD", typeof(int));
                 c = scanResult.Columns.Add("UltimateOscillator", typeof(int));
+                c = scanResult.Columns.Add("Jump", typeof(int));
+                c = scanResult.Columns.Add("MarketCap", typeof(long));
                 c = scanResult.Columns.Add("Exchange", typeof(string));
                 c = scanResult.Columns.Add("SymbolID", typeof(int));
                 c = scanResult.Columns.Add("SymbolName", typeof(string));
@@ -219,6 +224,8 @@ namespace Algorithm.Core.Forms
                         Symbol = (string)(dv[i]["Symbol"]);
                         Exchange = (string)(dv[i]["Exchange"]);
                         SymbolName = (string)(dv[i]["SymbolName"]);
+                        Shares = Convert.ToDouble(dv[i]["Shares"]);
+                        MarketCap = Convert.ToInt64(dv[i]["MarketCap"]);
                         ChartForm.SymbolID = SymbolID;
                         LoadData();
                         ScanCheck();
@@ -253,6 +260,12 @@ namespace Algorithm.Core.Forms
             
             DataRow t = scanResult.NewRow();
             t.BeginEdit();
+            t["MarketCap"] = MarketCap;
+            t["TurnOver"] = 0;
+            if (Shares > 0)
+            {
+                t["TurnOver"] = Convert.ToDouble(s["Volume"]) * 100 / Shares;
+            }
             t["TypicalPrice"] = typicalPrice;
             t["Exchange"] = Exchange;
             t["Symbol"] = Symbol;

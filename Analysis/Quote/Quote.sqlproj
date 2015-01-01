@@ -78,6 +78,11 @@
     <Folder Include="Security\" />
     <Folder Include="q\Functions" />
     <Folder Include="q\Procedures" />
+    <Folder Include="trans" />
+    <Folder Include="trans\Tables" />
+    <Folder Include="trans\Views" />
+    <Folder Include="trans\Procedures" />
+    <Folder Include="trans\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="q\Tables\q.Exchange.sql" />
@@ -107,6 +112,11 @@
     <Build Include="q\Procedures\q.CursorFetch.sql" />
     <Build Include="q\Procedures\q.CursorSize.sql" />
     <Build Include="q\Procedures\q.CursorRemove.sql" />
+    <Build Include="Security\trans.sql" />
+    <Build Include="trans\Tables\trans.Inventory.sql" />
+    <Build Include="trans\Views\Trans.InventorySummary.sql" />
+    <Build Include="trans\Views\trans_1.Inventoryinput.sql" />
+    <Build Include="trans\Stored Procedures\trans.CalculateInventory.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac">

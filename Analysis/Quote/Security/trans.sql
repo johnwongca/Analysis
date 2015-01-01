@@ -1,8 +1,5 @@
-﻿CREATE SCHEMA [q]
+﻿CREATE SCHEMA [trans]
     AUTHORIZATION [dbo];
-
-
-
 
 
 

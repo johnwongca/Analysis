@@ -35,4 +35,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ClassName" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="298b9ef6-9b67-40af-9b45-0abaa8d072ed" ChangeDateTime="12/24/2014 06:30:48">
+    <Property Name="ElementName" Value="[trans].[TRI_trans_Journal]" />
+    <Property Name="ElementType" Value="SqlDmlTrigger" />
+    <Property Name="ParentElementName" Value="[trans].[Journal]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[TRI_trans_Journal_Insert]" />
+  </Operation>
 </Operations>

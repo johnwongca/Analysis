@@ -173,7 +173,7 @@ namespace Algorithm.Core.Forms
         DataTable sourceForScan = new DataTable("ScanSource");
         DataTable scanResult = new DataTable("ScanResult");
         double Shares;
-        long MarketCap;
+        decimal MarketCap;
         bool scanStopped = false;
         void LoadData()
         {
@@ -192,11 +192,13 @@ namespace Algorithm.Core.Forms
                 
                 c = scanResult.Columns.Add("Over5", typeof(int));
                 c = scanResult.Columns.Add("RSI", typeof(int));
+                c = scanResult.Columns.Add("DaysIncrease", typeof(int));
+                //c = scanResult.Columns.Add("AvgDayIncreasePCT", typeof(double));
                 c = scanResult.Columns.Add("Bollinger", typeof(int));
                 c = scanResult.Columns.Add("MACD", typeof(int));
                 c = scanResult.Columns.Add("UltimateOscillator", typeof(int));
                 c = scanResult.Columns.Add("Jump", typeof(int));
-                c = scanResult.Columns.Add("MarketCap", typeof(long));
+                c = scanResult.Columns.Add("MarketCap", typeof(decimal));
                 c = scanResult.Columns.Add("Exchange", typeof(string));
                 c = scanResult.Columns.Add("SymbolID", typeof(int));
                 c = scanResult.Columns.Add("SymbolName", typeof(string));
@@ -225,7 +227,7 @@ namespace Algorithm.Core.Forms
                         Exchange = (string)(dv[i]["Exchange"]);
                         SymbolName = (string)(dv[i]["SymbolName"]);
                         Shares = Convert.ToDouble(dv[i]["Shares"]);
-                        MarketCap = Convert.ToInt64(dv[i]["MarketCap"]);
+                        MarketCap = Math.Round (Convert.ToDecimal(dv[i]["MarketCap"])/1000/1000, 2);
                         ChartForm.SymbolID = SymbolID;
                         LoadData();
                         ScanCheck();
@@ -248,7 +250,7 @@ namespace Algorithm.Core.Forms
         {
             if (sourceForScan.Rows.Count == 0)
                 return;
-            double a, b, c, high, low, typicalPrice;
+            double a, b, c, high, low, typicalPrice, open, close;
 
             DataRow s = sourceForScan.Rows[sourceForScan.Rows.Count - 1];
             DataRow s_1 = null;
@@ -256,11 +258,45 @@ namespace Algorithm.Core.Forms
                 s_1 = sourceForScan.Rows[sourceForScan.Rows.Count - 2];
             high = Convert.ToDouble(s["High"]);
             low = Convert.ToDouble(s["Low"]);
+            open = Convert.ToDouble(s["Open"]);
+            close = Convert.ToDouble(s["Close"]);
             typicalPrice = Convert.ToDouble(s["TypicalPrice"]);
+            int DaysIncrease = 0;
+            double increase;
+            double previousClose = -1;
+            foreach(DataRow rr in sourceForScan.Rows)
+            {
+                increase = Convert.ToDouble(rr["Close"]) - Convert.ToDouble(rr["Open"]);
+                if (previousClose > 0)
+                {
+                    if (increase < 0)
+                    {
+                        if(previousClose < Convert.ToDouble(rr["Close"]))
+                            DaysIncrease = 0;
+                        if (DaysIncrease > 0)
+                            DaysIncrease = 0;
+                        DaysIncrease--;
+                    }
+                    else if (increase > 0)
+                    {
+                        if(previousClose > Convert.ToDouble(rr["Close"]))
+                            DaysIncrease = 0;
+                        if (DaysIncrease < 0)
+                            DaysIncrease = 0;
+                        DaysIncrease++;
+                    }
+                    else
+                    {
+                        DaysIncrease = 0;
+                    }
+                }
+                previousClose = Convert.ToDouble(rr["Close"]);
+            }
             
             DataRow t = scanResult.NewRow();
             t.BeginEdit();
             t["MarketCap"] = MarketCap;
+            t["DaysIncrease"] = DaysIncrease;
             t["TurnOver"] = 0;
             if (Shares > 0)
             {

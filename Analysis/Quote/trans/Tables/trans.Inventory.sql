@@ -1,16 +1,23 @@
 ﻿CREATE TABLE [trans].[Inventory] (
-    [SymbolID]   INT      NOT NULL,
-    [Date]       DATETIME NOT NULL,
-    [Quantity]   INT      NOT NULL,
-    [Price]      MONEY    NOT NULL,
-    [Total]      MONEY    NOT NULL,
-    [Commission] MONEY    NOT NULL,
-    [Position]   INT      NOT NULL,
-    [Rate]       MONEY    NOT NULL,
-    [Cost]       MONEY    NOT NULL,
-    CONSTRAINT [PK_trans_Inventory] PRIMARY KEY CLUSTERED ([SymbolID] ASC, [Date] DESC),
-    CONSTRAINT [FK_trans_Inventory_q_Symbol] FOREIGN KEY ([SymbolID]) REFERENCES [q].[Symbol] ([SymbolID])
+    [InventoryID] INT          IDENTITY (1, 1) NOT NULL,
+    [SymbolID]    INT          NOT NULL,
+    [Exchange]    VARCHAR (10) NOT NULL,
+    [Symbol]      VARCHAR (32) NOT NULL,
+    [OpenDate]    DATETIME     NULL,
+    [CloseDate]   DATETIME     NULL,
+    [GrossEarn]   MONEY        NULL,
+    [Commission]  MONEY        NULL,
+    [NetEarn]     MONEY        NULL,
+    [TradeCount]  INT          NULL,
+    [Position]    INT          NULL,
+    [IsShort]     BIT          NULL,
+    [Rate]        AS           (case when [Position]=(0) then (0) else [Cost]/[Position] end),
+    [Cost]        MONEY        NULL,
+    CONSTRAINT [PK_Trans_Inventory] PRIMARY KEY CLUSTERED ([InventoryID] ASC),
+    CONSTRAINT [UK_trans_Inventory] UNIQUE NONCLUSTERED ([Exchange] ASC, [Symbol] ASC, [CloseDate] ASC)
 );
+
+
 
 
 

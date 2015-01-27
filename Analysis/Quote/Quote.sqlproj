@@ -115,7 +115,6 @@
     <Build Include="trans\Tables\trans.Inventory.sql" />
     <Build Include="trans\Views\Trans.InventorySummary.sql" />
     <Build Include="trans\Stored Procedures\trans.CalculateInventory.sql" />
-    <Build Include="trans\Views\trans.vInventory.sql" />
     <Build Include="trans\Views\trans.InventoryCurrent.sql" />
     <Build Include="trans\Views\trans.Inventoryinput.sql" />
     <Build Include="trans\Tables\trans_1.InventoryDetail.sql" />

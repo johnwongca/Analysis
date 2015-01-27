@@ -192,8 +192,8 @@ namespace Algorithm.Core.Forms
                 
                 c = scanResult.Columns.Add("Over5", typeof(int));
                 c = scanResult.Columns.Add("RSI", typeof(int));
-                c = scanResult.Columns.Add("DaysIncrease", typeof(int));
-                //c = scanResult.Columns.Add("AvgDayIncreasePCT", typeof(double));
+                c = scanResult.Columns.Add("DaysIncrease", typeof(double));
+                c = scanResult.Columns.Add("DayIncreasePCT", typeof(double));
                 c = scanResult.Columns.Add("Bollinger", typeof(int));
                 c = scanResult.Columns.Add("MACD", typeof(int));
                 c = scanResult.Columns.Add("UltimateOscillator", typeof(int));
@@ -264,6 +264,7 @@ namespace Algorithm.Core.Forms
             int DaysIncrease = 0;
             double increase;
             double previousClose = -1;
+            double dayIncreasePCT = 0;
             foreach(DataRow rr in sourceForScan.Rows)
             {
                 increase = Convert.ToDouble(rr["Close"]) - Convert.ToDouble(rr["Open"]);
@@ -290,11 +291,16 @@ namespace Algorithm.Core.Forms
                         DaysIncrease = 0;
                     }
                 }
+                if(previousClose!=0)
+                {
+                    dayIncreasePCT = increase * 100 / previousClose;
+                }
                 previousClose = Convert.ToDouble(rr["Close"]);
             }
             
             DataRow t = scanResult.NewRow();
             t.BeginEdit();
+            t["DayIncreasePCT"] = dayIncreasePCT;
             t["MarketCap"] = MarketCap;
             t["DaysIncrease"] = DaysIncrease;
             t["TurnOver"] = 0;
@@ -342,6 +348,8 @@ namespace Algorithm.Core.Forms
             }
             t.EndEdit();
             bool rowAdded = false;
+            scanResult.Rows.Add(t);
+            rowAdded = true;
             if(!rowAdded&&((a>=69)||(a<=31)))
             {
                 scanResult.Rows.Add(t);

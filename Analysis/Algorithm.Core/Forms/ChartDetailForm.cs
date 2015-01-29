@@ -348,8 +348,13 @@ namespace Algorithm.Core.Forms
             }
             t.EndEdit();
             bool rowAdded = false;
-            scanResult.Rows.Add(t);
-            rowAdded = true;
+            //scanResult.Rows.Add(t);
+            //rowAdded = true;
+            if (Convert.ToDouble(s["Volume"])<1000000)
+            {
+                //scanResult.Rows.Add(t);
+                rowAdded = true;
+            }
             if(!rowAdded&&((a>=69)||(a<=31)))
             {
                 scanResult.Rows.Add(t);

@@ -348,28 +348,37 @@ namespace Algorithm.Core.Forms
             }
             t.EndEdit();
             bool rowAdded = false;
-            //scanResult.Rows.Add(t);
-            //rowAdded = true;
-            if (Convert.ToDouble(s["Volume"])<1000000)
+
+            if (Convert.ToDouble(s["Volume"]) < 1000000)
             {
                 //scanResult.Rows.Add(t);
                 rowAdded = true;
             }
-            if(!rowAdded&&((a>=69)||(a<=31)))
+            else
             {
                 scanResult.Rows.Add(t);
                 rowAdded = true;
             }
-            if (!rowAdded && ((int)t["Jump"]!=0))
-            {
-                scanResult.Rows.Add(t);
-                rowAdded = true;
-            }
-            if (!rowAdded && ((int)t["Over5"] != 0))
-            {
-                scanResult.Rows.Add(t);
-                rowAdded = true;
-            }
+            //if (typicalPrice > 25)
+            //{
+            //    //scanResult.Rows.Add(t);
+            //    rowAdded = true;
+            //}
+            //if(!rowAdded&&((a>=69)||(a<=31)))
+            //{
+            //    scanResult.Rows.Add(t);
+            //    rowAdded = true;
+            //}
+            //if (!rowAdded && ((int)t["Jump"]!=0))
+            //{
+            //    scanResult.Rows.Add(t);
+            //    rowAdded = true;
+            //}
+            //if (!rowAdded && ((int)t["Over5"] != 0))
+            //{
+            //    scanResult.Rows.Add(t);
+            //    rowAdded = true;
+            //}
             if(!rowAdded)
                 t.Delete();
         }

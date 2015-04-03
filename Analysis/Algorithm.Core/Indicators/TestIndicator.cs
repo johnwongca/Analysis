@@ -65,6 +65,21 @@ namespace Algorithm.Core
         [Output]
         public RelativeStrengthIndex RSI { get; set; }
         #endregion
+
+        #region RSI1
+        [InputInt(DefaultValue = 28, FromValue = 2, ToValue = 9000, Interval = 1)]
+        public int RSIPeriod1 { get; set; }
+        [Output]
+        public RelativeStrengthIndex RSI1 { get; set; }
+        #endregion
+
+        #region RSI2
+        [InputInt(DefaultValue = 42, FromValue = 2, ToValue = 9000, Interval = 1)]
+        public int RSIPeriod2 { get; set; }
+        [Output]
+        public RelativeStrengthIndex RSI2 { get; set; }
+        #endregion
+
         #region Ultimate Oscillator
         [Output]
         public UltimateOscillator UltimateOscillator { get; set; }
@@ -104,6 +119,8 @@ namespace Algorithm.Core
             macd.PeriodShort = MACDFastPeriod;
             macd.SignalPeriod = MACDSignalPeriod;
             RSI = RelativeStrengthIndex(RSIPeriod, 2);
+            RSI1 = RelativeStrengthIndex(RSIPeriod1, 2);
+            RSI2 = RelativeStrengthIndex(RSIPeriod2, 2);
             UltimateOscillator = base.UltimateOscillator(1);
             UltimateOscillator.Source = this.Source;
             UltimateOscillator.Period1 = UltimateOscillatorP1;
@@ -121,6 +138,8 @@ namespace Algorithm.Core
             bollingerBands.Push(Close);
             macd.Push(Close);
             RSI.Push(Close);
+            RSI1.Push(Close);
+            RSI2.Push(Close);
             UltimateOscillator.Push();
         }
     }

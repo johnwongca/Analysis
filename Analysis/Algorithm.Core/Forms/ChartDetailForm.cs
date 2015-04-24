@@ -148,10 +148,9 @@ namespace Algorithm.Core.Forms
 
         private void gSymbol_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.KeyValue == (char)13)
-            {
-                btnOk_Click(null, null);
-            }
+
+            btnOk_Click(null, null);
+
         }
 
         private void btnSetSplitter_Click(object sender, EventArgs e)
@@ -194,9 +193,7 @@ namespace Algorithm.Core.Forms
                 c = scanResult.Columns.Add("RSI", typeof(int));
                 c = scanResult.Columns.Add("DaysIncrease", typeof(double));
                 c = scanResult.Columns.Add("DayIncreasePCT", typeof(double));
-                c = scanResult.Columns.Add("Bollinger", typeof(int));
                 c = scanResult.Columns.Add("MACD", typeof(int));
-                c = scanResult.Columns.Add("UltimateOscillator", typeof(int));
                 c = scanResult.Columns.Add("Jump", typeof(int));
                 c = scanResult.Columns.Add("MarketCap", typeof(decimal));
                 c = scanResult.Columns.Add("Exchange", typeof(string));
@@ -314,16 +311,8 @@ namespace Algorithm.Core.Forms
             t["SymbolID"] = SymbolID;
             t["SymbolName"] = SymbolName;
             t["MACD"] = Convert.ToInt32 (Convert.ToDouble(s["MACDDivergence"]) * 100);
-            a = Convert.ToDouble(s["BollingerBandsUpper"]);
-            b = Convert.ToDouble(s["BollingerBandsAverage"]);
-            c = Convert.ToDouble(s["BollingerBandsLower"]);
-            a = a - c;
-            b = b - c;
-            c = typicalPrice - c;
-            t["Bollinger"] = a <=double.Epsilon? 0: (int)(c * 100/a);
             a = Convert.ToDouble(s["RSI"]);
             t["RSI"] = Convert.ToInt32(a);
-            t["UltimateOscillator"] = Convert.ToInt32((Convert.ToDouble(s["UltimateOscillator"])) * 100);
             t["Jump"] = 0;
             t["Over5"] = 0;
             if (s_1!=null)
@@ -388,12 +377,18 @@ namespace Algorithm.Core.Forms
         {
             if (bsScanResult.Current == null)
                 return;
+            
             Exchange = ((DataRowView)bsScanResult.Current)["Exchange"].ToString();
             Symbol = ((DataRowView)bsScanResult.Current)["Symbol"].ToString();
             SymbolID = (int)((DataRowView)bsScanResult.Current)["SymbolID"];
             SymbolName = ((DataRowView)bsScanResult.Current)["SymbolName"].ToString();
             if (OnSearchConfirm != null)
                 OnSearchConfirm(this, EventArgs.Empty);
+        }
+
+        private void scanResultGrid_KeyUp(object sender, KeyEventArgs e)
+        {
+            scanResultGrid_DoubleClick(null, null);
         }
 
       

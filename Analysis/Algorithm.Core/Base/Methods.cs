@@ -92,6 +92,12 @@ namespace Algorithm.Core
                 return data[periodback] - data[0];
             return 0d;
         }
+        public static double BIAS(this Window<double> close, double average)
+        {
+            if (average <= double.Epsilon)
+                return 0;
+            return (close - average)*100d / average;
+        }
         public static bool CrossAbove(this Window<double> current, Window<double> compareTo, int period = 1)
         {
             if(period<1)

@@ -10,21 +10,41 @@ namespace Algorithm.Core
     {
         #region MAs
         bool MAUseSMA = true;
-        [InputInt(DefaultValue=30, FromValue=1, ToValue = 9000, Interval = 1)]
+        [InputInt(DefaultValue=60, FromValue=1, ToValue = 9000, Interval = 1)]
         
         public int MALongPeriod { get; set; }
         [Output]
         public Indicator MALong { get; set; }
-        
+        [Output]
+        public Window<double> BIASLong { get; set; }
+
+        [InputInt(DefaultValue = 20, FromValue = 1, ToValue = 9000, Interval = 1)]
+        public int MAMedian1Period { get; set; }
+        [Output]
+        public Indicator MAMedian1 { get; set; }
+        [Output]
+        public Window<double> BIASMedian1 { get; set; }
+
+        [InputInt(DefaultValue = 30, FromValue = 1, ToValue = 9000, Interval = 1)]
+        public int MAMedian2Period { get; set; }
+        [Output]
+        public Indicator MAMedian2 { get; set; }
+        [Output]
+        public Window<double> BIASMedian2 { get; set; }
+
         [InputInt(DefaultValue = 10, FromValue = 1, ToValue = 9000, Interval = 1)]
         public int MAMedianPeriod { get; set; }
         [Output]
         public Indicator MAMedian { get; set; }
+        [Output]
+        public Window<double> BIASMedian { get; set; }
 
         [InputInt(DefaultValue = 5, FromValue = 1, ToValue = 9000, Interval = 1)]
         public int MAShortPeriod { get; set; }
         [Output]
         public Indicator MAShort { get; set; }
+        [Output]
+        public Window<double> BIASShort { get; set; }
 
         [InputInt(DefaultValue = 50, FromValue = 1, ToValue = 9000, Interval = 1)]
         public int MAVolumePeriod { get; set; }
@@ -67,14 +87,14 @@ namespace Algorithm.Core
         #endregion
 
         #region RSI1
-        [InputInt(DefaultValue = 28, FromValue = 2, ToValue = 9000, Interval = 1)]
+        [InputInt(DefaultValue = 30, FromValue = 2, ToValue = 9000, Interval = 1)]
         public int RSIPeriod1 { get; set; }
         [Output]
         public RelativeStrengthIndex RSI1 { get; set; }
         #endregion
 
         #region RSI2
-        [InputInt(DefaultValue = 42, FromValue = 2, ToValue = 9000, Interval = 1)]
+        [InputInt(DefaultValue = 50, FromValue = 2, ToValue = 9000, Interval = 1)]
         public int RSIPeriod2 { get; set; }
         [Output]
         public RelativeStrengthIndex RSI2 { get; set; }
@@ -103,6 +123,8 @@ namespace Algorithm.Core
             {
                 MALong = SimpleMovingAverage(MALongPeriod, 2);
                 MAMedian = SimpleMovingAverage(MAMedianPeriod, 2);
+                MAMedian1 = SimpleMovingAverage(MAMedian1Period, 2);
+                MAMedian2 = SimpleMovingAverage(MAMedian2Period, 2);
                 MAShort = SimpleMovingAverage(MAShortPeriod, 2);
                 MAVolume = SimpleMovingAverage(MAVolumePeriod, 2);
             }
@@ -110,9 +132,17 @@ namespace Algorithm.Core
             {
                 MALong = ExponentialMovingAverage(MALongPeriod, 2);
                 MAMedian = ExponentialMovingAverage(MAMedianPeriod, 2);
+                MAMedian1 = ExponentialMovingAverage(MAMedian1Period, 2);
+                MAMedian2 = ExponentialMovingAverage(MAMedian2Period, 2);
                 MAShort = ExponentialMovingAverage(MAShortPeriod, 2);
                 MAVolume = ExponentialMovingAverage(MAVolumePeriod, 2);
             }
+            BIASLong = new Window<double>(2);
+            BIASShort = new Window<double>(2);
+            BIASMedian = new Window<double>(2);
+            BIASMedian1 = new Window<double>(2);
+            BIASMedian2 = new Window<double>(2);
+
             bollingerBands = BollingerBands(BollingerBandsPeriod,2);
             macd = base.MACD(Math.Max(Math.Max(MACDSignalPeriod, MACDSlowPeriod), MACDFastPeriod) + 2);
             macd.PeriodLong = MACDSlowPeriod;
@@ -133,6 +163,8 @@ namespace Algorithm.Core
             base.AfterSetValue(values);
             MALong.Push(Close);
             MAMedian.Push(Close);
+            MAMedian1.Push(Close);
+            MAMedian2.Push(Close);
             MAShort.Push(Close);
             MAVolume.Push(Volume);
             bollingerBands.Push(Close);
@@ -141,6 +173,11 @@ namespace Algorithm.Core
             RSI1.Push(Close);
             RSI2.Push(Close);
             UltimateOscillator.Push();
+            BIASLong.Push(Close.BIAS(MALong));
+            BIASMedian.Push(Close.BIAS(MAMedian));
+            BIASMedian1.Push(Close.BIAS(MAMedian1));
+            BIASMedian2.Push(Close.BIAS(MAMedian2));
+            BIASShort.Push(Close.BIAS(MAShort));
         }
     }
     public partial class IndicatorBase

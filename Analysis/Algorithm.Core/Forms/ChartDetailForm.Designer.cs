@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChartDetailForm));
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "ssss",
             "sss1"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0))));
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -186,6 +186,7 @@
             this.gSymbol.ReadOnly = true;
             this.gSymbol.Size = new System.Drawing.Size(524, 559);
             this.gSymbol.TabIndex = 2;
+            this.gSymbol.Click += new System.EventHandler(this.btnOk_Click);
             this.gSymbol.DoubleClick += new System.EventHandler(this.btnOk_Click);
             this.gSymbol.KeyUp += new System.Windows.Forms.KeyEventHandler(this.gSymbol_KeyUp);
             // 
@@ -320,19 +321,19 @@
             this.columnHeader2});
             this.lvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvData.GridLines = true;
-            listViewGroup1.Header = "ListViewGroup";
-            listViewGroup1.Name = "Current";
-            listViewGroup2.Header = "ListViewGroup";
-            listViewGroup2.Name = "Price";
-            listViewGroup3.Header = "ListViewGroup";
-            listViewGroup3.Name = "Volume";
+            listViewGroup4.Header = "ListViewGroup";
+            listViewGroup4.Name = "Current";
+            listViewGroup5.Header = "ListViewGroup";
+            listViewGroup5.Name = "Price";
+            listViewGroup6.Header = "ListViewGroup";
+            listViewGroup6.Name = "Volume";
             this.lvData.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2,
-            listViewGroup3});
-            listViewItem1.Group = listViewGroup1;
+            listViewGroup4,
+            listViewGroup5,
+            listViewGroup6});
+            listViewItem2.Group = listViewGroup4;
             this.lvData.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.lvData.Location = new System.Drawing.Point(3, 119);
             this.lvData.MultiSelect = false;
             this.lvData.Name = "lvData";
@@ -692,7 +693,9 @@
             this.scanResultGrid.ReadOnly = true;
             this.scanResultGrid.Size = new System.Drawing.Size(544, 593);
             this.scanResultGrid.TabIndex = 1;
+            this.scanResultGrid.Click += new System.EventHandler(this.scanResultGrid_DoubleClick);
             this.scanResultGrid.DoubleClick += new System.EventHandler(this.scanResultGrid_DoubleClick);
+            this.scanResultGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.scanResultGrid_KeyUp);
             // 
             // panel2
             // 

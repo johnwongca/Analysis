@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChartDetailForm));
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "ssss",
             "sss1"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0))));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tc = new System.Windows.Forms.TabControl();
             this.tabSearch = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -98,9 +98,16 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btnScan = new System.Windows.Forms.Button();
             this.lExchange = new System.Windows.Forms.ComboBox();
+            this.tpWatchList = new System.Windows.Forms.TabPage();
+            this.watchListGrid = new System.Windows.Forms.DataGridView();
+            this.bsWatchList = new System.Windows.Forms.BindingSource(this.components);
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnRemoveWatchList = new System.Windows.Forms.Button();
+            this.btnRefreshWatchList = new System.Windows.Forms.Button();
             this.bsExchange = new System.Windows.Forms.BindingSource(this.components);
             this.bsSymbol = new System.Windows.Forms.BindingSource(this.components);
-            this.tabControl1.SuspendLayout();
+            this.tpFundamental = new System.Windows.Forms.TabPage();
+            this.tc.SuspendLayout();
             this.tabSearch.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -120,23 +127,29 @@
             ((System.ComponentModel.ISupportInitialize)(this.scanResultGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsScanResult)).BeginInit();
             this.panel2.SuspendLayout();
+            this.tpWatchList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.watchListGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsWatchList)).BeginInit();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsExchange)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSymbol)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tc
             // 
-            this.tabControl1.Controls.Add(this.tabSearch);
-            this.tabControl1.Controls.Add(this.tabData);
-            this.tabControl1.Controls.Add(this.tabParameterContainer);
-            this.tabControl1.Controls.Add(this.tabChart);
-            this.tabControl1.Controls.Add(this.tabScan);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(552, 648);
-            this.tabControl1.TabIndex = 0;
+            this.tc.Controls.Add(this.tabSearch);
+            this.tc.Controls.Add(this.tabData);
+            this.tc.Controls.Add(this.tabParameterContainer);
+            this.tc.Controls.Add(this.tabChart);
+            this.tc.Controls.Add(this.tabScan);
+            this.tc.Controls.Add(this.tpWatchList);
+            this.tc.Controls.Add(this.tpFundamental);
+            this.tc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tc.Location = new System.Drawing.Point(0, 0);
+            this.tc.Name = "tc";
+            this.tc.SelectedIndex = 0;
+            this.tc.Size = new System.Drawing.Size(552, 648);
+            this.tc.TabIndex = 0;
             // 
             // tabSearch
             // 
@@ -321,19 +334,19 @@
             this.columnHeader2});
             this.lvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvData.GridLines = true;
-            listViewGroup4.Header = "ListViewGroup";
-            listViewGroup4.Name = "Current";
-            listViewGroup5.Header = "ListViewGroup";
-            listViewGroup5.Name = "Price";
-            listViewGroup6.Header = "ListViewGroup";
-            listViewGroup6.Name = "Volume";
+            listViewGroup1.Header = "ListViewGroup";
+            listViewGroup1.Name = "Current";
+            listViewGroup2.Header = "ListViewGroup";
+            listViewGroup2.Name = "Price";
+            listViewGroup3.Header = "ListViewGroup";
+            listViewGroup3.Name = "Volume";
             this.lvData.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup4,
-            listViewGroup5,
-            listViewGroup6});
-            listViewItem2.Group = listViewGroup4;
+            listViewGroup1,
+            listViewGroup2,
+            listViewGroup3});
+            listViewItem1.Group = listViewGroup1;
             this.lvData.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.lvData.Location = new System.Drawing.Point(3, 119);
             this.lvData.MultiSelect = false;
             this.lvData.Name = "lvData";
@@ -750,17 +763,90 @@
             this.lExchange.Size = new System.Drawing.Size(121, 21);
             this.lExchange.TabIndex = 0;
             // 
+            // tpWatchList
+            // 
+            this.tpWatchList.Controls.Add(this.watchListGrid);
+            this.tpWatchList.Controls.Add(this.panel3);
+            this.tpWatchList.Location = new System.Drawing.Point(4, 22);
+            this.tpWatchList.Name = "tpWatchList";
+            this.tpWatchList.Padding = new System.Windows.Forms.Padding(3);
+            this.tpWatchList.Size = new System.Drawing.Size(544, 622);
+            this.tpWatchList.TabIndex = 5;
+            this.tpWatchList.Text = "WatchList";
+            this.tpWatchList.UseVisualStyleBackColor = true;
+            // 
+            // watchListGrid
+            // 
+            this.watchListGrid.AllowUserToAddRows = false;
+            this.watchListGrid.AllowUserToDeleteRows = false;
+            this.watchListGrid.AutoGenerateColumns = false;
+            this.watchListGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.watchListGrid.DataSource = this.bsWatchList;
+            this.watchListGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.watchListGrid.Location = new System.Drawing.Point(3, 32);
+            this.watchListGrid.Name = "watchListGrid";
+            this.watchListGrid.ReadOnly = true;
+            this.watchListGrid.Size = new System.Drawing.Size(538, 587);
+            this.watchListGrid.TabIndex = 2;
+            this.watchListGrid.Click += new System.EventHandler(this.watchListGrid_Click);
+            this.watchListGrid.DoubleClick += new System.EventHandler(this.watchListGrid_Click);
+            this.watchListGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.watchListGrid_KeyUp);
+            // 
+            // bsWatchList
+            // 
+            this.bsWatchList.AllowNew = false;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnRemoveWatchList);
+            this.panel3.Controls.Add(this.btnRefreshWatchList);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(538, 29);
+            this.panel3.TabIndex = 0;
+            // 
+            // btnRemoveWatchList
+            // 
+            this.btnRemoveWatchList.Location = new System.Drawing.Point(87, 3);
+            this.btnRemoveWatchList.Name = "btnRemoveWatchList";
+            this.btnRemoveWatchList.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveWatchList.TabIndex = 1;
+            this.btnRemoveWatchList.Text = "Remove";
+            this.btnRemoveWatchList.UseVisualStyleBackColor = true;
+            this.btnRemoveWatchList.Click += new System.EventHandler(this.btnRemoveWatchList_Click);
+            // 
+            // btnRefreshWatchList
+            // 
+            this.btnRefreshWatchList.Location = new System.Drawing.Point(5, 3);
+            this.btnRefreshWatchList.Name = "btnRefreshWatchList";
+            this.btnRefreshWatchList.Size = new System.Drawing.Size(75, 23);
+            this.btnRefreshWatchList.TabIndex = 0;
+            this.btnRefreshWatchList.Text = "Refresh";
+            this.btnRefreshWatchList.UseVisualStyleBackColor = true;
+            this.btnRefreshWatchList.Click += new System.EventHandler(this.btnRefreshWatchList_Click);
+            // 
+            // tpFundamental
+            // 
+            this.tpFundamental.Location = new System.Drawing.Point(4, 22);
+            this.tpFundamental.Name = "tpFundamental";
+            this.tpFundamental.Padding = new System.Windows.Forms.Padding(3);
+            this.tpFundamental.Size = new System.Drawing.Size(544, 622);
+            this.tpFundamental.TabIndex = 6;
+            this.tpFundamental.Text = "Fundamental";
+            this.tpFundamental.UseVisualStyleBackColor = true;
+            // 
             // ChartDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(552, 648);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tc);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "ChartDetailForm";
             this.Text = "Details";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChartDetailForm_FormClosing);
-            this.tabControl1.ResumeLayout(false);
+            this.tc.ResumeLayout(false);
             this.tabSearch.ResumeLayout(false);
             this.tabSearch.PerformLayout();
             this.tabControl2.ResumeLayout(false);
@@ -785,6 +871,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.scanResultGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsScanResult)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.tpWatchList.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.watchListGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsWatchList)).EndInit();
+            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsExchange)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSymbol)).EndInit();
             this.ResumeLayout(false);
@@ -793,7 +883,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tc;
         private System.Windows.Forms.TabPage tabSearch;
         private System.Windows.Forms.TabPage tabChart;
         private System.Windows.Forms.ToolStrip toolStrip1;
@@ -857,5 +947,12 @@
         private System.Windows.Forms.Button btnScanStop;
         private System.Windows.Forms.DataGridView scanResultGrid;
         private System.Windows.Forms.BindingSource bsScanResult;
+        private System.Windows.Forms.TabPage tpWatchList;
+        private System.Windows.Forms.DataGridView watchListGrid;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.BindingSource bsWatchList;
+        private System.Windows.Forms.Button btnRemoveWatchList;
+        private System.Windows.Forms.Button btnRefreshWatchList;
+        private System.Windows.Forms.TabPage tpFundamental;
     }
 }

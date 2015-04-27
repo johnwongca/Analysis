@@ -678,8 +678,11 @@ namespace Algorithm.Core.Forms
             mouseDown = true;
         }
 
-        
-       
-       
+        private void btnAddtoWatchList_Click(object sender, EventArgs e)
+        {
+            WatchList.Add(SymbolID);
+            details.RefreshWatchList();
+        }
+
     }
 }

@@ -81,6 +81,7 @@
     <Compile Include="Base\Methods.cs" />
     <Compile Include="Base\IndicatorAttribute.cs" />
     <Compile Include="Base\OutputAttribute.cs" />
+    <Compile Include="Forms\Fundamental.cs" />
     <Compile Include="Forms\ParameterControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -123,6 +124,7 @@
     <Compile Include="Forms\ToolStripDateTimePicker.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\WatchList.cs" />
     <Compile Include="Indicators\TestIndicator.cs" />
     <Compile Include="Indicators\DefaultIndicator.cs" />
     <Compile Include="Program.cs" />

@@ -53,6 +53,7 @@ namespace Algorithm.Core.Forms
         void ReloadData()
         {
             MainForm.RefreshData();
+            RefreshWatchList();
             SetExchangeList();
         }
         private void miExchange_Click(object sender, EventArgs e)
@@ -391,7 +392,41 @@ namespace Algorithm.Core.Forms
             scanResultGrid_DoubleClick(null, null);
         }
 
-      
+        private void btnRefreshWatchList_Click(object sender, EventArgs e)
+        {
+            RefreshWatchList();
+        }
 
+        private void btnRemoveWatchList_Click(object sender, EventArgs e)
+        {
+            if (bsWatchList.Current == null)
+                return;
+            WatchList.Remove((int)((DataRowView)(bsWatchList.Current))["SymbolID"]);
+            watchListGrid.AutoGenerateColumns = true;
+            bsWatchList.DataSource = WatchList.Get();
+        }
+        public void RefreshWatchList()
+        {
+            watchListGrid.AutoGenerateColumns = true;
+            bsWatchList.DataSource = WatchList.Get();
+        }
+
+        private void watchListGrid_Click(object sender, EventArgs e)
+        {
+            if (bsWatchList.Current == null)
+                return;
+
+            Exchange = ((DataRowView)bsWatchList.Current)["Exchange"].ToString();
+            Symbol = ((DataRowView)bsWatchList.Current)["Symbol"].ToString();
+            SymbolID = (int)((DataRowView)bsWatchList.Current)["SymbolID"];
+            SymbolName = ((DataRowView)bsWatchList.Current)["SymbolName"].ToString();
+            if (OnSearchConfirm != null)
+                OnSearchConfirm(this, EventArgs.Empty);
+        }
+
+        private void watchListGrid_KeyUp(object sender, KeyEventArgs e)
+        {
+            watchListGrid_Click(sender, e);
+        }
     }
 }

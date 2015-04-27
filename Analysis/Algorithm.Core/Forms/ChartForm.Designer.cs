@@ -60,6 +60,7 @@
             this.nLargeChange = new System.Windows.Forms.NumericUpDown();
             this.hScrollBar = new System.Windows.Forms.HScrollBar();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btnAddtoWatchList = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nLargeChange)).BeginInit();
@@ -134,7 +135,7 @@
             // minuteToolStripMenuItem
             // 
             this.minuteToolStripMenuItem.Name = "minuteToolStripMenuItem";
-            this.minuteToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.minuteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.minuteToolStripMenuItem.Text = "Minutes";
             this.minuteToolStripMenuItem.Click += new System.EventHandler(this.IntervalChange);
             // 
@@ -143,28 +144,28 @@
             this.dayToolStripMenuItem.Checked = true;
             this.dayToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.dayToolStripMenuItem.Name = "dayToolStripMenuItem";
-            this.dayToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.dayToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.dayToolStripMenuItem.Text = "Days";
             this.dayToolStripMenuItem.Click += new System.EventHandler(this.IntervalChange);
             // 
             // weekToolStripMenuItem
             // 
             this.weekToolStripMenuItem.Name = "weekToolStripMenuItem";
-            this.weekToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.weekToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.weekToolStripMenuItem.Text = "Weeks";
             this.weekToolStripMenuItem.Click += new System.EventHandler(this.IntervalChange);
             // 
             // monthToolStripMenuItem
             // 
             this.monthToolStripMenuItem.Name = "monthToolStripMenuItem";
-            this.monthToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.monthToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.monthToolStripMenuItem.Text = "Months";
             this.monthToolStripMenuItem.Click += new System.EventHandler(this.IntervalChange);
             // 
             // yearToolStripMenuItem
             // 
             this.yearToolStripMenuItem.Name = "yearToolStripMenuItem";
-            this.yearToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.yearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.yearToolStripMenuItem.Text = "Years";
             this.yearToolStripMenuItem.Click += new System.EventHandler(this.IntervalChange);
             // 
@@ -184,12 +185,13 @@
             this.toolStripLabel2,
             this.nScale,
             this.toolStripSeparator1,
+            this.btnAddtoWatchList,
             this.btnMore,
             this.toolStripSeparator5,
             this.labelIsLoading});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(716, 26);
+            this.toolStrip2.Size = new System.Drawing.Size(749, 26);
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -286,7 +288,7 @@
             this.dpStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dpStartDate.CustomFormat = "yyyy-MM-dd";
             this.dpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dpStartDate.Location = new System.Drawing.Point(624, 2);
+            this.dpStartDate.Location = new System.Drawing.Point(657, 2);
             this.dpStartDate.MaxDate = new System.DateTime(2020, 12, 31, 0, 0, 0, 0);
             this.dpStartDate.MinDate = new System.DateTime(1980, 1, 1, 0, 0, 0, 0);
             this.dpStartDate.Name = "dpStartDate";
@@ -300,15 +302,15 @@
             this.panel1.Controls.Add(this.nLargeChange);
             this.panel1.Controls.Add(this.hScrollBar);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 670);
+            this.panel1.Location = new System.Drawing.Point(0, 583);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(716, 20);
+            this.panel1.Size = new System.Drawing.Size(749, 20);
             this.panel1.TabIndex = 10;
             // 
             // nLargeChange
             // 
             this.nLargeChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nLargeChange.Location = new System.Drawing.Point(654, 0);
+            this.nLargeChange.Location = new System.Drawing.Point(687, 0);
             this.nLargeChange.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -335,7 +337,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.hScrollBar.Location = new System.Drawing.Point(0, 0);
             this.hScrollBar.Name = "hScrollBar";
-            this.hScrollBar.Size = new System.Drawing.Size(651, 20);
+            this.hScrollBar.Size = new System.Drawing.Size(684, 20);
             this.hScrollBar.TabIndex = 8;
             this.hScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar_Scroll);
             // 
@@ -344,18 +346,28 @@
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chart1.Location = new System.Drawing.Point(0, 26);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(716, 644);
+            this.chart1.Size = new System.Drawing.Size(749, 557);
             this.chart1.TabIndex = 11;
             this.chart1.Text = "chart1";
             this.chart1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseDown);
             this.chart1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseMove);
             this.chart1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseUp);
             // 
+            // btnAddtoWatchList
+            // 
+            this.btnAddtoWatchList.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnAddtoWatchList.Image = ((System.Drawing.Image)(resources.GetObject("btnAddtoWatchList.Image")));
+            this.btnAddtoWatchList.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddtoWatchList.Name = "btnAddtoWatchList";
+            this.btnAddtoWatchList.Size = new System.Drawing.Size(23, 23);
+            this.btnAddtoWatchList.Text = "A";
+            this.btnAddtoWatchList.Click += new System.EventHandler(this.btnAddtoWatchList_Click);
+            // 
             // ChartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(716, 690);
+            this.ClientSize = new System.Drawing.Size(749, 603);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dpStartDate);
@@ -406,6 +418,7 @@
         private System.Windows.Forms.NumericUpDown nLargeChange;
         private System.Windows.Forms.HScrollBar hScrollBar;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.ToolStripButton btnAddtoWatchList;
 
 
     }

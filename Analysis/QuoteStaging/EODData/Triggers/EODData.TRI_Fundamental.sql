@@ -1,10 +1,10 @@
-﻿create trigger EODData.TRI_Fundamental on EODData.vFundamental
+﻿CREATE trigger [EODData].[TRI_Fundamental] on [EODData].[vFundamental]
 instead of insert
 AS 
 BEGIN 
 	set nocount on
 	merge EODData.Fundamental t
-	using inserted as s on t.Exchange = s.Exchange and t.Symbol = s.Symbol and t.Date = s.Date
+	using inserted as s on t.Exchange = s.Exchange and t.Symbol = s.Symbol and t.Date = isnull(s.Date, cast(getdate() as date))
 	when matched and (
 							isnull(t.Name,'') <> isnull(s.Name, '')
 						or isnull(t.Description,'') <> isnull(s.Description, '')
@@ -33,6 +33,6 @@ BEGIN
 					Sector = s.Sector, Shares = s.Shares, Yield = s.Yield
 	when not matched then
 		insert (Exchange, Symbol, Date, Name, Description, Dividend, DividendDate, DividendYield, DPS, EBITDA, EPS, Industry, MarketCap, NTA, PE, PEG, PtB, PtS, Sector, Shares, Yield)
-			values(s.Exchange, s.Symbol, s.Date, s.Name, s.Description, s.Dividend, s.DividendDate, s.DividendYield, s.DPS, s.EBITDA, s.EPS, s.Industry, s.MarketCap, s.NTA, s.PE, s.PEG, s.PtB, s.PtS, s.Sector, s.Shares, s.Yield)
+			values(s.Exchange, s.Symbol, isnull(s.Date, cast(getdate() as date)), s.Name, s.Description, s.Dividend, s.DividendDate, s.DividendYield, s.DPS, s.EBITDA, s.EPS, s.Industry, s.MarketCap, s.NTA, s.PE, s.PEG, s.PtB, s.PtS, s.Sector, s.Shares, s.Yield)
 	option(loop join);
 END

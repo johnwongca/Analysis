@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobSpoolerEngine", "JobSpoolerEngine.csproj", "{B470E7F6-72CD-4711-80DE-4E77DCF9A5F0}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccLocalPath0 = .
+		CanCheckoutShared = true
+		SccProjectUniqueName1 = JobSpoolerEngine.csproj
+		SccLocalPath1 = .
+		CanCheckoutShared = true
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B470E7F6-72CD-4711-80DE-4E77DCF9A5F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B470E7F6-72CD-4711-80DE-4E77DCF9A5F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B470E7F6-72CD-4711-80DE-4E77DCF9A5F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B470E7F6-72CD-4711-80DE-4E77DCF9A5F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

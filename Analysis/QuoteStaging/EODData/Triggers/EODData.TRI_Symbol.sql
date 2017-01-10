@@ -1,10 +1,17 @@
-﻿create trigger EODData.TRI_Symbol on EODData.vSymbol
+﻿CREATE trigger [EODData].[TRI_Symbol] on [EODData].[vSymbol]
 instead of insert
 AS 
 BEGIN 
 	set nocount on
 	;merge EODData.Symbol t
-	using inserted s on t.Exchange = s.Exchange and t.Symbol = s.Symbol
+	using (
+				select *
+				from (
+						select *, row_number() over(partition by Exchange, Symbol order by Date desc) RowNumber 
+						from inserted
+					)s1
+				where s1.RowNumber = 1
+			) s on t.Exchange = s.Exchange and t.Symbol = s.Symbol
 	when matched and (
 							isnull(t.Name, '') <> isnull (s.Name, '')
 						or isnull(t.LongName, '') <> isnull(s.LongName, '')

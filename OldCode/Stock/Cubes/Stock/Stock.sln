@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "Stock", "Stock.dwproj", "{5ACAC41E-AA04-49AB-9B28-E89C6A0919C4}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Stock.dwproj
+		SccLocalPath1 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5ACAC41E-AA04-49AB-9B28-E89C6A0919C4}.Development|Default.ActiveCfg = Development
+		{5ACAC41E-AA04-49AB-9B28-E89C6A0919C4}.Development|Default.Build.0 = Development
+		{5ACAC41E-AA04-49AB-9B28-E89C6A0919C4}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

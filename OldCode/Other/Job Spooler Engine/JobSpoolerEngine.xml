@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<JobSpooler xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<HostName>nmmprog05</HostName>
+	<Database>Test</Database>
+	<UserName>UserName</UserName>
+	<Password>Password</Password>
+	<UseWindowsAuthentication>true</UseWindowsAuthentication>
+	<CommandTimeout>10</CommandTimeout>
+	<HistoryCommandTimeout>300</HistoryCommandTimeout>
+	<MaxThreads>200</MaxThreads>
+	<MaxConcurrentServerReads>10</MaxConcurrentServerReads>
+</JobSpooler>

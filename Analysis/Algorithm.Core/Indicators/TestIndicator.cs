@@ -10,6 +10,15 @@ namespace Algorithm.Core
     {
         #region MAs
         bool MAUseSMA = true;
+
+
+        [InputInt(DefaultValue = 200, FromValue = 100, ToValue = 9000, Interval = 1)]
+
+        public int MALong200Period { get; set; }
+        [Output]
+        public Indicator MALong200 { get; set; }
+        [Output]
+
         [InputInt(DefaultValue=60, FromValue=1, ToValue = 9000, Interval = 1)]
         
         public int MALongPeriod { get; set; }
@@ -127,6 +136,7 @@ namespace Algorithm.Core
                 MAMedian2 = SimpleMovingAverage(MAMedian2Period, 2);
                 MAShort = SimpleMovingAverage(MAShortPeriod, 2);
                 MAVolume = SimpleMovingAverage(MAVolumePeriod, 2);
+                MALong200 = SimpleMovingAverage(MALong200Period, 2);
             }
             else
             {
@@ -136,6 +146,7 @@ namespace Algorithm.Core
                 MAMedian2 = ExponentialMovingAverage(MAMedian2Period, 2);
                 MAShort = ExponentialMovingAverage(MAShortPeriod, 2);
                 MAVolume = ExponentialMovingAverage(MAVolumePeriod, 2);
+                MALong200 = ExponentialMovingAverage(MALong200Period, 2);
             }
             BIASLong = new Window<double>(2);
             BIASShort = new Window<double>(2);
@@ -178,6 +189,7 @@ namespace Algorithm.Core
             BIASMedian1.Push(Close.BIAS(MAMedian1));
             BIASMedian2.Push(Close.BIAS(MAMedian2));
             BIASShort.Push(Close.BIAS(MAShort));
+            MALong200.Push(Close);
         }
     }
     public partial class IndicatorBase

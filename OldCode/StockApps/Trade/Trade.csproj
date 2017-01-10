@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5706B6B5-BA28-42CA-83FE-0C07777A39B4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Trade</RootNamespace>
+    <AssemblyName>Trade</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Deployment">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\WINDOWS\assembly\GAC_MSIL\WindowsFormsIntegration\3.0.0.0__31bf3856ad364e35\WindowsFormsIntegration.dll</HintPath>
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analysis.cs" />
+    <Compile Include="Analyze\Analyze.cs" />
+    <Compile Include="Analyze\AnalyzeSearch..cs" />
+    <Compile Include="Base\Canvas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\Canvas.Designer.cs">
+      <DependentUpon>Canvas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\FixedDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Base\SChart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base\SChart.Designer.cs">
+      <DependentUpon>SChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\SystemMenu.cs" />
+    <Compile Include="Base\WPFCanvas.xaml.cs">
+      <DependentUpon>WPFCanvas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Base\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\BaseForm.designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\BindingSourceAdapter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Base\DbTree.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Base\DbTree.Designer.cs">
+      <DependentUpon>DbTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\DbTreeDialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\DbTreeDialogForm.Designer.cs">
+      <DependentUpon>DbTreeDialogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ScreenMousePosition.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Base\ScreenMousePosition.Designer.cs">
+      <DependentUpon>ScreenMousePosition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTest.Designer.cs">
+      <DependentUpon>FormTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\Global.cs">
+    </Compile>
+    <Compile Include="Interface\Analyze\DataSetAnalyze.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetAnalyze.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Analyze\FormChartDays.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Analyze\FormChartDays.Designer.cs">
+      <DependentUpon>FormChartDays.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Analyze\FormCharts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Analyze\FormCharts.Designer.cs">
+      <DependentUpon>FormCharts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Analyze\FormChartSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Analyze\FormChartSettings.Designer.cs">
+      <DependentUpon>FormChartSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Analyze\FormExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Analyze\FormExplorer.Designer.cs">
+      <DependentUpon>FormExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Analyze\FormTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Analyze\FormTest.Designer.cs">
+      <DependentUpon>FormTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Import\DataSetProvider.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetProvider.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Import\FormArchivedFiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Import\FormArchivedFiles.Designer.cs">
+      <DependentUpon>FormArchivedFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Import\FormProvider.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Import\FormProvider.Designer.cs">
+      <DependentUpon>FormProvider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Import\FormUnprocessedFiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Import\FormUnprocessedFiles.Designer.cs">
+      <DependentUpon>FormUnprocessedFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Transaction\BuySell.cs" />
+    <Compile Include="Interface\Transaction\DataSetTransaction.cs">
+      <DependentUpon>DataSetTransaction.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Interface\Transaction\DataSetTransaction.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetTransaction.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Transaction\FormAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Transaction\FormAccount.Designer.cs">
+      <DependentUpon>FormAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Transaction\FormBuyInitial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Transaction\FormBuyInitial.Designer.cs">
+      <DependentUpon>FormBuyInitial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Transaction\FormBuySell.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Transaction\FormBuySell.Designer.cs">
+      <DependentUpon>FormBuySell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Transaction\FormSymbol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Transaction\FormSymbol.Designer.cs">
+      <DependentUpon>FormSymbol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Transaction\FormTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Transaction\FormTransaction.Designer.cs">
+      <DependentUpon>FormTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Base\Canvas.resx">
+      <DependentUpon>Canvas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <EmbeddedResource Include="Base\DbTree.resx">
+      <DependentUpon>DbTree.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\DbTreeDialogForm.resx">
+      <DependentUpon>DbTreeDialogForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\SChart.resx">
+      <DependentUpon>SChart.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\ScreenMousePosition.resx">
+      <DependentUpon>ScreenMousePosition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTest.resx">
+      <DependentUpon>FormTest.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Analyze\FormChartDays.resx">
+      <DependentUpon>FormChartDays.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Analyze\FormCharts.resx">
+      <DependentUpon>FormCharts.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Analyze\FormChartSettings.resx">
+      <DependentUpon>FormChartSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Analyze\FormExplorer.resx">
+      <DependentUpon>FormExplorer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Analyze\FormTest.resx">
+      <DependentUpon>FormTest.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Import\FormArchivedFiles.resx">
+      <DependentUpon>FormArchivedFiles.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Import\FormProvider.resx">
+      <DependentUpon>FormProvider.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Import\FormUnprocessedFiles.resx">
+      <DependentUpon>FormUnprocessedFiles.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Transaction\FormAccount.resx">
+      <DependentUpon>FormAccount.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Transaction\FormBuyInitial.resx">
+      <DependentUpon>FormBuyInitial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Transaction\FormBuySell.resx">
+      <DependentUpon>FormBuySell.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Transaction\FormSymbol.resx">
+      <DependentUpon>FormSymbol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Transaction\FormTransaction.resx">
+      <DependentUpon>FormTransaction.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="Test\ETL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Interface\Analyze\DataSetAnalyze.xsc">
+      <DependentUpon>DataSetAnalyze.xsd</DependentUpon>
+    </None>
+    <None Include="Interface\Analyze\DataSetAnalyze.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetAnalyze.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Interface\Analyze\DataSetAnalyze.xss">
+      <DependentUpon>DataSetAnalyze.xsd</DependentUpon>
+    </None>
+    <None Include="Interface\Import\DataSetProvider.xsc">
+      <DependentUpon>DataSetProvider.xsd</DependentUpon>
+    </None>
+    <None Include="Interface\Import\DataSetProvider.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetProvider.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Interface\Import\DataSetProvider.xss">
+      <DependentUpon>DataSetProvider.xsd</DependentUpon>
+    </None>
+    <None Include="Interface\Transaction\DataSetTransaction.xsc">
+      <DependentUpon>DataSetTransaction.xsd</DependentUpon>
+    </None>
+    <None Include="Interface\Transaction\DataSetTransaction.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetTransaction.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Interface\Transaction\DataSetTransaction.xss">
+      <DependentUpon>DataSetTransaction.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\BMP_Refresh.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Base\WPFCanvas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interface\Symbol\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

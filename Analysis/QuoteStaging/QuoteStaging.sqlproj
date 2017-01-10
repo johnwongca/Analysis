@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{f1b20643-b937-46b1-b2ae-5ad5d5df32b5}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -17,7 +17,7 @@
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
@@ -35,6 +35,7 @@
     <Trustworthy>True</Trustworthy>
     <IsBrokerPriorityHonored>True</IsBrokerPriorityHonored>
     <ServiceBrokerOption>EnableBroker</ServiceBrokerOption>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -81,6 +82,7 @@
     <Folder Include="EODData\Triggers" />
     <Folder Include="EODData\Views" />
     <Folder Include="EODData\Procedures" />
+    <Folder Include="Storage\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\clr.sql" />
@@ -129,6 +131,7 @@
     <Build Include="EODData\Procedures\EODData.RemoveSessionStatus.sql" />
     <Build Include="EODData\Procedures\EODData.Download.sql" />
     <Build Include="EODData\Procedures\EODData.UpdateQuote.sql" />
+    <Build Include="Storage\QuoteStagingInMemory.sql" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clr\CLR\ExecuteSQLInternal.cs" />
@@ -172,5 +175,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\test.sql" />
+    <None Include="SqlSchemaCompare.scmp" />
   </ItemGroup>
 </Project>

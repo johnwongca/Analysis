@@ -1,0 +1,335 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="47fceb91-610f-41c1-ae2e-7f03e1f6cbc8" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Symbol</ID>
+  <Name>Symbol</Name>
+  <CreatedTimestamp>0001-01-01T08:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T08:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="8" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-2978" scrolltop="-5971" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="8969" y="20558" backcolor="15334399" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.1" tooltip="Symbol (DIM.Symbol)" left="20" top="5125" logicalid="4" controlid="1" masterid="0" hint1="0" hint2="0" width="3000" height="3572" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="00080000b80b0000f40d0000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="DIM_Symbol" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.1" tooltip="A_Exchange (DIM.A_Exchange)" left="20" top="0" logicalid="5" controlid="2" masterid="0" hint1="0" hint2="0" width="3000" height="2725" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="00080000b80b0000a50a0000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="DIM_A_Exchange" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="1121" top="2226" logicalid="6" controlid="3" masterid="0" hint1="0" hint2="0" width="799" height="3199" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="0" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[FK_Symbol_A_Exchange]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="2" destid="1" sourceattachpoint="5" destattachpoint="4" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="1520" y="2725" />
+              <point x="1520" y="5125" />
+            </connector>
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>-2978</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>-5971</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>20</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T08:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="c5ab607c-63ff-4d26-995f-cf6d4fc2d929">
+    <DataSourceViewID>Stock</DataSourceViewID>
+  </Source>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="e04bd36c-b934-4be1-bc77-24c73f08b65b">
+      <ID>Symbol</ID>
+      <Name>Symbol</Name>
+      <Usage>Key</Usage>
+      <EstimatedCount>82192</EstimatedCount>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="53fc3368-9bca-4f3c-8e4e-17b172ae693f">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="12be558e-b240-4292-a67f-7971d51e9824">
+            <TableID>DIM_Symbol</TableID>
+            <ColumnID>ID</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="69f0150f-7e5d-4832-8efe-dd69c2b308f7">
+        <DataType>WChar</DataType>
+        <DataSize>128</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="a3cbc225-b7d0-4dce-8753-4631835f59a7">
+          <TableID>DIM_Symbol</TableID>
+          <ColumnID>Name</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="78a67e9b-c6d3-462c-b95d-6797ba869c35">
+          <AttributeID>Description</AttributeID>
+          <Name>Symbol - Description</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="6e60b458-b9a5-4195-9e4d-5f0398e3b5f5">
+          <AttributeID>Sort Order</AttributeID>
+          <Name>Symbol - Sort Order</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="0ad01907-5d78-40e3-8bff-35d69dbd9ba8">
+          <AttributeID>Index ID</AttributeID>
+          <Name>Symbol - Index</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="41951491-d5a4-4c93-8720-a6b89310f2db">
+          <AttributeID>Name</AttributeID>
+          <Name>ExchangeName</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="265cf359-4e74-46c9-bca0-7667aa4da7ea">
+          <AttributeID>A Exchange - Description</AttributeID>
+          <Name>Exchange - Description</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="998a0e14-0358-47a9-af9b-c9e84d090b49">
+          <AttributeID>Full Name</AttributeID>
+          <Name>Full Name</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>AttributeKey</OrderBy>
+      <OrderByAttributeID>Sort Order</OrderByAttributeID>
+      <ValueColumn dwd:design-time-name="b7bffa05-207b-482f-a045-782d1cad3719">
+        <DataType>WChar</DataType>
+        <DataSize>256</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="a190bd5a-baa1-4edf-9dcc-7dc916721653">
+          <TableID>DIM_Symbol</TableID>
+          <ColumnID>Description</ColumnID>
+        </Source>
+      </ValueColumn>
+    </Attribute>
+    <Attribute dwd:design-time-name="e2e8a53b-e63b-4879-83cc-c6cec3b1cf9a">
+      <ID>Description</ID>
+      <Name>Symbol - Description</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="666d6989-6217-46f5-beb6-682a43343ca0">
+          <DataType>WChar</DataType>
+          <DataSize>256</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="03da525e-03ef-46a9-bd8c-21244d73a58e">
+            <TableID>DIM_Symbol</TableID>
+            <ColumnID>Description</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+    </Attribute>
+    <Attribute dwd:design-time-name="f0984334-83f0-420a-a016-c64c9e94caea">
+      <ID>Sort Order</ID>
+      <Name>Symbol - Sort Order</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="fa80a17c-9c4d-44e4-980e-0221271948ae">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="87bba44e-a95d-4382-be14-608cf23df9f0">
+            <TableID>DIM_Symbol</TableID>
+            <ColumnID>SortOrder</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+    </Attribute>
+    <Attribute dwd:design-time-name="118b417f-5376-4db1-82d8-46966dadfc73">
+      <ID>Index ID</ID>
+      <Name>Symbol - Index</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="b42594b6-bc2b-40c7-9d6e-848a439f33a3">
+          <DataType>WChar</DataType>
+          <DataSize>1</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="a26eda1e-dd57-4b34-8b7a-492fbdbfe57c">
+            <TableID>DIM_Symbol</TableID>
+            <ColumnID>IndexID</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+    </Attribute>
+    <Attribute dwd:design-time-name="8349fe06-6193-4e60-9f69-217f648c2b55">
+      <ID>Name</ID>
+      <Name>ExchangeName</Name>
+      <EstimatedCount>29</EstimatedCount>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="bbe7b3e1-3d22-4335-906a-78c492877f8f">
+          <DataType>WChar</DataType>
+          <DataSize>128</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="593bf410-6d17-4b54-8e41-7ddd9afe39d3">
+            <TableID>DIM_A_Exchange</TableID>
+            <ColumnID>Name</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <NameColumn dwd:design-time-name="002bbfff-cb6f-4a9f-9cfc-767f36defe1f">
+        <DataType>WChar</DataType>
+        <DataSize>128</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="f1617885-0dfc-44c4-8fcf-9939b384045e">
+          <TableID>DIM_A_Exchange</TableID>
+          <ColumnID>Name</ColumnID>
+        </Source>
+      </NameColumn>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="5858e4f6-f51a-495a-a55b-47285a16af88">
+          <AttributeID>A Exchange - Sort Order</AttributeID>
+          <Name>Exchange - Sort Order</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>AttributeKey</OrderBy>
+      <OrderByAttributeID>A Exchange - Sort Order</OrderByAttributeID>
+      <ValueColumn dwd:design-time-name="a993204e-ea49-46dc-932b-15c1c1b990c5">
+        <DataType>WChar</DataType>
+        <DataSize>256</DataSize>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="7fb4b5b0-f78a-4a2c-8182-e8ff750d6686">
+          <TableID>DIM_A_Exchange</TableID>
+          <ColumnID>Description</ColumnID>
+        </Source>
+      </ValueColumn>
+    </Attribute>
+    <Attribute dwd:design-time-name="c9ba8559-4d65-4037-95ee-cd4bdf8d68a5">
+      <ID>A Exchange - Description</ID>
+      <Name>Exchange - Description</Name>
+      <EstimatedCount>29</EstimatedCount>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="1ab598f6-d667-4804-91f4-7323e6fe83f6">
+          <DataType>WChar</DataType>
+          <DataSize>256</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="2313d973-828b-4385-99f0-3b7bd331e532">
+            <TableID>DIM_A_Exchange</TableID>
+            <ColumnID>Description</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+    </Attribute>
+    <Attribute dwd:design-time-name="89a58c5a-1747-4b5e-97fa-cb9d2354a62d">
+      <ID>A Exchange - Sort Order</ID>
+      <Name>Exchange - Sort Order</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="98928715-7155-44be-8d20-aa34929a716c">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="0531233f-8fd6-4946-920c-13463abc53f9">
+            <TableID>DIM_A_Exchange</TableID>
+            <ColumnID>SortOrder</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+    </Attribute>
+    <Attribute dwd:design-time-name="b7d306da-0902-4f63-a4b1-3062a381c373">
+      <ID>Full Name</ID>
+      <Name>Full Name</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="c70ba1fe-41fb-4d68-9692-70cdf8396e3e">
+          <DataType>WChar</DataType>
+          <DataSize>387</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="b3979ed8-3bf2-4977-82ed-df21ee4b66f5">
+            <TableID>DIM_Symbol</TableID>
+            <ColumnID>Full_x0020_Name</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+    </Attribute>
+  </Attributes>
+  <Hierarchies>
+    <Hierarchy dwd:design-time-name="5dd90a2b-1548-498c-9805-da34203729c7">
+      <ID>Hierarchy</ID>
+      <Name>Symbols</Name>
+      <Levels>
+        <Level dwd:design-time-name="2bbaa485-4da9-4ca2-87ec-c569238b5ed4">
+          <ID>ExchangeName</ID>
+          <Name>Exchange</Name>
+          <SourceAttributeID>Name</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="74f1f90b-3e30-4a76-a22c-aab716359fc1">
+          <ID>Symbol - Index</ID>
+          <Name>Index</Name>
+          <SourceAttributeID>Index ID</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="adc83a1b-7785-45c8-b388-f402da72deb1">
+          <ID>Symbol</ID>
+          <Name>Symbol</Name>
+          <SourceAttributeID>Symbol</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+    <Hierarchy dwd:design-time-name="9e8ef764-6f53-4cad-a356-78559059c586">
+      <ID>Hierarchy 1</ID>
+      <Name>Symbol - Full Description</Name>
+      <Levels>
+        <Level dwd:design-time-name="b7b6aed6-d9e2-4475-81f4-d6998cbd64a8">
+          <ID>Exchange - Description</ID>
+          <Name>Exchange</Name>
+          <SourceAttributeID>A Exchange - Description</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="24a21a6d-bf3c-4ae0-b159-20000cdd2f9e">
+          <ID>Symbol - Index</ID>
+          <Name>Index</Name>
+          <SourceAttributeID>Index ID</SourceAttributeID>
+        </Level>
+        <Level dwd:design-time-name="70d2372f-47b8-4299-b19d-abfbeff39339">
+          <ID>Full Name</ID>
+          <Name>Symbol</Name>
+          <SourceAttributeID>Full Name</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+  </Hierarchies>
+</Dimension>

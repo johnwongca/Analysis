@@ -1,0 +1,8 @@
+Volumn Adjusted Moving Average
+
+period:=5;
+avol:=Cum(VOLUME)/Cum(1); -- average
+volinc:=avol*0.67;
+perratio:=VOLUME/volinc;
+volP:=Sum(C*perratio,period);
+volP

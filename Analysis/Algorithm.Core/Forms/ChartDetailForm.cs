@@ -191,6 +191,7 @@ namespace Algorithm.Core.Forms
                 c = scanResult.Columns.Add("TurnOver", typeof(double));
                 
                 c = scanResult.Columns.Add("Over5", typeof(int));
+                c = scanResult.Columns.Add("Over200", typeof(int));
                 c = scanResult.Columns.Add("RSI", typeof(int));
                 c = scanResult.Columns.Add("DaysIncrease", typeof(double));
                 c = scanResult.Columns.Add("DayIncreasePCT", typeof(double));
@@ -316,6 +317,7 @@ namespace Algorithm.Core.Forms
             t["RSI"] = Convert.ToInt32(a);
             t["Jump"] = 0;
             t["Over5"] = 0;
+            t["Over200"] = 0;
             if (s_1!=null)
             {
                 if(Convert.ToDouble(s_1["High"])< Convert.ToDouble(s["Low"]))
@@ -334,7 +336,30 @@ namespace Algorithm.Core.Forms
                 {
                     t["Over5"] = 1;
                 }
-                
+                if (
+                        (Convert.ToDouble(s_1["TypicalPrice"]) > Convert.ToDouble(s_1["MAShort"]))
+                    &&
+                        (Convert.ToDouble(s["TypicalPrice"]) < Convert.ToDouble(s["MAShort"]))
+                    )
+                {
+                    t["Over5"] = -1;
+                }
+                if (
+                        (Convert.ToDouble(s_1["TypicalPrice"]) < Convert.ToDouble(s_1["MALong200"]))
+                    &&
+                        (Convert.ToDouble(s["TypicalPrice"]) > Convert.ToDouble(s["MALong200"]))
+                    )
+                {
+                    t["Over200"] = 1;
+                }
+                if (
+                        (Convert.ToDouble(s_1["TypicalPrice"]) > Convert.ToDouble(s_1["MALong200"]))
+                    &&
+                        (Convert.ToDouble(s["TypicalPrice"]) < Convert.ToDouble(s["MALong200"]))
+                    )
+                {
+                    t["Over200"] = -1;
+                }
             }
             t.EndEdit();
             bool rowAdded = false;

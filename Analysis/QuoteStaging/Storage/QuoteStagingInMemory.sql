@@ -1,0 +1,3 @@
+﻿ALTER DATABASE [$(DatabaseName)]
+    ADD FILEGROUP [QuoteStagingInMemory] CONTAINS MEMORY_OPTIMIZED_DATA;
+

@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChartDetailForm));
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "ssss",
             "sss1"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0))));
             this.tc = new System.Windows.Forms.TabControl();
@@ -104,9 +104,9 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnRemoveWatchList = new System.Windows.Forms.Button();
             this.btnRefreshWatchList = new System.Windows.Forms.Button();
+            this.tpSaveIndicator = new System.Windows.Forms.TabPage();
             this.bsExchange = new System.Windows.Forms.BindingSource(this.components);
             this.bsSymbol = new System.Windows.Forms.BindingSource(this.components);
-            this.tpFundamental = new System.Windows.Forms.TabPage();
             this.tc.SuspendLayout();
             this.tabSearch.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -143,7 +143,7 @@
             this.tc.Controls.Add(this.tabChart);
             this.tc.Controls.Add(this.tabScan);
             this.tc.Controls.Add(this.tpWatchList);
-            this.tc.Controls.Add(this.tpFundamental);
+            this.tc.Controls.Add(this.tpSaveIndicator);
             this.tc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tc.Location = new System.Drawing.Point(0, 0);
             this.tc.Name = "tc";
@@ -334,19 +334,19 @@
             this.columnHeader2});
             this.lvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvData.GridLines = true;
-            listViewGroup1.Header = "ListViewGroup";
-            listViewGroup1.Name = "Current";
-            listViewGroup2.Header = "ListViewGroup";
-            listViewGroup2.Name = "Price";
-            listViewGroup3.Header = "ListViewGroup";
-            listViewGroup3.Name = "Volume";
+            listViewGroup4.Header = "ListViewGroup";
+            listViewGroup4.Name = "Current";
+            listViewGroup5.Header = "ListViewGroup";
+            listViewGroup5.Name = "Price";
+            listViewGroup6.Header = "ListViewGroup";
+            listViewGroup6.Name = "Volume";
             this.lvData.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2,
-            listViewGroup3});
-            listViewItem1.Group = listViewGroup1;
+            listViewGroup4,
+            listViewGroup5,
+            listViewGroup6});
+            listViewItem2.Group = listViewGroup4;
             this.lvData.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.lvData.Location = new System.Drawing.Point(3, 119);
             this.lvData.MultiSelect = false;
             this.lvData.Name = "lvData";
@@ -637,6 +637,7 @@
             // 
             // chartPropertyAll
             // 
+            this.chartPropertyAll.CategoryForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.chartPropertyAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartPropertyAll.Location = new System.Drawing.Point(3, 28);
             this.chartPropertyAll.Name = "chartPropertyAll";
@@ -676,6 +677,7 @@
             // 
             // chartPropertySelected
             // 
+            this.chartPropertySelected.CategoryForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.chartPropertySelected.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartPropertySelected.Location = new System.Drawing.Point(3, 3);
             this.chartPropertySelected.Name = "chartPropertySelected";
@@ -826,15 +828,15 @@
             this.btnRefreshWatchList.UseVisualStyleBackColor = true;
             this.btnRefreshWatchList.Click += new System.EventHandler(this.btnRefreshWatchList_Click);
             // 
-            // tpFundamental
+            // tpSaveIndicator
             // 
-            this.tpFundamental.Location = new System.Drawing.Point(4, 22);
-            this.tpFundamental.Name = "tpFundamental";
-            this.tpFundamental.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFundamental.Size = new System.Drawing.Size(544, 622);
-            this.tpFundamental.TabIndex = 6;
-            this.tpFundamental.Text = "Fundamental";
-            this.tpFundamental.UseVisualStyleBackColor = true;
+            this.tpSaveIndicator.Location = new System.Drawing.Point(4, 22);
+            this.tpSaveIndicator.Name = "tpSaveIndicator";
+            this.tpSaveIndicator.Padding = new System.Windows.Forms.Padding(3);
+            this.tpSaveIndicator.Size = new System.Drawing.Size(544, 622);
+            this.tpSaveIndicator.TabIndex = 6;
+            this.tpSaveIndicator.Text = "SaveIndicator";
+            this.tpSaveIndicator.UseVisualStyleBackColor = true;
             // 
             // ChartDetailForm
             // 
@@ -953,6 +955,6 @@
         private System.Windows.Forms.BindingSource bsWatchList;
         private System.Windows.Forms.Button btnRemoveWatchList;
         private System.Windows.Forms.Button btnRefreshWatchList;
-        private System.Windows.Forms.TabPage tpFundamental;
+        private System.Windows.Forms.TabPage tpSaveIndicator;
     }
 }

@@ -1,22 +1,22 @@
-﻿CREATE TABLE [EODData].[Task]
-(
-	TaskID INT NOT NULL identity(1,1),
-	PoolID smallint not null,
-	MethodName varchar(50) not null,
-	[IntervalID] TINYINT NULL, 
-    [Exchange] VARCHAR(10) NULL, 
-    [Symbol] VARCHAR(32) NULL, 
-    [DateFrom] DATE NULL, 
-    [DateTo] DATE NULL, 
-    [EnlistDate] DATETIME NOT NULL constraint DF_EODData_Task_EnlistDate default (GetDate()), 
-	LastCompletionDate datetime not null constraint DF_EODData_Task_LastCompletionDate default (GetDate()), 
-    [Retries] INT not NULL constraint DF_EODData_Task_Retries DEFAULT (0), 
-	NextStartDate as dateadd(second, power(2, case when Retries < 12 then Retries else 11 end) -1, LastCompletionDate) persisted,
-	IsRegularPool as case when PoolID = 0 then 0 else 1 end persisted, 
-	Status varchar(10) not null constraint DF_EODData_Task_Status default('Pending'),
-	PostScript varchar(max),
-	Error varchar(max),
-    constraint PK_EODData_Task PRIMARY KEY(TaskID),
-	constraint FK_EODData_Task_EODData_Interval foreign key (IntervalID) references EODData.Interval(IntervalID),
-	index IX_EODData_Task_StartDate(IsRegularPool, NextStartDate)
-)
+﻿CREATE TABLE [EODData].[Task] (
+    [TaskID]             INT           IDENTITY (1, 1) NOT NULL,
+    [PoolID]             SMALLINT      NOT NULL,
+    [MethodName]         VARCHAR (50)  NOT NULL,
+    [IntervalID]         TINYINT       NULL,
+    [Exchange]           VARCHAR (10)  NULL,
+    [Symbol]             VARCHAR (32)  NULL,
+    [DateFrom]           DATE          NULL,
+    [DateTo]             DATE          NULL,
+    [EnlistDate]         DATETIME      CONSTRAINT [DF_EODData_Task_EnlistDate] DEFAULT (getdate()) NOT NULL,
+    [LastCompletionDate] DATETIME      CONSTRAINT [DF_EODData_Task_LastCompletionDate] DEFAULT (getdate()) NOT NULL,
+    [Retries]            INT           CONSTRAINT [DF_EODData_Task_Retries] DEFAULT ((0)) NOT NULL,
+    [NextStartDate]      AS            (dateadd(second,power((2),case when [Retries]<(12) then [Retries] else (11) end)-(1),[LastCompletionDate])) PERSISTED,
+    [IsRegularPool]      AS            (case when [PoolID]=(0) then (0) else (1) end) PERSISTED NOT NULL,
+    [Status]             VARCHAR (10)  CONSTRAINT [DF_EODData_Task_Status] DEFAULT ('Pending') NOT NULL,
+    [PostScript]         VARCHAR (MAX) NULL,
+    [Error]              VARCHAR (MAX) NULL,
+    CONSTRAINT [PK_EODData_Task] PRIMARY KEY CLUSTERED ([TaskID] ASC),
+    CONSTRAINT [FK_EODData_Task_EODData_Interval] FOREIGN KEY ([IntervalID]) REFERENCES [EODData].[Interval] ([IntervalID])
+);
+
+

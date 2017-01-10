@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToMetaStock", "ToMetaStock.csproj", "{230E49DF-D37B-4188-98DC-259BE4CCA2B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportToMEtaStock", "..\ExportToMEtaStock\ExportToMEtaStock.csproj", "{F3504359-2E04-44A0-882E-08201E491AE7}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 3
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ToMetaStock.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\ExportToMEtaStock\\ExportToMEtaStock.csproj
+		SccProjectName2 = \u0022$/Stock/ToMetaStock/ExportToMEtaStock\u0022,\u0020CTDAAAAA
+		SccLocalPath2 = ..\\ExportToMEtaStock
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{230E49DF-D37B-4188-98DC-259BE4CCA2B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{230E49DF-D37B-4188-98DC-259BE4CCA2B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{230E49DF-D37B-4188-98DC-259BE4CCA2B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{230E49DF-D37B-4188-98DC-259BE4CCA2B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3504359-2E04-44A0-882E-08201E491AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3504359-2E04-44A0-882E-08201E491AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3504359-2E04-44A0-882E-08201E491AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3504359-2E04-44A0-882E-08201E491AE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

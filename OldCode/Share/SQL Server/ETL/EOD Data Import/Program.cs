@@ -20,15 +20,16 @@ namespace EOD_Data_Import
         private SqlCommand cmdCanImport, cmdImport, cmdError;
         static void Test()
         {
-            FTPSite ftp = new FTPSite("ftp://u38107435-readonly:rfvTGB456$%^@test.ultradyna.com:21/modules/dblog/");
-            //FTPSite ftp = new FTPSite("ftp.EODData.com", 21, "zhuang", "euphoria");
+            //FTPSite ftp = new FTPSite("ftp://u38107435-readonly:rfvTGB456$%^@test.ultradyna.com:21/modules/dblog/");
+            //FTPSite ftp = new FTPSite("ftp.EODData.com", 21, "jhuang", "euphoria");
+            FTPSite ftp = new FTPSite("ftp://jhuang:euphoria@ftp.EODData.com");
             ftp.Connect();
             foreach (var f in ftp.Current.Files)
             {
-                Console.WriteLine("{0}{1}---{2}-------------------", f.Path, f.Name, f.Size);
+                Console.WriteLine("{0}{1}---{2}----{3}", f.Path, f.Name, f.Size, f.Date);
                 //Console.Read();
-                Console.WriteLine(f.DataString);
-                f.FreeData();
+                //Console.WriteLine(f.DataString);
+                //f.FreeData();
                 //Console.Read();
                 break;
             }
@@ -54,17 +55,20 @@ namespace EOD_Data_Import
         }
         static void Main(string[] args)
         {
-            string serverName = "(local)";
-            string databaseName = "Stock";
-            if (args.Length == 2)
-            {
-                serverName = args[0];
-                databaseName = args[1];
-            }
+            Test();
+            Console.WriteLine("done...");
+            Console.ReadKey();
+            //string serverName = "(local)";
+            //string databaseName = "Stock";
+            //if (args.Length == 2)
+            //{
+            //    serverName = args[0];
+            //    databaseName = args[1];
+            //}
 
-            Console.WriteLine("Start importing data to {0}.{1}......", serverName, databaseName);
-            (new EODDataImport(serverName, databaseName)).Import();
-            Console.WriteLine("Finished......");
+            //Console.WriteLine("Start importing data to {0}.{1}......", serverName, databaseName);
+            //(new EODDataImport(serverName, databaseName)).Import();
+            //Console.WriteLine("Finished......");
         }
         public EODDataImport(string serverName, string databaseName)
         {

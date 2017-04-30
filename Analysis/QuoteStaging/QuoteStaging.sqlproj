@@ -87,8 +87,6 @@
   <ItemGroup>
     <Build Include="Schemas\clr.sql" />
     <Build Include="FileGroups\QuoteStagingData.sql" />
-    <Build Include="CLR\Functions\clr.GetLoopbackConnectionString.sql" />
-    <None Include="clr\clrtest.sql" />
     <Build Include="Schemas\EODData.sql" />
     <Build Include="EODData\Tables\EODData.Setting.sql" />
     <Build Include="EODData\Tables\EODData.Country.sql" />
@@ -134,10 +132,6 @@
     <Build Include="Storage\QuoteStagingInMemory.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="clr\CLR\ExecuteSQLInternal.cs" />
-    <Compile Include="clr\CLR\SessionStore.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -176,5 +170,8 @@
   <ItemGroup>
     <None Include="Scripts\test.sql" />
     <None Include="SqlSchemaCompare.scmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="clr\CLR\FileOperations.cs" />
   </ItemGroup>
 </Project>

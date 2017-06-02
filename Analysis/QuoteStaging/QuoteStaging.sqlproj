@@ -83,6 +83,7 @@
     <Folder Include="EODData\Views" />
     <Folder Include="EODData\Procedures" />
     <Folder Include="Storage\" />
+    <Folder Include="EODData\Functions\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\clr.sql" />
@@ -130,6 +131,19 @@
     <Build Include="EODData\Procedures\EODData.Download.sql" />
     <Build Include="EODData\Procedures\EODData.UpdateQuote.sql" />
     <Build Include="Storage\QuoteStagingInMemory.sql" />
+    <Build Include="EODData\Tables\EODData.QuoteLoaded.sql" />
+    <Build Include="EODData\Tables\EODData.LoadedQuote.sql" />
+    <Build Include="EODData\Tables\EODData.FilePath.sql" />
+    <Build Include="EODData\Views\EODData.QuoteFile.sql" />
+    <Build Include="EODData\Functions\EODData.FileLocation.sql" />
+    <Build Include="EODData\Functions\EODData.SplitString.sql" />
+    <Build Include="EODData\Functions\EODData.ReadSymbol.sql" />
+    <Build Include="EODData\Functions\EODData.ReadSplit.sql" />
+    <Build Include="EODData\Functions\EODData.ReadQuote.sql" />
+    <Build Include="EODData\Functions\EODData.ReadFundamental.sql" />
+    <Build Include="EODData\Functions\EODData.ReadExchange.sql" />
+    <Build Include="EODData\Functions\EODData.ReadCSV.sql" />
+    <Build Include="EODData\Functions\EODData.BreakLine.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -173,5 +187,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clr\CLR\FileOperations.cs" />
+    <Compile Include="clr\CLR\ADataReader.cs" />
+    <Compile Include="clr\CLR\Common.cs" />
+    <Compile Include="clr\CLR\Data.cs" />
+    <Compile Include="clr\CLR\DataSetDefinition.cs" />
+    <Compile Include="clr\CLR\DecisionXML.cs" />
+    <Compile Include="clr\CLR\FlatFile.cs" />
+    <Compile Include="clr\CLR\Parser.cs" />
   </ItemGroup>
 </Project>

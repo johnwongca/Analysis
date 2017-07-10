@@ -84,6 +84,7 @@
     <Folder Include="EODData\Procedures" />
     <Folder Include="Storage\" />
     <Folder Include="EODData\Functions\" />
+    <Folder Include="EODData\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\clr.sql" />
@@ -131,7 +132,6 @@
     <Build Include="EODData\Procedures\EODData.Download.sql" />
     <Build Include="EODData\Procedures\EODData.UpdateQuote.sql" />
     <Build Include="Storage\QuoteStagingInMemory.sql" />
-    <Build Include="EODData\Tables\EODData.QuoteLoaded.sql" />
     <Build Include="EODData\Tables\EODData.LoadedQuote.sql" />
     <Build Include="EODData\Tables\EODData.FilePath.sql" />
     <Build Include="EODData\Views\EODData.QuoteFile.sql" />
@@ -144,6 +144,9 @@
     <Build Include="EODData\Functions\EODData.ReadExchange.sql" />
     <Build Include="EODData\Functions\EODData.ReadCSV.sql" />
     <Build Include="EODData\Functions\EODData.BreakLine.sql" />
+    <Build Include="EODData\Stored Procedures\EODData.LoadQuoteFiles.sql" />
+    <Build Include="EODData\Views\EODData.PendingQuoteFile.sql" />
+    <Build Include="EODData\Functions\EODData.ReadSymbolChange.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -152,15 +155,6 @@
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Quote\Quote.sqlproj">
-      <Name>Quote</Name>
-      <Project>{7f473c15-bb1d-405f-8300-8e9e96a4b1ac}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>Quote</DatabaseSqlCmdVariable>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Quote">
@@ -175,13 +169,6 @@
     <PostDeploy Include="Scripts\PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
-    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac">
-      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac</HintPath>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
-    </ArtifactReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Scripts\test.sql" />
     <None Include="SqlSchemaCompare.scmp" />
   </ItemGroup>
@@ -191,8 +178,8 @@
     <Compile Include="clr\CLR\Common.cs" />
     <Compile Include="clr\CLR\Data.cs" />
     <Compile Include="clr\CLR\DataSetDefinition.cs" />
-    <Compile Include="clr\CLR\DecisionXML.cs" />
     <Compile Include="clr\CLR\FlatFile.cs" />
     <Compile Include="clr\CLR\Parser.cs" />
+    <Compile Include="clr\CLR\CSVFile.cs" />
   </ItemGroup>
 </Project>

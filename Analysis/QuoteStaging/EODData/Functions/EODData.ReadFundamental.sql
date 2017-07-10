@@ -16,4 +16,5 @@ return (
 					try_cast(C11 as float) as PtS, 
 					try_cast(C12 as float) as PtB
 			from EODData.ReadCSV(EODData.FileLocation()+'Fundamentals\' + rtrim(ltrim(@Exchange))+'.txt', '	', 1)
+			where rtrim(isnull(C1, ''))<>'' and rtrim(isnull(C2, '')) <>''
 	)

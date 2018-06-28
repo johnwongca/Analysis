@@ -4,7 +4,7 @@ as return
 (
 	with x0 as
 	(
-		select 1 as one
+		select 1 as one 
 	)
 	select row_number() over(order by one) as RowID, value as Value
 	from string_split(@Text, @Separator)
